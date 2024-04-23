@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PreguntaDao {
     List<Pregunta> obtenerTodasPreguntas() throws IOException, CsvValidationException;
-    void agregarPregunta(Pregunta pregunta) throws IOException;
+    void agregarPregunta(Pregunta pregunta)  throws IOException;
     void actualizarPregunta(Pregunta pregunta) throws IOException;
     void eliminarPregunta(Pregunta pregunta) throws IOException ;
 }

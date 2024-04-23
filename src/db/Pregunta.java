@@ -15,34 +15,34 @@ class Pregunta {
     private List<String> respuestas;
     private String respuestaCorrecta;
     
-    public Pregunta(String pregunta, List<String> respuestas, String respuestaCorrecta){
-    this.pregunta = pregunta;
-    this.respuestas = respuestas;
-    this.respuestaCorrecta = respuestaCorrecta;
+    public Pregunta(){
     }
 
     public String getPregunta() {
         return pregunta;
     }
 
-    public void setPregunta(String pregunta) {
+    public Pregunta setPregunta(String pregunta) {
         this.pregunta = pregunta;
+        return this;
     }
 
     public List<String> getRespuestas() {
         return respuestas;
     }
 
-    public void setRespuestas(List<String> respuestas) {
+    public Pregunta setRespuestas(List<String> respuestas) {
         this.respuestas = respuestas;
+        return this;
     }
 
     public String getRespuestaCorrecta() {
         return respuestaCorrecta;
     }
 
-    public void setRespuestaCorrecta(String respuestaCorrecta) {
+    public Pregunta setRespuestaCorrecta(String respuestaCorrecta) {
         this.respuestaCorrecta = respuestaCorrecta;
+        return this;
     }
     
 }

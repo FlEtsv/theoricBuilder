@@ -3,14 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package db;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
+import com.opencsv.CSVWriterBuilder;
+import com.opencsv.ICSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +27,7 @@ import java.util.logging.Logger;
  * @author steve
  */
 public class CsvPreguntaDao implements PreguntaDao{
-    private String csvArchivo = "data.csv";
+    private String csvArchivo = "Simulador1\\StreamingAssets\\Preguntas.csv";
 public CsvPreguntaDao() {
     // al instanciar vemos si existe
         crearArchivoSiNoExiste();
@@ -33,8 +39,6 @@ public CsvPreguntaDao() {
         File file = new File(csvArchivo);
         if (!file.exists()) {
             try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo))) {
-                String[] header = {"Pregunta", "Respuesta 1", "Respuesta 2", "Respuesta 3", "Respuesta Correcta"};
-                writer.writeNext(header);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -50,14 +54,30 @@ public CsvPreguntaDao() {
     @Override
     public List<Pregunta> obtenerTodasPreguntas() throws IOException, CsvValidationException {
         List<Pregunta> preguntas = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new FileReader(csvArchivo))) {
+        CSVParser parser = new CSVParserBuilder()
+                .withSeparator(';')  // Establecer el delimitador como punto y coma
+                .build();
+
+        try (CSVReader reader = new CSVReaderBuilder(new FileReader(csvArchivo))
+                .withCSVParser(parser)  // Usar el parser personalizado
+                .build()) {
             String[] siguienteLinea;
-            reader.readNext(); // Saltar el encabezado
+            boolean isFirstLine = true;
+
             while ((siguienteLinea = reader.readNext()) != null) {
+
+                if (siguienteLinea.length < 5) {
+                    // Si no hay suficientes columnas, imprimir error y continuar con la siguiente línea
+                    System.err.println("Línea incompleta ignorada: " + Arrays.toString(siguienteLinea));
+                    continue;
+                }
                 String pregunta = siguienteLinea[0];
-                List<String> respuestas = List.of(siguienteLinea[1], siguienteLinea[2], siguienteLinea[3]);
+                List<String> respuestas = Arrays.asList(siguienteLinea[1], siguienteLinea[2], siguienteLinea[3]);
                 String respuestaCorrecta = siguienteLinea[4];
-                preguntas.add(new Pregunta(pregunta, respuestas, respuestaCorrecta));
+                preguntas.add(new Pregunta()
+                    .setPregunta(pregunta)
+                    .setRespuestas(respuestas)
+                    .setRespuestaCorrecta(respuestaCorrecta));
             }
         } catch (CsvValidationException e) {
             System.err.println("Error de validación del CSV: " + e.getMessage());
@@ -68,18 +88,26 @@ public CsvPreguntaDao() {
         }
         return preguntas;
     }
-/**
- * con una instacia de pregunta podemos agregar una nueva linea a nuestro archivo csv, se asegura de que haya 3 respuestas como minimo sumando la correcta
- * @param pregunta
- * @throws IOException 
- */
-      @Override
+
+    /**
+     * Con una instancia de pregunta podemos agregar una nueva línea a nuestro archivo CSV, se asegura de que haya 3 respuestas como mínimo sumando la correcta.
+     * @param pregunta Pregunta a agregar
+     * @throws IOException si ocurre un error al escribir en el archivo
+     */
     public void agregarPregunta(Pregunta pregunta) throws IOException {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, true))) {
-            String[] nuevaPregunta = new String[5]; // Asumiendo que hay cuatro respuestas y una correcta de 0-4
+        // Define el delimitador y el caracter de comillas
+        char customSeparator = ';';
+        char noQuoteChar = CSVWriter.NO_QUOTE_CHARACTER;
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, true), 
+                                              customSeparator, 
+                                              noQuoteChar, 
+                                              CSVWriter.DEFAULT_ESCAPE_CHARACTER, 
+                                              CSVWriter.DEFAULT_LINE_END)) {
+            String[] nuevaPregunta = new String[5];  // Asumiendo que hay una pregunta y cuatro respuestas, incluyendo la correcta
             nuevaPregunta[0] = pregunta.getPregunta();
             List<String> respuestas = pregunta.getRespuestas();
-            if (respuestas.size() >= 3) { // Asegura que hay al menos tres respuestas opcional
+            if (respuestas.size() >= 3) {  // Asegura que hay al menos tres respuestas opcionales
                 nuevaPregunta[1] = respuestas.get(0);
                 nuevaPregunta[2] = respuestas.get(1);
                 nuevaPregunta[3] = respuestas.get(2);
@@ -102,7 +130,8 @@ public CsvPreguntaDao() {
         } catch (CsvValidationException ex) {
             Logger.getLogger(CsvPreguntaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Encuentra la pregunta que quieres actualizar o editar
+
+        // Encuentra la pregunta que quieres editar
         int index = -1;
         for (int i = 0; i < preguntas.size(); i++) {
             if (preguntas.get(i).getPregunta().equals(pregunta.getPregunta())) {
@@ -111,8 +140,8 @@ public CsvPreguntaDao() {
             }
         }
 
-        if (index != -1) { // Si se encuentra la pregunta -1 valor imposible.
-            preguntas.set(index, pregunta); // Actualiza la pregunta en la lista cambiandola por la instancia que le damos.
+        if (index != -1) { // Si se encuentra la pregunta
+            preguntas.set(index, pregunta); // Actualiza la pregunta en la lista.
             reescribirArchivo(preguntas); // Reescribe el archivo con la lista actualizada.
         }
     }
@@ -121,18 +150,16 @@ public CsvPreguntaDao() {
  * @param preguntas
  * @throws IOException 
  */
-    private void reescribirArchivo(List<Pregunta> preguntas) throws IOException {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, false))) {
-            String[] header = {"Pregunta", "Respuesta 1", "Respuesta 2", "Respuesta 3", "Respuesta Correcta"};
-            writer.writeNext(header);
-            for (Pregunta p : preguntas) {
-                String[] entries = new String[]{
-                    p.getPregunta(),
-                    p.getRespuestas().get(0),
-                    p.getRespuestas().get(1),
-                    p.getRespuestas().get(2),
-                    p.getRespuestaCorrecta()
-                };
+    public void reescribirArchivo(List<Pregunta> preguntas) throws IOException {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, false),
+                ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                CSVWriter.DEFAULT_LINE_END)) {
+            for (Pregunta pregunta : preguntas) {
+                String[] entries = new String[]{pregunta.getPregunta(),
+                    pregunta.getRespuestas().get(0),
+                    pregunta.getRespuestas().get(1),
+                    pregunta.getRespuestas().get(2),
+                    pregunta.getRespuestaCorrecta()};
                 writer.writeNext(entries);
             }
         }
