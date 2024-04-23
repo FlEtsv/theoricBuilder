@@ -5,31 +5,48 @@
 package views;
 
 import java.awt.Dimension;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import static utility.theUltimateUtility.sumaDimension;
+import static utility.theUltimateUtility.setImageLabel;
 
 /**
+ * Esta clase extiende JPanel para crear un panel personalizado para seleccionar un simulador.
+ * Incluye un desplegable para la selección del simulador, un botón para añadir preguntas y un botón de información.
+ * El panel también incluye un panel de información que puede ser visible o invisible.
  *
- * @author PazosRG
+ * @author Fishb0ness
  */
 public class VistaSelectorSimulador extends javax.swing.JPanel {
 
+    // Dimensiones para varios componentes en el panel
+    private final Dimension selectorDimension = new Dimension(400, 46);
+    private final Dimension iconButtonDimension = new Dimension(25, 25);
+    private final Dimension infoPanelDimension = new Dimension(400, 95);
+    private Dimension contenedorDimension = new Dimension(430, 130);
+
     /**
-     * Creates new form VistaSelectorSimulador
+     * Constructor para la clase VistaSelectorSimulador.
+     * Inicializa los componentes y configura el estado inicial del panel.
      */
     public VistaSelectorSimulador() {
         initComponents();
-        
-        // set imagen comboBox selector de simuladores
-        Dimension selectorDimension = new Dimension(400,46);
-        setImageLabel(selectorSimuladores, "C:/Users/PazosRG/code/Universae/theoricBuilderResources/InterfazMobile/Desplegable_Off.png", selectorDimension);
-        
-        // set iconos de añadir pregunta y de información sobre el simulador
-        Dimension iconButtonDimension = new Dimension (30,30);
-        setImageLabel(anadirPreguntaButton, "C:/Users/PazosRG/code/Universae/theoricBuilderResources/InterfazMobile/Mas_Off.png", iconButtonDimension);
-        setImageLabel(simuladorInfoButton, "C:/Users/PazosRG/code/Universae/theoricBuilderResources/InterfazMobile/info_Off.png", iconButtonDimension);
+
+        // Inicia el panel de lista como no visible
+        listaSimuladoresPanel.setVisible(false);
+
+        // Establece la imagen del desplegable del selector de simuladores
+        setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_Off.png", selectorDimension);
+
+        // Establece los iconos de añadir pregunta y de información sobre el simulador
+        setImageLabel(anadirPreguntaButton, "theoricBuilderResources/InterfazMobile/Mas_Off.png", iconButtonDimension);
+        setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_Off.png", iconButtonDimension);
+
+        // Establece el panel de información como invisible y establece la imagen de fondo
+        infoPanel.setVisible(false);
+        setImageLabel(infoBackImg, "theoricBuilderResources/InterfazMobile/Panel_Info.png", infoPanelDimension);
+
+        // Establece el tamaño del contenedor
+        this.setSize(contenedorDimension);
     }
 
     /**
@@ -40,11 +57,13 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
+        tipoSimuladorPanel = new javax.swing.JPanel();
         tipoSimuladorLabel = new javax.swing.JLabel();
-        selectorSimuladores = new javax.swing.JLabel();
-        listaSimuladoresPanel = new javax.swing.JPanel();
+        selectorPanel = new javax.swing.JPanel();
+        selectorSimuladoresTxt = new javax.swing.JLabel();
+        selectorSimuladoresImg = new javax.swing.JLabel();
+        listaSimuladoresPanel = new RoundedPanel(25);
         simuladorLabel0 = new javax.swing.JLabel();
         simuladorLabel1 = new javax.swing.JLabel();
         simuladorLabel2 = new javax.swing.JLabel();
@@ -52,83 +71,142 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         simuladorLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         textAnadirPregunta = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        buttonsPanel = new javax.swing.JPanel();
         anadirPreguntaButton = new javax.swing.JLabel();
         simuladorInfoButton = new javax.swing.JLabel();
+        infoPanel = new javax.swing.JPanel();
+        infoText = new javax.swing.JLabel();
+        infoBackImg = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(10, 38, 72));
-        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 12));
+        setMinimumSize(new java.awt.Dimension(430, 0));
+        setPreferredSize(new java.awt.Dimension(430, 129));
 
-        tipoSimuladorLabel.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
+        tipoSimuladorPanel.setOpaque(false);
+
+        tipoSimuladorLabel.setFont(new java.awt.Font("Raleway Medium", 0, 18)); // NOI18N
         tipoSimuladorLabel.setForeground(new java.awt.Color(247, 247, 247));
         tipoSimuladorLabel.setText("Tipo de Simulador");
-        tipoSimuladorLabel.setMaximumSize(new java.awt.Dimension(400, 15));
+        tipoSimuladorLabel.setMaximumSize(new java.awt.Dimension(400, 20));
         tipoSimuladorLabel.setMinimumSize(new java.awt.Dimension(400, 15));
-        tipoSimuladorLabel.setPreferredSize(new java.awt.Dimension(400, 15));
-        add(tipoSimuladorLabel);
+        tipoSimuladorLabel.setPreferredSize(new java.awt.Dimension(400, 20));
+        tipoSimuladorPanel.add(tipoSimuladorLabel);
 
-        selectorSimuladores.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
-        selectorSimuladores.setForeground(new java.awt.Color(247, 247, 247));
-        selectorSimuladores.setText("selectedListaSimuladores");
-        selectorSimuladores.setMaximumSize(new java.awt.Dimension(400, 16));
-        selectorSimuladores.setMinimumSize(new java.awt.Dimension(400, 16));
-        selectorSimuladores.setPreferredSize(new java.awt.Dimension(400, 16));
-        add(selectorSimuladores);
+        add(tipoSimuladorPanel);
+
+        selectorPanel.setOpaque(false);
+        selectorPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        selectorSimuladoresTxt.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
+        selectorSimuladoresTxt.setForeground(new java.awt.Color(247, 247, 247));
+        selectorSimuladoresTxt.setText("Seleccione el Simulador");
+        selectorSimuladoresTxt.setAlignmentY(0.0F);
+        selectorSimuladoresTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        selectorSimuladoresTxt.setMaximumSize(new java.awt.Dimension(400, 46));
+        selectorSimuladoresTxt.setMinimumSize(new java.awt.Dimension(400, 46));
+        selectorSimuladoresTxt.setPreferredSize(new java.awt.Dimension(400, 46));
+        selectorSimuladoresTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectorSimuladoresTxtMouseClicked(evt);
+            }
+        });
+        selectorPanel.add(selectorSimuladoresTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 40));
+
+        selectorSimuladoresImg.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
+        selectorSimuladoresImg.setForeground(new java.awt.Color(247, 247, 247));
+        selectorSimuladoresImg.setToolTipText("");
+        selectorSimuladoresImg.setAlignmentY(0.0F);
+        selectorSimuladoresImg.setMaximumSize(new java.awt.Dimension(400, 46));
+        selectorSimuladoresImg.setMinimumSize(new java.awt.Dimension(400, 46));
+        selectorSimuladoresImg.setPreferredSize(new java.awt.Dimension(400, 46));
+        selectorPanel.add(selectorSimuladoresImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        add(selectorPanel);
 
         listaSimuladoresPanel.setBackground(new java.awt.Color(111, 114, 113));
-        listaSimuladoresPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(193, 197, 200), 1, true));
         listaSimuladoresPanel.setMaximumSize(new java.awt.Dimension(400, 32767));
         listaSimuladoresPanel.setMinimumSize(new java.awt.Dimension(400, 0));
-        listaSimuladoresPanel.setPreferredSize(new java.awt.Dimension(400, 105));
+        listaSimuladoresPanel.setOpaque(false);
+        listaSimuladoresPanel.setPreferredSize(new java.awt.Dimension(400, 150));
         listaSimuladoresPanel.setVerifyInputWhenFocusTarget(false);
-        listaSimuladoresPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+        listaSimuladoresPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 13));
 
         simuladorLabel0.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel0.setForeground(new java.awt.Color(247, 247, 247));
         simuladorLabel0.setText("Ahora Aprendo");
+        simuladorLabel0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel0.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel0.setMinimumSize(new java.awt.Dimension(400, 15));
         simuladorLabel0.setPreferredSize(new java.awt.Dimension(400, 15));
+        simuladorLabel0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorLabel0MouseClicked(evt);
+            }
+        });
         listaSimuladoresPanel.add(simuladorLabel0);
 
         simuladorLabel1.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel1.setForeground(new java.awt.Color(247, 247, 247));
         simuladorLabel1.setText("El Cazador");
+        simuladorLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel1.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel1.setMinimumSize(new java.awt.Dimension(400, 15));
         simuladorLabel1.setPreferredSize(new java.awt.Dimension(400, 15));
+        simuladorLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorLabel1MouseClicked(evt);
+            }
+        });
         listaSimuladoresPanel.add(simuladorLabel1);
 
-        simuladorLabel2.setFont(new java.awt.Font("Raleway", 1, 14)); // NOI18N
+        simuladorLabel2.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel2.setForeground(new java.awt.Color(247, 247, 247));
         simuladorLabel2.setText("Atrapa los Univercoins");
+        simuladorLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel2.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel2.setMinimumSize(new java.awt.Dimension(400, 15));
         simuladorLabel2.setPreferredSize(new java.awt.Dimension(400, 15));
+        simuladorLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorLabel2MouseClicked(evt);
+            }
+        });
         listaSimuladoresPanel.add(simuladorLabel2);
 
-        simuladorLabel3.setFont(new java.awt.Font("Raleway", 0, 14)); // NOI18N
+        simuladorLabel3.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel3.setForeground(new java.awt.Color(247, 247, 247));
         simuladorLabel3.setText("BAAM");
+        simuladorLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel3.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel3.setMinimumSize(new java.awt.Dimension(400, 15));
         simuladorLabel3.setPreferredSize(new java.awt.Dimension(400, 15));
+        simuladorLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorLabel3MouseClicked(evt);
+            }
+        });
         listaSimuladoresPanel.add(simuladorLabel3);
 
-        simuladorLabel4.setFont(new java.awt.Font("Raleway", 0, 14)); // NOI18N
+        simuladorLabel4.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel4.setForeground(new java.awt.Color(247, 247, 247));
         simuladorLabel4.setText("PiensoPalabra");
+        simuladorLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel4.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel4.setMinimumSize(new java.awt.Dimension(400, 15));
         simuladorLabel4.setPreferredSize(new java.awt.Dimension(400, 15));
+        simuladorLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorLabel4MouseClicked(evt);
+            }
+        });
         listaSimuladoresPanel.add(simuladorLabel4);
 
         add(listaSimuladoresPanel);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 32767));
-        jPanel1.setMinimumSize(new java.awt.Dimension(400, 100));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 35));
         jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 35));
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -138,28 +216,143 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         textAnadirPregunta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jPanel1.add(textAnadirPregunta, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         anadirPreguntaButton.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
         anadirPreguntaButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Mas_Off.png")); // NOI18N
-        jPanel2.add(anadirPreguntaButton);
+        anadirPreguntaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonsPanel.add(anadirPreguntaButton);
 
         simuladorInfoButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Info_Off.png")); // NOI18N
-        jPanel2.add(simuladorInfoButton);
+        simuladorInfoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        simuladorInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simuladorInfoButtonMouseClicked(evt);
+            }
+        });
+        buttonsPanel.add(simuladorInfoButton);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.EAST);
+        jPanel1.add(buttonsPanel, java.awt.BorderLayout.EAST);
 
         add(jPanel1);
+
+        infoPanel.setMaximumSize(new java.awt.Dimension(400, 32767));
+        infoPanel.setMinimumSize(new java.awt.Dimension(400, 0));
+        infoPanel.setOpaque(false);
+        infoPanel.setPreferredSize(new java.awt.Dimension(400, 100));
+        infoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        infoText.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+        infoText.setForeground(new java.awt.Color(247, 247, 247));
+        infoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoText.setText("<html><center> Añade las preguntas que quieras que aparezcan durante<br/>la simulación. Luego, pulsa el botón crear para exportar<br/>el archivo zip que deberas subir a SharePoint.</center> </html>");
+        infoText.setAlignmentY(0.0F);
+        infoText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        infoText.setMaximumSize(new java.awt.Dimension(400, 0));
+        infoText.setMinimumSize(new java.awt.Dimension(400, 0));
+        infoText.setPreferredSize(new java.awt.Dimension(400, 0));
+        infoPanel.add(infoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
+
+        infoBackImg.setAlignmentY(0.0F);
+        infoBackImg.setMaximumSize(new java.awt.Dimension(400, 32767));
+        infoBackImg.setMinimumSize(new java.awt.Dimension(400, 0));
+        infoBackImg.setPreferredSize(new java.awt.Dimension(400, 0));
+        infoPanel.add(infoBackImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
+
+        add(infoPanel);
     }// </editor-fold>//GEN-END:initComponents
+
+        /**
+     * Este método se activa cuando se hace clic en el texto del selector de simuladores.
+     * Si el panel de la lista de simuladores está visible, lo oculta y cambia la imagen del botón del selector.
+     * Si el panel de la lista de simuladores no está visible, lo hace visible y cambia la imagen del botón del selector.
+     * Después de cambiar la visibilidad del panel de la lista de simuladores, recalcula y ajusta el tamaño del contenedor.
+     *
+     * @param evt El evento de clic del mouse que activó este método.
+     */
+    private void selectorSimuladoresTxtMouseClicked(java.awt.event.MouseEvent evt) {
+        if (listaSimuladoresPanel.isShowing()) {
+            listaSimuladoresPanel.setVisible(false);
+            setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_Off.png", selectorDimension);
+        } else {
+            listaSimuladoresPanel.setVisible(true);
+            setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_On.png", selectorDimension);
+        }
+        contenedorDimension = sumaDimension(this.getComponents());
+        this.setSize(contenedorDimension);
+    }//GEN-LAST:event_selectorSimuladoresTxtMouseClicked
+
+    /**
+     * Este método se activa cuando se hace clic en el botón de información del simulador.
+     * Si el panel de información está visible, lo oculta y cambia la imagen del botón de información.
+     * Si el panel de información no está visible, lo hace visible y cambia la imagen del botón de información.
+     * También cambia la imagen del botón del selector de simuladores.
+     * Después de cambiar la visibilidad del panel de información, recalcula y ajusta el tamaño del contenedor.
+     *
+     * @param evt El evento de clic del mouse que activó este método.
+     */
+    private void simuladorInfoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorInfoButtonMouseClicked
+        if (infoPanel.isShowing()) {
+            infoPanel.setVisible(false);
+            setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_Off.png", iconButtonDimension);
+        } else {
+            infoPanel.setVisible(true);
+            setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_On.png", iconButtonDimension);
+            setImageLabel(selectorSimuladoresImg, "C:/Users/PazosRG/code/Universae/theoricBuilderResources/InterfazMobile/Desplegable_On.png", selectorDimension);
+        }
+        contenedorDimension = sumaDimension(this.getComponents());
+        this.setSize(contenedorDimension);
+    }//GEN-LAST:event_simuladorInfoButtonMouseClicked
+
+    /**
+     * Este método se activa cuando se hace clic en la etiqueta del simulador 0.
+     * Obtiene la etiqueta en la que se hizo clic, establece el texto del selector de simuladores al texto de la etiqueta y activa el método de clic del selector de simuladores.
+     *
+     * @param evt El evento de clic del mouse que activó este método.
+     */
+    private void simuladorLabel0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel0MouseClicked
+        JLabel clickedLabel = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(clickedLabel.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+    }//GEN-LAST:event_simuladorLabel0MouseClicked
+
+    private void simuladorLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel1MouseClicked
+        JLabel label = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(label.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+    }//GEN-LAST:event_simuladorLabel1MouseClicked
+
+    private void simuladorLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel2MouseClicked
+        JLabel label = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(label.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+    }//GEN-LAST:event_simuladorLabel2MouseClicked
+
+    private void simuladorLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel3MouseClicked
+        JLabel label = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(label.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+    }//GEN-LAST:event_simuladorLabel3MouseClicked
+
+    private void simuladorLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel4MouseClicked
+        JLabel label = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(label.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+    }//GEN-LAST:event_simuladorLabel4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anadirPreguntaButton;
+    private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JLabel infoBackImg;
+    private javax.swing.JPanel infoPanel;
+    private javax.swing.JLabel infoText;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel listaSimuladoresPanel;
-    private javax.swing.JLabel selectorSimuladores;
+    private javax.swing.JPanel selectorPanel;
+    private javax.swing.JLabel selectorSimuladoresImg;
+    private javax.swing.JLabel selectorSimuladoresTxt;
     private javax.swing.JLabel simuladorInfoButton;
     private javax.swing.JLabel simuladorLabel0;
     private javax.swing.JLabel simuladorLabel1;
@@ -168,12 +361,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private javax.swing.JLabel simuladorLabel4;
     private javax.swing.JLabel textAnadirPregunta;
     private javax.swing.JLabel tipoSimuladorLabel;
+    private javax.swing.JPanel tipoSimuladorPanel;
     // End of variables declaration//GEN-END:variables
 
-    public static void setImageLabel(JLabel jLabel, String path, Dimension dimension) {
-        ImageIcon imageIcon = new ImageIcon(path);
-        Icon icon = new ImageIcon( imageIcon.getImage().getScaledInstance((int)(dimension.getWidth()), (int)(dimension.getHeight()), Image.SCALE_SMOOTH));
-        jLabel.setIcon(icon);
-        jLabel.repaint();
-    }
 }
