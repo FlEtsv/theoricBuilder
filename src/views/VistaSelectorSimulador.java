@@ -220,11 +220,9 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         buttonsPanel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         anadirPreguntaButton.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
-        anadirPreguntaButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Mas_Off.png")); // NOI18N
         anadirPreguntaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonsPanel.add(anadirPreguntaButton);
 
-        simuladorInfoButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Info_Off.png")); // NOI18N
         simuladorInfoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -281,7 +279,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
-    }//GEN-LAST:event_selectorSimuladoresTxtMouseClicked
+    }                                                   
 
     /**
      * Este método se activa cuando se hace clic en el botón de información del simulador.
