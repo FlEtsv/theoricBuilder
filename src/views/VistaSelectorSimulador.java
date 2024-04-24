@@ -35,15 +35,15 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         listaSimuladoresPanel.setVisible(false);
 
         // Establece la imagen del desplegable del selector de simuladores
-        setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_Off.png", selectorDimension);
+        setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
 
         // Establece los iconos de añadir pregunta y de información sobre el simulador
-        setImageLabel(anadirPreguntaButton, "theoricBuilderResources/InterfazMobile/Mas_Off.png", iconButtonDimension);
-        setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_Off.png", iconButtonDimension);
+        setImageLabel(anadirPreguntaButton, "imagenes/InterfazMobile/Mas_Off.png", iconButtonDimension);
+        setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
 
         // Establece el panel de información como invisible y establece la imagen de fondo
         infoPanel.setVisible(false);
-        setImageLabel(infoBackImg, "theoricBuilderResources/InterfazMobile/Panel_Info.png", infoPanelDimension);
+        setImageLabel(infoBackImg, "imagenes/InterfazMobile/Panel_Info.png", infoPanelDimension);
 
         // Establece el tamaño del contenedor
         this.setSize(contenedorDimension);
@@ -272,10 +272,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void selectorSimuladoresTxtMouseClicked(java.awt.event.MouseEvent evt) {
         if (listaSimuladoresPanel.isShowing()) {
             listaSimuladoresPanel.setVisible(false);
-            setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_Off.png", selectorDimension);
+            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
         } else {
             listaSimuladoresPanel.setVisible(true);
-            setImageLabel(selectorSimuladoresImg, "theoricBuilderResources/InterfazMobile/Desplegable_On.png", selectorDimension);
+            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
@@ -293,11 +293,11 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void simuladorInfoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorInfoButtonMouseClicked
         if (infoPanel.isShowing()) {
             infoPanel.setVisible(false);
-            setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_Off.png", iconButtonDimension);
+            setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
         } else {
             infoPanel.setVisible(true);
-            setImageLabel(simuladorInfoButton, "theoricBuilderResources/InterfazMobile/info_On.png", iconButtonDimension);
-            setImageLabel(selectorSimuladoresImg, "C:/Users/PazosRG/code/Universae/theoricBuilderResources/InterfazMobile/Desplegable_On.png", selectorDimension);
+            setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_On.png", iconButtonDimension);
+            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
