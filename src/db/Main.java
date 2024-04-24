@@ -86,12 +86,18 @@ public static void main(String[] args) throws IOException, CsvValidationExceptio
     con el for a la vez que le damos los valores a los componentes necesarios. haciendo esto tambien 
     tendriamos el prime debug Fail que es si el simulador no tiene preguntas en cuyo caso calLabels = 0
     
-    metodo editar no necesario por las propiedades de las areas de texto en java, esperaremos para cargarlos 
-    al pulsar crear entonces dentro de los posibles TextArea se podran cambiar los datos tanto como se quiera
-    MIENTRAS NO SE LE HAYA DADO A CREAR. El metodo eliminar lo que hara es eliminar el panel adjunto al propio 
-    boton, por lo tanto evitara que se vuelque esos datos en el csv.
+    se simplifica el acceso de la base de datos  teniendo solo dos accesos claros a ella, teniendo un
+    acceso al principio de la aplicacion al selecciona un simulador que accederemos a leer el archivo que 
+    hay dentro de su carpeta correspondiente,  y al final de la aplicacion para con el boton crear detonaremos
+    el guardado de todas la informacion en la lista preguntas y posterior guardado en nuestro archivo csv para 
+    su empaquetado en el escritorio. se determinaran 6 rutas distintas para la posible lectura de nuestro
+    simulador elegido. se manejara las eliminaciones desde el front. se intentara implementar un boton de guardado 
+    previo al crear que nos dejara los cambios de un simulador determinado sin generar el zip.
 
-    cuando lo que se trate es de un csv completo, por lo tanto con la intencion de modificar, se usara el metodo Reescribir 
-    junto a sus metodos de Eliminar o editar. detonaremos este tratamiento separado haciendo una busqueda de la pregunta dentro de preguntas,
-    si esto fuera nulo se tratara como una pregunta nueva, sino sera una pregunta que nos obliga a reescribir el csv eliminando o modificandola
+    se añadiran una clase sesion que almacenara nuestra int canLabels para obtenerlo donde necesitemos con facil acceso
+    Pregunta nuevaPregunta = new Pregunta();  // Crear una nueva instancia en cada iteración
+    nuevaPregunta.setPregunta(preguntaField.getText());
+    nuevaPregunta.setRespuestas(Tratamiento para la lista de respuestas);
+    nuevaPregunta.setRespuestaCorrecta(respuestasField.getText());
+    preguntasList.add(nuevaPregunta);
 */
