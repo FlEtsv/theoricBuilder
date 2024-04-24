@@ -4,6 +4,17 @@
  */
 package utility;
 
+/**
+ *
+ * @author steve
+ */
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
+
 import com.opencsv.exceptions.CsvValidationException;
 import db.CsvPreguntaDao;
 import db.ManejoZip;
@@ -49,8 +60,10 @@ public class Sesion {
     /**
      * 
      * @return datos para cargarlos directamente en las labels
+     * @throws com.opencsv.exceptions.CsvValidationException
+     * @throws java.io.IOException
      */
-    public List<Pregunta> obtenerDatos() throws CsvValidationException {
+    public List<Pregunta> obtenerDatos() throws CsvValidationException, IOException {
         CsvPreguntaDao obtenerDatos = new CsvPreguntaDao();
         try {
             List<Pregunta> datos = obtenerDatos.obtenerTodasPreguntas();
@@ -65,6 +78,7 @@ public class Sesion {
      /**
      * Método final para guardar el archivo.
      * @param preguntasGuardado Lista de preguntas a guardar.
+     * @throws java.io.IOException
      */
     public static void guardar(List<Pregunta> preguntasGuardado) throws IOException {
         // Crear una instancia de CsvPreguntaDao
@@ -91,3 +105,4 @@ public class Sesion {
 
 
 }
+

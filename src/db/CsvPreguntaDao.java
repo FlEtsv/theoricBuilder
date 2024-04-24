@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utility.Sesion;
 
 /**
  * Clase para manejar la escritura de archivos CSV.
@@ -27,7 +28,7 @@ import java.util.logging.Logger;
  * @author steve
  */
 public class CsvPreguntaDao implements PreguntaDao{
-    private String csvArchivo = "Simulador1\\StreamingAssets\\Preguntas.csv";
+    private final String csvArchivo = Sesion.getInstance().getSimuladorName() + File.separator + "StreamingAssets\\Preguntas.csv";
 public CsvPreguntaDao() {
     // al instanciar vemos si existe
         crearArchivoSiNoExiste();
@@ -89,11 +90,52 @@ public CsvPreguntaDao() {
         return preguntas;
     }
 
-    /**
+/**
+ * 
+ * @param preguntas
+ * @throws IOException 
+ */
+    public void reescribirArchivo(List<Pregunta> preguntas, String csvArchivo) throws IOException {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, false),
+                ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                CSVWriter.DEFAULT_LINE_END)) {
+            for (Pregunta pregunta : preguntas) {
+                String[] entries = new String[]{pregunta.getPregunta(),
+                    pregunta.getRespuestas().get(0),
+                    pregunta.getRespuestas().get(1),
+                    pregunta.getRespuestas().get(2),
+                    pregunta.getRespuestaCorrecta()};
+                writer.writeNext(entries);
+            }
+        }
+    }
+}
+
+
+    /*
+    
+     * Elimina la pregunta específica, suponiendo que la igualdad se basa en el texto solo de la pregunta
+     * Reescribe el archivo con la lista actualizada
+     * @param pregunta
+     * @throws IOException 
+
+      @Override
+    public void eliminarPregunta(Pregunta pregunta) throws IOException {
+        List<Pregunta> preguntas = null;
+        try {
+            preguntas = obtenerTodasPreguntas();
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(CsvPreguntaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        preguntas.removeIf(p -> p.getPregunta().equals(pregunta.getPregunta()));//elimina la que coincida con pregunta.getPregunta() de la instacia actual
+        reescribirArchivo(preguntas); 
+    }
+    }
      * Con una instancia de pregunta podemos agregar una nueva línea a nuestro archivo CSV, se asegura de que haya 3 respuestas como mínimo sumando la correcta.
      * @param pregunta Pregunta a agregar
      * @throws IOException si ocurre un error al escribir en el archivo
-     */
+     
     public void agregarPregunta(Pregunta pregunta) throws IOException {
         // Define el delimitador y el caracter de comillas
         char customSeparator = ';';
@@ -117,11 +159,10 @@ public CsvPreguntaDao() {
         }
     }
 
-    /**
      *encuentra la pregunta de estre todas y nos permite modificarla 
      * @param pregunta
      * @throws IOException
-     */
+
     @Override
     public void actualizarPregunta(Pregunta pregunta) throws IOException {
         List<Pregunta> preguntas = null;
@@ -145,43 +186,6 @@ public CsvPreguntaDao() {
             reescribirArchivo(preguntas); // Reescribe el archivo con la lista actualizada.
         }
     }
-/**
- * 
- * @param preguntas
- * @throws IOException 
- */
-    public void reescribirArchivo(List<Pregunta> preguntas) throws IOException {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, false),
-                ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                CSVWriter.DEFAULT_LINE_END)) {
-            for (Pregunta pregunta : preguntas) {
-                String[] entries = new String[]{pregunta.getPregunta(),
-                    pregunta.getRespuestas().get(0),
-                    pregunta.getRespuestas().get(1),
-                    pregunta.getRespuestas().get(2),
-                    pregunta.getRespuestaCorrecta()};
-                writer.writeNext(entries);
-            }
-        }
-    }
-    /**
-     * Elimina la pregunta específica, suponiendo que la igualdad se basa en el texto solo de la pregunta
-     * Reescribe el archivo con la lista actualizada
-     * @param pregunta
-     * @throws IOException 
      */
-      @Override
-    public void eliminarPregunta(Pregunta pregunta) throws IOException {
-        List<Pregunta> preguntas = null;
-        try {
-            preguntas = obtenerTodasPreguntas();
-        } catch (CsvValidationException ex) {
-            Logger.getLogger(CsvPreguntaDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        preguntas.removeIf(p -> p.getPregunta().equals(pregunta.getPregunta()));//elimina la que coincida con pregunta.getPregunta() de la instacia actual
-        reescribirArchivo(preguntas); 
-    }
-    }
 
 

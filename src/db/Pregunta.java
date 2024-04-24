@@ -10,7 +10,7 @@ import java.util.List;
  * clase Pregunta representa como objetos los datos de nuestro csv
  * @author steve
  */
-class Pregunta {
+public class Pregunta {
     private String pregunta;
     private List<String> respuestas;
     private String respuestaCorrecta;
