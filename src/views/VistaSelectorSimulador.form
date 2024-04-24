@@ -346,6 +346,11 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="anadirPreguntaButtonMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="anadirPreguntaButtonMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="anadirPreguntaButtonMouseReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="simuladorInfoButton">
               <Properties>
