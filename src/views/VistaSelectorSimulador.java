@@ -222,17 +222,6 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         anadirPreguntaButton.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
         anadirPreguntaButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Mas_Off.png")); // NOI18N
         anadirPreguntaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        anadirPreguntaButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                anadirPreguntaButtonMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                anadirPreguntaButtonMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                anadirPreguntaButtonMouseReleased(evt);
-            }
-        });
         buttonsPanel.add(anadirPreguntaButton);
 
         simuladorInfoButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\PazosRG\\code\\Universae\\theoricBuilderResources\\InterfazMobile\\Info_Off.png")); // NOI18N
@@ -292,7 +281,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
-    }                                                   
+    }//GEN-LAST:event_selectorSimuladoresTxtMouseClicked
 
     /**
      * Este método se activa cuando se hace clic en el botón de información del simulador.
@@ -351,18 +340,6 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         selectorSimuladoresTxt.setText(label.getText());
         selectorSimuladoresTxtMouseClicked(evt);
     }//GEN-LAST:event_simuladorLabel4MouseClicked
-
-    private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
-        // TODO implementar añadir pregunta
-    }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
-
-    private void anadirPreguntaButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMousePressed
-        setImageLabel(anadirPreguntaButton, "theoricBuilderResources/InterfazMobile/Mas_On.png", iconButtonDimension);
-    }//GEN-LAST:event_anadirPreguntaButtonMousePressed
-
-    private void anadirPreguntaButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseReleased
-        setImageLabel(anadirPreguntaButton, "theoricBuilderResources/InterfazMobile/Mas_Off.png", iconButtonDimension);
-    }//GEN-LAST:event_anadirPreguntaButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
