@@ -6,6 +6,7 @@ package views;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import static utility.Sesion.getInstance;
 import static utility.theUltimateUtility.sumaDimension;
 import static utility.theUltimateUtility.setImageLabel;
@@ -293,9 +294,8 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     
     /**
      * Este método se activa cuando se hace clic en el texto del selector de simuladores.
-     * Si el panel de la lista de simuladores está visible, lo oculta y cambia la imagen del botón del selector.
-     * Si el panel de la lista de simuladores no está visible, lo hace visible y cambia la imagen del botón del selector.
-     * Después de cambiar la visibilidad del panel de la lista de simuladores, recalcula y ajusta el tamaño del contenedor.
+     * Después de cambiar la visibilidad del panel de la lista de simuladores (metodo selectorSimuladoresTxtMouseClicked), recalcula y ajusta el tamaño del contenedor. 
+     * Llama al metodo mostrarPreguntas del simulador
      *
      * @param evt El evento de clic del mouse que activó este método.
      */
@@ -303,7 +303,22 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         JLabel clickedLabel = (JLabel) evt.getSource();
         selectorSimuladoresTxt.setText(clickedLabel.getText());
         selectorSimuladoresTxtMouseClicked(evt);
-        getInstance().setSimuladorName(clickedLabel.getText());
+        mostrarPreguntas(clickedLabel.getText());
+    }
+    
+    /**
+     * Muestra las preguntas existentes del simulador dado.
+     *
+     * @param nombreSimulador El nombre del simulador elegido para mostrar sus preguntas.
+     */
+    private void mostrarPreguntas(String nombreSimulador) {
+        getInstance().setSimuladorName(nombreSimulador);
+        int cantidadPreguntas = getInstance().getCantidadPreguntas();
+        JPanel[] paneles = new JPanel[cantidadPreguntas];
+        JLabel[] botones = new JLabel[cantidadPreguntas];
+        objeto.setPaneles(paneles);
+        objeto.setBotones(botones);
+        objeto.cargarPanelesInicio();
     }
     
 
