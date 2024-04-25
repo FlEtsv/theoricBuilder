@@ -35,8 +35,12 @@ import javax.swing.JTextField;
  */
 public class Sesion {
     private static Sesion instancia = null;
+    private String rojo, amarillo, verde = null;
     private String simuladorName = null;
     private int cantidadPreguntas;
+    private int nFinalPreguntas;
+
+
     
     private Sesion() {
         // Constructor privado para el patrón Singleton
@@ -63,6 +67,37 @@ public class Sesion {
     public void setSimuladorName(String simuladorName) {
         this.simuladorName = simuladorName;
     }
+    
+    public String getRojo() {
+        return rojo;
+    }
+
+    public void setRojo(String rojo) {
+        this.rojo = rojo;
+    }
+
+    public String getAmarillo() {
+        return amarillo;
+    }
+
+    public void setAmarillo(String amarillo) {
+        this.amarillo = amarillo;
+    }
+
+    public String getVerde() {
+        return verde;
+    }
+
+    public void setVerde(String verde) {
+        this.verde = verde;
+    }
+        public int getnFinalPreguntas() {
+        return nFinalPreguntas;
+    }
+
+    public void setnFinalPreguntas(int nFinalPreguntas) {
+        this.nFinalPreguntas = nFinalPreguntas;
+    }
     /**
      * 
      * @return datos para cargarlos directamente en las labels
@@ -74,6 +109,8 @@ public class Sesion {
         try {
             List<Pregunta> datos = obtenerDatos.obtenerTodasPreguntas();
             getInstance().setCantidadPreguntas(datos.size());
+            String err = "Las preguntas han sido cargadas con éxito";
+            getInstance().setVerde(err);
             return datos; 
         } catch (IOException e) { 
             System.err.println("Error al obtener preguntas: " + e.getMessage());
@@ -92,6 +129,7 @@ public class Sesion {
          String simuladorName = getInstance().getSimuladorName();
         // Llamar al método reescribirArchivo con la lista de preguntas
         guardar.reescribirArchivo(preguntasGuardado,simuladorName);
+        String err = "Las preguntas han sido guardadas (%d en total)" + getInstance().getnFinalPreguntas();
     }
     /**
      * nos genera el archivo final solo necesita el nombre del simulador elegido
@@ -107,6 +145,8 @@ public class Sesion {
     String nombreArchivoZIP =  simuladorName + ".zip";
     String direccionArchivoZIP = miCarpeta + File.separator + nombreArchivoZIP;
     exportar.comprimir(simuladorName, direccionArchivoZIP);
+    String err = "Las preguntas se guardaron y se exportó el simulador en: "+ direccionArchivoZIP +".zip";
+    getInstance().setVerde(err);
     }
     
 

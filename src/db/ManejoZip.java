@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import utility.Sesion;
 
 /**
  *
@@ -24,11 +25,17 @@ public class ManejoZip {
      * Comprime el contenido de un directorio o archivo en un archivo ZIP.
      * @param fuente es la ruta del archivo o directorio que se va a comprimir.
      * @param direccionArchivoZip es la ruta donde se guardará el archivo ZIP.
+     * @throws java.io.IOException
      */
     public void comprimir(String fuente, String direccionArchivoZip) throws IOException {
         try (ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(direccionArchivoZip))) {
             File archivoFuente = new File(fuente);
             comprimirArchivo(archivoFuente, archivoFuente.getName(), zipOut);
+        } catch (IOException e) {
+            System.err.println("Error al comprimir el archivo: " + e.getMessage());
+            String err = "Las preguntas se guardaron, pero no se pudo comprimir el simulador";
+            Sesion.getInstance().setAmarillo(err);
+            throw e;  // Vuelve a lanzar la excepción para informar al llamador
         }
     }
 

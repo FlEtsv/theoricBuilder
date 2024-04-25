@@ -35,10 +35,12 @@ public CsvPreguntaDao() {
     private void crearArchivoSiNoExiste() {
         File file = new File(csvArchivo);
         if (!file.exists()) {
-            //No se encontro el archivo de preguntas
+            String err = "No se encontró el archivo preguntas";
+            Sesion.getInstance().setRojo(err);
             try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo))) {
             } catch (IOException e) {
-                //No se pudo crear el archivo de preguntas
+                err = "No se pudo crear el archivo Preguntas";
+                Sesion.getInstance().setRojo(err);
                 e.printStackTrace();
             }
         }
@@ -64,7 +66,10 @@ public CsvPreguntaDao() {
             boolean isFirstLine = true;
 
             while ((siguienteLinea = reader.readNext()) != null) {
-
+                if (isFirstLine) {
+                    isFirstLine = false; // Omitir la primera línea si es el encabezado.
+                    continue;
+                }
                 if (siguienteLinea.length < 5) {
                     // Si no hay suficientes columnas, imprimir error y continuar con la siguiente línea
                     System.err.println("Línea incompleta ignorada: " + Arrays.toString(siguienteLinea));
@@ -79,14 +84,25 @@ public CsvPreguntaDao() {
                     .setRespuestaCorrecta(respuestaCorrecta));
             }
         } catch (CsvValidationException e) {
-            System.err.println("Error de validación del CSV: " + e.getMessage());
+            System.err.println("Error en la estructura del archivo de preguntas: " + e.getMessage());
+            String err = "Error en la estructura del archivo de preguntas";
+            Sesion.getInstance().setRojo(err);
             throw e;
         } catch (IOException e) {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
             throw e;
         }
+
+        // Verificación para comprobar si la lista de preguntas está vacía
+        if (preguntas.isEmpty()) {
+            System.err.println("No se encontraron preguntas en el archivo.");
+            String err = "Este simulador no tiene preguntas";
+            Sesion.getInstance().setAmarillo(err);
+        }
+
         return preguntas;
     }
+
 
 /**
  * 
