@@ -445,7 +445,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
@@ -459,27 +458,11 @@ public class PanelPreguntas extends javax.swing.JPanel {
         panelPrincipal.setMinimumSize(new java.awt.Dimension(430, 788));
         panelPrincipal.setOpaque(false);
         panelPrincipal.setPreferredSize(new java.awt.Dimension(430, 788));
-        add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 28, 410, 760));
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("jLabel4");
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 390, 10));
+        add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -2, 410, 790));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-        //crearPaneles();
-    }//GEN-LAST:event_jLabel4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 
