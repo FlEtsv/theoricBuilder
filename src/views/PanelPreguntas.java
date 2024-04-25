@@ -9,11 +9,13 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static utility.Sesion.getInstance;
 import utility.Utility;
 
 
@@ -23,8 +25,10 @@ import utility.Utility;
  */
 public class PanelPreguntas extends javax.swing.JPanel {
 
-    private final JPanel[] paneles = new JPanel[3];
-    private final JLabel[] botones = new JLabel[16];
+    private final JPanel[] paneles = new JPanel[getInstance().getCantidadPreguntas()];
+    private final JLabel[] botones = new JLabel[getInstance().getCantidadPreguntas()];
+    //List<JPanel> preguntas = obtenerPreguntas();
+    
     //private final java.util.List<JPanel> paneles = new java.util.ArrayList<>();
     //private final java.util.List<JLabel> botones = new java.util.ArrayList<>();
     
@@ -34,6 +38,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
      */
     public PanelPreguntas() {
         initComponents();
+        
         cargarPanelesInicio();
         
         setPreferredSize(new Dimension(430, 788));
@@ -63,9 +68,17 @@ public class PanelPreguntas extends javax.swing.JPanel {
             paneles[indice].setOpaque(false);
 
 
-            //Botón especial con ÍNDICE
+            //Generar icono eliminar pregunta
             botones[indice] = new JLabel();
-            botones[indice].setText("Hola mundo" + indice);
+            botones[indice].setName("iconoEliminar"+indice);
+            botones[indice].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            botones[indice].setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            botones[indice].setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            botones[indice].setMaximumSize(new java.awt.Dimension(12, 12));
+            botones[indice].setMinimumSize(new java.awt.Dimension(12, 12));
+            botones[indice].setPreferredSize(new java.awt.Dimension(12, 12));
+            Utility.SetImageLabel(botones[indice], "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
+            paneles[indice].add(botones[indice], new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 12, 12));
             // Agregar MouseListener al segundo JLabel
             botones[indice].addMouseListener(new MouseAdapter() {
                 @Override
@@ -216,7 +229,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
             // Agregar componentes al panel
             paneles[indice].add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 250));
-            paneles[indice].add(botones[indice], new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 165, -1));
             cantidadPanelesFront++;
         }
 

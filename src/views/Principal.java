@@ -133,7 +133,7 @@ public class Principal extends javax.swing.JFrame {
         txtBtnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtBtnCrear.setText("Exportar");
         txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bottomPanel.add(txtBtnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, 250, 40));
+        bottomPanel.add(txtBtnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 10, 250, 50));
 
         btnExportar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnExportar.setToolTipText(null);
