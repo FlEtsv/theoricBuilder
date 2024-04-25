@@ -6,6 +6,7 @@ package views;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import static utility.Sesion.getInstance;
 import static utility.theUltimateUtility.sumaDimension;
 import static utility.theUltimateUtility.setImageLabel;
 import views.PanelPreguntas;
@@ -136,7 +137,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         simuladorLabel0.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel0.setForeground(new java.awt.Color(247, 247, 247));
-        simuladorLabel0.setText("Ahora Aprendo");
+        simuladorLabel0.setText("Simulador1");
         simuladorLabel0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel0.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel0.setMinimumSize(new java.awt.Dimension(400, 15));
@@ -269,7 +270,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         add(infoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-        /**
+    /**
      * Este método se activa cuando se hace clic en el texto del selector de simuladores.
      * Si el panel de la lista de simuladores está visible, lo oculta y cambia la imagen del botón del selector.
      * Si el panel de la lista de simuladores no está visible, lo hace visible y cambia la imagen del botón del selector.
@@ -288,7 +289,23 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
         objeto.CambioSize(contenedorDimension);
-    }                                                   
+    }       
+    
+    /**
+     * Este método se activa cuando se hace clic en el texto del selector de simuladores.
+     * Si el panel de la lista de simuladores está visible, lo oculta y cambia la imagen del botón del selector.
+     * Si el panel de la lista de simuladores no está visible, lo hace visible y cambia la imagen del botón del selector.
+     * Después de cambiar la visibilidad del panel de la lista de simuladores, recalcula y ajusta el tamaño del contenedor.
+     *
+     * @param evt El evento de clic del mouse que activó este método.
+     */
+    private void simuladorSeleccionado(java.awt.event.MouseEvent evt){
+        JLabel clickedLabel = (JLabel) evt.getSource();
+        selectorSimuladoresTxt.setText(clickedLabel.getText());
+        selectorSimuladoresTxtMouseClicked(evt);
+        getInstance().setSimuladorName(clickedLabel.getText());
+    }
+    
 
     /**
      * Este método se activa cuando se hace clic en el botón de información del simulador.
@@ -319,33 +336,23 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
      * @param evt El evento de clic del mouse que activó este método.
      */
     private void simuladorLabel0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel0MouseClicked
-        JLabel clickedLabel = (JLabel) evt.getSource();
-        selectorSimuladoresTxt.setText(clickedLabel.getText());
-        selectorSimuladoresTxtMouseClicked(evt);
+        simuladorSeleccionado(evt);
     }//GEN-LAST:event_simuladorLabel0MouseClicked
 
     private void simuladorLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel1MouseClicked
-        JLabel label = (JLabel) evt.getSource();
-        selectorSimuladoresTxt.setText(label.getText());
-        selectorSimuladoresTxtMouseClicked(evt);
+        simuladorSeleccionado(evt);
     }//GEN-LAST:event_simuladorLabel1MouseClicked
 
     private void simuladorLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel2MouseClicked
-        JLabel label = (JLabel) evt.getSource();
-        selectorSimuladoresTxt.setText(label.getText());
-        selectorSimuladoresTxtMouseClicked(evt);
+        simuladorSeleccionado(evt);
     }//GEN-LAST:event_simuladorLabel2MouseClicked
 
     private void simuladorLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel3MouseClicked
-        JLabel label = (JLabel) evt.getSource();
-        selectorSimuladoresTxt.setText(label.getText());
-        selectorSimuladoresTxtMouseClicked(evt);
+        simuladorSeleccionado(evt);
     }//GEN-LAST:event_simuladorLabel3MouseClicked
 
     private void simuladorLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorLabel4MouseClicked
-        JLabel label = (JLabel) evt.getSource();
-        selectorSimuladoresTxt.setText(label.getText());
-        selectorSimuladoresTxtMouseClicked(evt);
+        simuladorSeleccionado(evt);
     }//GEN-LAST:event_simuladorLabel4MouseClicked
 
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
