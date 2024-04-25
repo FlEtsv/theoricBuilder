@@ -4,7 +4,6 @@
  */
 package views;
 
-import views.PanelPreguntas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -33,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
        
 
         //Ubicar y adaptar botón de "Crear".
-        Utility.SetImageLabel(btnCrear, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
+        Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
         Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(50, 50));
         
         //Llamar al JPanel correspondiente de preguntas.
@@ -85,7 +84,7 @@ public class Principal extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         txtBtnCrear = new javax.swing.JLabel();
-        btnCrear = new javax.swing.JLabel();
+        btnExportar = new javax.swing.JLabel();
         txtWarning = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
@@ -136,25 +135,24 @@ public class Principal extends javax.swing.JFrame {
         txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bottomPanel.add(txtBtnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, 250, 40));
 
-        btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/InterfazMobile/Cilindrico_On.png"))); // NOI18N
-        btnCrear.setToolTipText(null);
-        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCrear.setMaximumSize(new java.awt.Dimension(380, 52));
-        btnCrear.setMinimumSize(new java.awt.Dimension(370, 50));
-        btnCrear.setPreferredSize(new java.awt.Dimension(380, 52));
-        btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnExportar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnExportar.setToolTipText(null);
+        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExportar.setMaximumSize(new java.awt.Dimension(380, 52));
+        btnExportar.setMinimumSize(new java.awt.Dimension(370, 50));
+        btnExportar.setPreferredSize(new java.awt.Dimension(380, 52));
+        btnExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCrearMouseClicked(evt);
+                btnExportarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCrearMouseEntered(evt);
+                btnExportarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCrearMouseExited(evt);
+                btnExportarMouseExited(evt);
             }
         });
-        bottomPanel.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 10, 250, 50));
+        bottomPanel.add(btnExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 10, 250, 50));
 
         txtWarning.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
         txtWarning.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,25 +180,30 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
+    private void btnExportarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseEntered
         // TODO add your handling code here:
-        Utility.SetImageLabel(btnCrear, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(250, 50));
-    }//GEN-LAST:event_btnCrearMouseEntered
+        Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(250, 50));
+    }//GEN-LAST:event_btnExportarMouseEntered
 
-    private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
+    private void btnExportarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseExited
         // TODO add your handling code here:
-        Utility.SetImageLabel(btnCrear, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
-    }//GEN-LAST:event_btnCrearMouseExited
+        Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
+    }//GEN-LAST:event_btnExportarMouseExited
 
-    private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
+    private void btnExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseClicked
         /*
-        *
-        * STEVEN
-        *
-        * AQUÍ VAN LOS CÓDIGOS NECESARIOS PARA PODER GUARDAR LAS PREGUNTAS Y RESPUESTAS DEL TEST
-        *
+            btnExportar -> Función guardar en CSV y exportar en ZIP
+            txtPregunta -> Muestra la pregunta n (variable según instancias)
+            txtRespuestaCorrecta -> Muestra la respuesta correcta de n
+            txtRespuestaInc1 -> Muestra la primera resp. inco. de n
+            txtRespuestaInc2 -> Muestra la segunda resp. inco. de n
+            txtRespuestaInc3 -> Muestra la tercera resp. inco. de n
+            iconoEliminar -> Función de eliminar una pregunta.
+            
+            SEGÚN NOS DIGA JACK:
+            btnGuardar -> Guarda todo el front en CSV antes de exportar.
         */
-    }//GEN-LAST:event_btnCrearMouseClicked
+    }//GEN-LAST:event_btnExportarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         
@@ -244,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
-    private javax.swing.JLabel btnCrear;
+    private javax.swing.JLabel btnExportar;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel jPanel4;
