@@ -19,9 +19,14 @@ import com.opencsv.exceptions.CsvValidationException;
 import db.CsvPreguntaDao;
 import db.ManejoZip;
 import db.Pregunta;
+import java.awt.Component;
+import java.awt.Container;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -102,7 +107,50 @@ public class Sesion {
     String direccionArchivoZIP = miCarpeta + File.separator + nombreArchivoZIP;
     exportar.comprimir(simuladorName, direccionArchivoZIP);
     }
+    
 
+    /**
+     * Actualiza los JTextFields dentro de una lista de JPanels con preguntas de una lista de Pregunta.
+     * 
+     * @param paneles La lista de JPanels que se actualizarán con preguntas.
+     * @param preguntas La lista de preguntas que contienen los datos a mostrar.
+     * @param cantidadPaneles El número de paneles que corresponden al número de preguntas.
+     */
+    public void actualizarPreguntasEnPaneles(List<JPanel> paneles, List<Pregunta> preguntas, int cantidadPaneles) {
+        for (int i = 0; i < Math.min(paneles.size(), preguntas.size()); i++) {
+            JPanel panel = paneles.get(i);
+            Pregunta pregunta = preguntas.get(i);
 
+            // Buscar el JTextField por su nombre en el JPanel
+            JTextField textField = (JTextField) EncontrarComponente(panel, "jLabelPregunta" + (i));
+            if (textField != null) {
+                textField.setText(pregunta.getPregunta());
+            } else {
+                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+            }
+        }
+    }
+
+    /**
+     * Busca un componente por nombre dentro de un contenedor.
+     * 
+     * @param container El contenedor donde buscar el componente.
+     * @param name El nombre del componente a buscar.
+     * @return El componente si se encuentra, de lo contrario null.
+     */
+    private Component EncontrarComponente(Container container, String name) {
+        for (Component comp : container.getComponents()) {
+            if (name.equals(comp.getName())) {
+                return comp;
+            } else if (comp instanceof Container) {
+                Component foundComp = EncontrarComponente((Container) comp, name);
+                if (foundComp != null) {
+                    return foundComp;
+                }
+            }
+        }
+        return null;
+    }
 }
+
 
