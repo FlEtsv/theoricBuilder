@@ -29,8 +29,8 @@ import utility.Utility;
 public class PanelPreguntas extends javax.swing.JPanel {
     
     
-    private final JPanel[] paneles;
-    private final JLabel[] botones;
+    private JPanel[] paneles;
+    private JLabel[] botones;
     //List<JPanel> preguntas = obtenerPreguntas();
     
     //private final java.util.List<JPanel> paneles = new java.util.ArrayList<>();
@@ -44,7 +44,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
     public PanelPreguntas() {
         initComponents();
         
-        
+        /*
         try {
             List<Pregunta> preguntas = getInstance().obtenerDatos();
         } catch (CsvValidationException e) {
@@ -52,13 +52,11 @@ public class PanelPreguntas extends javax.swing.JPanel {
         } catch (IOException e) {
             System.err.println("Error de I/O: " + e.getMessage());
         }
+        */
         
-        paneles = new JPanel[getInstance().getCantidadPreguntas()];
-        botones = new JLabel[getInstance().getCantidadPreguntas()];
         
         panelPrincipal.add(new VistaSelectorSimulador(this));
         
-        cargarPanelesInicio();
         
         setPreferredSize(new Dimension(430, 788));
         
@@ -80,6 +78,13 @@ public class PanelPreguntas extends javax.swing.JPanel {
         panelPrincipal.repaint();
     }
     
+    public void setPaneles(JPanel[] paneles){
+        this.paneles = paneles;
+    }
+    
+    public void setBotones(JLabel[] botones){
+        this.botones = botones;
+    }
     
     public void cargarPanelesInicio() {
         for (int i = 0; i < paneles.length; i++) {
