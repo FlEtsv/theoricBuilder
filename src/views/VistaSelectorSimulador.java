@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import static utility.theUltimateUtility.sumaDimension;
 import static utility.theUltimateUtility.setImageLabel;
+import views.PanelPreguntas;
 
 /**
  * Esta clase extiende JPanel para crear un panel personalizado para seleccionar un simulador.
@@ -23,27 +24,28 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private final Dimension iconButtonDimension = new Dimension(25, 25);
     private final Dimension infoPanelDimension = new Dimension(400, 95);
     private Dimension contenedorDimension = new Dimension(430, 130);
-
+    private PanelPreguntas objeto;
     /**
      * Constructor para la clase VistaSelectorSimulador.
      * Inicializa los componentes y configura el estado inicial del panel.
      */
-    public VistaSelectorSimulador() {
+    public VistaSelectorSimulador(PanelPreguntas objeto) {
+        this.objeto = objeto;
         initComponents();
 
         // Inicia el panel de lista como no visible
         listaSimuladoresPanel.setVisible(false);
 
         // Establece la imagen del desplegable del selector de simuladores
-        setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
+        setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
 
         // Establece los iconos de añadir pregunta y de información sobre el simulador
-        setImageLabel(anadirPreguntaButton, "imagenes/InterfazMobile/Mas_Off.png", iconButtonDimension);
-        setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
+        setImageLabel(anadirPreguntaButton, "src/imagenes/InterfazMobile/Mas_Off.png", iconButtonDimension);
+        setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
 
         // Establece el panel de información como invisible y establece la imagen de fondo
         infoPanel.setVisible(false);
-        setImageLabel(infoBackImg, "imagenes/InterfazMobile/Panel_Info.png", infoPanelDimension);
+        setImageLabel(infoBackImg, "src/imagenes/InterfazMobile/Panel_Info.png", infoPanelDimension);
 
         // Establece el tamaño del contenedor
         this.setSize(contenedorDimension);
@@ -80,6 +82,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(10, 38, 72));
         setMinimumSize(new java.awt.Dimension(430, 0));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(430, 129));
 
         tipoSimuladorPanel.setOpaque(false);
@@ -221,6 +224,11 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         anadirPreguntaButton.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
         anadirPreguntaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anadirPreguntaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                anadirPreguntaButtonMouseClicked(evt);
+            }
+        });
         buttonsPanel.add(anadirPreguntaButton);
 
         simuladorInfoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -272,13 +280,14 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void selectorSimuladoresTxtMouseClicked(java.awt.event.MouseEvent evt) {
         if (listaSimuladoresPanel.isShowing()) {
             listaSimuladoresPanel.setVisible(false);
-            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
+            setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
         } else {
             listaSimuladoresPanel.setVisible(true);
-            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);
+            setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);           
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
+        objeto.CambioSize(contenedorDimension);
     }                                                   
 
     /**
@@ -293,14 +302,14 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void simuladorInfoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorInfoButtonMouseClicked
         if (infoPanel.isShowing()) {
             infoPanel.setVisible(false);
-            setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
+            setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
         } else {
             infoPanel.setVisible(true);
-            setImageLabel(simuladorInfoButton, "imagenes/InterfazMobile/info_On.png", iconButtonDimension);
-            setImageLabel(selectorSimuladoresImg, "imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);
+            setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_On.png", iconButtonDimension);
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
+        objeto.CambioSize(contenedorDimension);
     }//GEN-LAST:event_simuladorInfoButtonMouseClicked
 
     /**
@@ -338,6 +347,11 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         selectorSimuladoresTxt.setText(label.getText());
         selectorSimuladoresTxtMouseClicked(evt);
     }//GEN-LAST:event_simuladorLabel4MouseClicked
+
+    private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

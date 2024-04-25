@@ -4,11 +4,14 @@
  */
 package views;
 
+import com.opencsv.exceptions.CsvValidationException;
+import db.Pregunta;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,9 +27,10 @@ import utility.Utility;
  * @author USER
  */
 public class PanelPreguntas extends javax.swing.JPanel {
-
-    private final JPanel[] paneles = new JPanel[getInstance().getCantidadPreguntas()];
-    private final JLabel[] botones = new JLabel[getInstance().getCantidadPreguntas()];
+    
+    
+    private final JPanel[] paneles;
+    private final JLabel[] botones;
     //List<JPanel> preguntas = obtenerPreguntas();
     
     //private final java.util.List<JPanel> paneles = new java.util.ArrayList<>();
@@ -36,8 +40,23 @@ public class PanelPreguntas extends javax.swing.JPanel {
     /**
      * Creates new form PanelPreguntas
      */
+    
     public PanelPreguntas() {
         initComponents();
+        
+        
+        try {
+            List<Pregunta> preguntas = getInstance().obtenerDatos();
+        } catch (CsvValidationException e) {
+            System.err.println("Error de validación CSV: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error de I/O: " + e.getMessage());
+        }
+        
+        paneles = new JPanel[getInstance().getCantidadPreguntas()];
+        botones = new JLabel[getInstance().getCantidadPreguntas()];
+        
+        panelPrincipal.add(new VistaSelectorSimulador(this));
         
         cargarPanelesInicio();
         
@@ -53,6 +72,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
         Utility.SetImageLabel(iconoEliminar, "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
         */
     }
+    
+    
+    public void CambioSize(Dimension nuevaDimension){
+        panelPrincipal.getComponent(0).setPreferredSize(nuevaDimension);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+    }
+    
+    
     public void cargarPanelesInicio() {
         for (int i = 0; i < paneles.length; i++) {
             final int indice = i;
@@ -245,10 +273,9 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 panelPrincipal.revalidate();
                 panelPrincipal.repaint();
                 System.out.println("Eliminando el panel: " + nombre);
-                return; // Terminamos el método luego de eliminar el panel
+                return;
             }
         }
-        // Si llegamos aquí, significa que no se encontró ningún panel con el nombre especificado
         System.out.println("No se encontró ningún panel con el nombre: " + nombre);
     }
     /*
