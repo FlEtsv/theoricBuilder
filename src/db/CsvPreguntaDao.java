@@ -8,8 +8,6 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
-import com.opencsv.CSVWriterBuilder;
-import com.opencsv.ICSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.FileReader;
@@ -18,8 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utility.Sesion;
 
 /**
@@ -39,8 +35,10 @@ public CsvPreguntaDao() {
     private void crearArchivoSiNoExiste() {
         File file = new File(csvArchivo);
         if (!file.exists()) {
+            //No se encontro el archivo de preguntas
             try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo))) {
             } catch (IOException e) {
+                //No se pudo crear el archivo de preguntas
                 e.printStackTrace();
             }
         }
