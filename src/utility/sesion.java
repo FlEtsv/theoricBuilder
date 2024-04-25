@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -150,6 +151,47 @@ public class Sesion {
             }
         }
         return null;
+    }
+    
+    /**
+     * Crea una lista de preguntas instanciando Pregunta con los JTextFields de una lista de JPanels.
+     * 
+     * @param paneles La lista de JPanels de la que tomamos la información..
+     * @return Una lista de Pregunta con la información tomada de los paneles.
+     */
+    public List<Pregunta> crearPreguntasConPaneles(List<JPanel> paneles) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        for (int i = 0; i < paneles.size(); i++) {
+            JPanel panel = paneles.get(i);
+            Pregunta pregunta = new Pregunta();
+            // Buscar el JTextField de la pregunta por su nombre en el JPanel
+            JTextField preguntaTextField = (JTextField) EncontrarComponente(panel, "jLabelPregunta" + (i));
+            if (preguntaTextField != null) {
+                pregunta.setPregunta(preguntaTextField.getText());
+            } else {
+                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+            }
+            // Busca el JTextField de la respuesta correcta por su nombre en el JPanel
+            JTextField correctaTextField = (JTextField) EncontrarComponente(panel, "jLabelCorrecta" + (i));
+            if (correctaTextField != null) {
+                pregunta.setRespuestaCorrecta(correctaTextField.getText());
+            } else {
+                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+            }
+            // Respuestas incorrectas.
+            List<String> incorrectasList = new ArrayList<>();
+            // Busca el JTextField cada una de las respuestas incorrectas por su nombre en el JPanel
+            for (int j = 1; j <= 3; j++){
+                JTextField incorrectaTextField = (JTextField) EncontrarComponente(panel, "jLabelIncorrecta"+j);
+                if (correctaTextField != null) {
+                    incorrectasList.add(incorrectaTextField.getText());
+                } else {
+                    System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+                }
+            }
+            pregunta.setRespuestas(incorrectasList);
+        }
+        return preguntas;
     }
 }
 
