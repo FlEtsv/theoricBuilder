@@ -177,6 +177,21 @@ public class Sesion {
             } else {
                 System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
             }
+            JTextField textFieldRespuestaCorrecta = (JTextField) EncontrarComponente(panel, "jLabelCorrecta" + (i));
+            if (textFieldRespuestaCorrecta != null) {
+                textFieldRespuestaCorrecta.setText(pregunta.getRespuestaCorrecta());
+            } else {
+                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+            }
+            for(int j = 1; j <= pregunta.getRespuestas().size(); j++) {
+                int index = j-1;
+                JTextField textFieldRespuestaIncorrecta = (JTextField) EncontrarComponente(panel, "jLabelIncorrecta" + (j));
+                if (textFieldRespuestaIncorrecta != null) {
+                    textFieldRespuestaIncorrecta.setText(pregunta.getRespuestas().get(index));
+                } else {
+                    System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+                }
+            }
         }
     }
 
