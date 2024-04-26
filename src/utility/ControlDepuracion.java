@@ -53,23 +53,23 @@ public void mostrarMensaje(String message, int displayDuration) {
     }
 
     private void verificarYMostrarMensajes() {
-        String rojo = Sesion.getInstance().getRojo();
-        String verde = Sesion.getInstance().getVerde();
-        String amarillo = Sesion.getInstance().getAmarillo();
+    String rojo = Sesion.getInstance().getRojo();
+    String verde = Sesion.getInstance().getVerde();
+    String amarillo = Sesion.getInstance().getAmarillo();
 
-        if (!rojo.isEmpty()) {
-            depuracion.mostrarMensaje(rojo, 3000); // 3 segundos para 'rojo'
-            Sesion.getInstance().setRojo(""); // Limpia el valor después de mostrar
-        }
-        if (!verde.isEmpty()) {
-            depuracion.mostrarMensaje(verde, 2000); // 2 segundos para 'verde'
-            Sesion.getInstance().setVerde(""); // Limpia el valor después de mostrar
-        }
-        if (!amarillo.isEmpty()) {
-            depuracion.mostrarMensaje(amarillo, 2000); // 2 segundos para 'amarillo'
-            Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
-        }
+    if (rojo != null && !rojo.isEmpty()) {
+        this.mostrarMensaje(rojo, 3000); // 3 segundos para 'rojo'
+        Sesion.getInstance().setRojo(""); // Limpia el valor después de mostrar
     }
+    if (verde != null && !verde.isEmpty()) {
+        this.mostrarMensaje(verde, 2000); // 2 segundos para 'verde'
+        Sesion.getInstance().setVerde(""); // Limpia el valor después de mostrar
+    }
+    if (amarillo != null && !amarillo.isEmpty()) {
+        this.mostrarMensaje(amarillo, 2000); // 2 segundos para 'amarillo'
+        Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
+    }
+}
 
     public void detenerDepuracion() {
         seguirEjecutando = false;

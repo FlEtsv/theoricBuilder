@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import utility.ControlDepuracion;
 import utility.Utility;
 
 /**
@@ -34,7 +35,8 @@ public final class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
+        ControlDepuracion txtWarningControl = new ControlDepuracion(txtWarning);
+        txtWarningControl.iniciarDepuracion();
 
         //Ubicar y adaptar botón de "Crear".
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
@@ -173,8 +175,7 @@ public final class Principal extends javax.swing.JFrame {
         txtWarning.setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
         txtWarning.setForeground(new java.awt.Color(255, 255, 255));
         txtWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtWarning.setText("ejemplo de aviso");
-        bottomPanel.add(txtWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 66, 410, -1));
+        bottomPanel.add(txtWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 56, 420, 30));
 
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
