@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import utility.Utility;
 
 /**
@@ -54,12 +55,18 @@ public class Principal extends javax.swing.JFrame {
     
     
     
-    public void ShowPanel(JPanel p){
-        p.setSize(contentPanel.getWidth(),contentPanel.getHeight());
-        p.setLocation(0,0);        
-        //         !!!!!           MIRAR SCROLL
+public void ShowPanel(JPanel p){
+        JScrollPane scrollPane = new JScrollPane(p);
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //scrollPane.setOpaque(false);
+
+        scrollPane.setPreferredSize(new Dimension(440, 700));
+
         contentPanel.removeAll();
-        contentPanel.add(p, BorderLayout.CENTER);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
+
         contentPanel.revalidate();
         contentPanel.repaint();
     }
@@ -93,9 +100,10 @@ public class Principal extends javax.swing.JFrame {
         setTitle("TheoricBuilder");
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(430, 930));
+        setMinimumSize(new java.awt.Dimension(430, 932));
+        setPreferredSize(new java.awt.Dimension(430, 932));
         setResizable(false);
-        setSize(new java.awt.Dimension(430, 930));
+        setSize(new java.awt.Dimension(430, 932));
 
         jPanel4.setBackground(new java.awt.Color(0, 11, 31));
         jPanel4.setMaximumSize(new java.awt.Dimension(430, 930));
@@ -169,10 +177,10 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel4.add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 
-        contentPanel.setMaximumSize(new java.awt.Dimension(430, 788));
-        contentPanel.setMinimumSize(new java.awt.Dimension(430, 788));
+        contentPanel.setMaximumSize(new java.awt.Dimension(430, 790));
+        contentPanel.setMinimumSize(new java.awt.Dimension(430, 790));
         contentPanel.setOpaque(false);
-        contentPanel.setPreferredSize(new java.awt.Dimension(430, 788));
+        contentPanel.setPreferredSize(new java.awt.Dimension(430, 790));
         jPanel4.add(contentPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.LINE_END);

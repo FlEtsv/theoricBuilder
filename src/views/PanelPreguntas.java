@@ -9,6 +9,8 @@ import db.Pregunta;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
     
     public PanelPreguntas() {
         initComponents();
+        panelPrincipal.addContainerListener(new ContainerHandler());
         
         /*
         try {
@@ -55,11 +58,9 @@ public class PanelPreguntas extends javax.swing.JPanel {
         */
         
         
-        panelPrincipal.add(new VistaSelectorSimulador(this));
+       panelPrincipal.add(new VistaSelectorSimulador(this));
         
-        
-        setPreferredSize(new Dimension(430, 788));
-        
+            
         /*Ubicar y adaptar fondo de cada tarjeta de pregunta y respuestas.
         Utility.SetImageLabel(fondoTarjeta, "src/imagenes/InterfazMobile/Cuadrado_Off.png", new Dimension(410, 250));
         Utility.SetImageLabel(fondoTxtField1, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension (360,30));
@@ -69,6 +70,50 @@ public class PanelPreguntas extends javax.swing.JPanel {
         Utility.SetImageLabel(fondoTxtField5, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension (360,30));
         Utility.SetImageLabel(iconoEliminar, "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
         */
+    }
+    private class ContainerHandler implements ContainerListener {
+        @Override
+        public void componentAdded(ContainerEvent e) {
+            ajustarTamaño();
+        }
+
+        @Override
+        public void componentRemoved(ContainerEvent e) {
+            ajustarTamaño();
+        }
+    }
+
+    public void ajustarTamaño() {
+        int totalWidth = panelPrincipal.getWidth();
+        int x = 0;
+        int y = 0;
+        int maxHeight = 0;
+
+        for (Component comp : panelPrincipal.getComponents()) {
+            Dimension compPrefSize = comp.getPreferredSize();
+            if (x + compPrefSize.width > totalWidth) {
+                x = 0;
+                y += maxHeight;
+                maxHeight = 0;
+            }
+            x += compPrefSize.width;
+            maxHeight = Math.max(maxHeight, compPrefSize.height);
+        }
+
+        int newHeight = y + maxHeight;
+        Dimension newSize = new Dimension(totalWidth, newHeight);
+        panelPrincipal.setPreferredSize(newSize);
+        panelPrincipal.setSize(newSize);
+        panelPrincipal.setMaximumSize(newSize);
+        this.setPreferredSize(newSize);
+        this.setSize(newSize);
+        this.setMaximumSize(newSize);
+// Ajustar el tamaño preferido del panelPrincipal
+        System.out.println(newSize); // Debugging
+        this.revalidate();
+        this.repaint();
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
     }
     
     
@@ -263,6 +308,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             // Agregar componentes al panel
             paneles[indice].add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 250));
             cantidadPanelesFront++;
+
         }
 
         for (JPanel panel : paneles) {
@@ -480,17 +526,28 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Raleway", 0, 12)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(430, 788));
+        setMaximumSize(new java.awt.Dimension(430, 2631));
         setMinimumSize(new java.awt.Dimension(430, 788));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(430, 788));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelPrincipal.setMaximumSize(new java.awt.Dimension(430, 788));
+        panelPrincipal.setMaximumSize(new java.awt.Dimension(430, 2700));
         panelPrincipal.setMinimumSize(new java.awt.Dimension(430, 788));
         panelPrincipal.setOpaque(false);
         panelPrincipal.setPreferredSize(new java.awt.Dimension(430, 788));
-        add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -2, 410, 790));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
