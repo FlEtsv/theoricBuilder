@@ -4,6 +4,7 @@
  */
 package views;
 
+import db.Pregunta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -11,6 +12,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import utility.ControlDepuracion;
@@ -21,7 +25,8 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 
 /**
- *
+ * Clase Principal que extiende de JFrame.
+ * Esta clase es la principal del proyecto y se encarga de la interfaz gráfica del usuario.
  * @author USER
  */
 public final class Principal extends javax.swing.JFrame {
@@ -36,7 +41,8 @@ public final class Principal extends javax.swing.JFrame {
     */
     
     /**
-     * Creates new form PrincipalJuego
+     * Constructor de la clase Principal.
+     * Inicializa los componentes de la interfaz gráfica y configura la ventana principal.
      */
     public Principal() {
         initComponents();
@@ -65,13 +71,16 @@ public final class Principal extends javax.swing.JFrame {
     
     
     
-    
+    /**
+     * Método para mostrar un panel en la interfaz gráfica.
+     * @param p JPanel a mostrar.
+     */
     public void ShowPanel(JPanel p){
         JScrollPane scrollPane = new JScrollPane(p);
 
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         
-        //PONER VELOCIDAD DISTINTA AL SCROLL
+        // TODO PONER VELOCIDAD DISTINTA AL SCROLL
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         
         
@@ -90,10 +99,37 @@ public final class Principal extends javax.swing.JFrame {
         contentPanel.repaint();
     }
     
+    /**
+     * Método para obtener la imagen del icono de la aplicación.
+     * @return Image del icono de la aplicación.
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("imagenes/InterfazMobile/Extra/Icon_Shield.png"));
         return retValue;
+    }
+    
+    /**
+    * Este método se utiliza para obtener una lista de paneles de preguntas de la interfaz gráfica.
+    * Recorre todos los componentes del panel de contenido y agrega a la lista aquellos que son instancias de JPanel y no son instancias de VistaSelectorSimulador.
+    * 
+    * @return List<JPanel> Una lista de paneles de preguntas.
+    */
+    private List<JPanel> obtenerJPanlesPreguntas(){
+        // Crea la Lista<JPanel> que queremos convertir a Pregunta
+        List<JPanel> panelesPregunta = new ArrayList<>();
+        if(contentPanel.getComponentCount() == 1){
+            JScrollPane panelScroll = (JScrollPane) contentPanel.getComponent(0);
+            JPanel variable = (JPanel) panelScroll.getViewport().getView();
+            Component[] componentes = variable.getComponents();
+            // Suponemos que el componente en la posición 0 es la vistaSelectoSimulador
+            for (Component componente : componentes){
+                if(componente instanceof JPanel  && !(componente instanceof VistaSelectorSimulador)){
+                    panelesPregunta.add((JPanel)componente);
+                }
+            }
+        }
+        return panelesPregunta;
     }
     
     /**
@@ -208,18 +244,26 @@ public final class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExportarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseEntered
-        // TODO add your handling code here:
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(250, 50));
     }//GEN-LAST:event_btnExportarMouseEntered
 
     private void btnExportarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseExited
-        // TODO add your handling code here:
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
     }//GEN-LAST:event_btnExportarMouseExited
 
+    /**
+    * Método que se ejecuta cuando se hace clic en el botón "Exportar".
+    * Este método crea una lista de paneles de preguntas, convierte estos paneles en objetos de tipo Pregunta,
+    * guarda estas preguntas en un archivo CSV y luego exporta este archivo a un archivo ZIP.
+    *
+    * @param evt Evento del mouse que representa el clic en el botón.
+    */
     private void btnExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseClicked
+        // Convierte los paneles de preguntas en objetos de tipo Pregunta
+        List<Pregunta> preguntas = Sesion.getInstance().crearPreguntasConPaneles(obtenerJPanlesPreguntas());       
+        // Guarda las preguntas en un archivo CSV y exporta este archivo a un archivo ZIP
         try {
-            Sesion.guardar(Sesion.getInstance().getPreguntas());
+            Sesion.guardar(preguntas);
             Sesion.Exportar();
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -235,7 +279,8 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     /**
-     * @param args the command line arguments
+     * Método principal de la aplicación.
+     * @param args Argumentos de la línea de comandos.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
