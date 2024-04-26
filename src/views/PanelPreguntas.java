@@ -14,6 +14,7 @@ import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -311,6 +312,14 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         }
 
+        List<Pregunta> preguntasLista = List.of();
+        try{
+            preguntasLista = getInstance().obtenerDatos();
+        } catch(CsvValidationException | IOException e){
+            // TODO menajar el posible error
+        }
+        getInstance().actualizarPreguntasEnPaneles(Arrays.asList(paneles), preguntasLista, paneles.length);
+        
         for (JPanel panel : paneles) {
             panelPrincipal.add(panel);
             panelPrincipal.revalidate();
@@ -329,6 +338,20 @@ public class PanelPreguntas extends javax.swing.JPanel {
         }
         System.out.println("No se encontró ningún panel con el nombre: " + nombre);
     }
+    
+    public void eliminarTodasPreguntas(){
+        Component[] componentes = panelPrincipal.getComponents();
+        if (componentes.length > 1 && componentes[0] instanceof VistaSelectorSimulador){
+            for (int i = 1; i < componentes.length; i++) {
+                if (componentes[i] instanceof JPanel) {
+                    panelPrincipal.remove(componentes[i]);
+                    panelPrincipal.revalidate();
+                    panelPrincipal.repaint();
+                }
+            }
+        }
+    }
+    
     /*
     CÓDIGO ANTERIOR
     public void agregarNuevoPanel() {

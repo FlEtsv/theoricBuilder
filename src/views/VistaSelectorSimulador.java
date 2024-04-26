@@ -5,8 +5,10 @@
 package views;
 
 import com.opencsv.exceptions.CsvValidationException;
+import db.Pregunta;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static utility.Sesion.getInstance;
@@ -28,13 +30,13 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private final Dimension iconButtonDimension = new Dimension(25, 25);
     private final Dimension infoPanelDimension = new Dimension(400, 95);
     private Dimension contenedorDimension = new Dimension(430, 130);
-    private PanelPreguntas objeto;
+    private PanelPreguntas instanciaPanelPreguntas;
     /**
      * Constructor para la clase VistaSelectorSimulador.
      * Inicializa los componentes y configura el estado inicial del panel.
      */
-    public VistaSelectorSimulador(PanelPreguntas objeto) {
-        this.objeto = objeto;
+    public VistaSelectorSimulador(PanelPreguntas instanciaPanelPreguntas) {
+        this.instanciaPanelPreguntas = instanciaPanelPreguntas;
         initComponents();
 
         // Inicia el panel de lista como no visible
@@ -291,7 +293,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
-        objeto.CambioSize(contenedorDimension);
+        instanciaPanelPreguntas.CambioSize(contenedorDimension);
     }       
     
     /**
@@ -316,20 +318,17 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void mostrarPreguntas(String nombreSimulador) {
         getInstance().setSimuladorName(nombreSimulador);
         try{
-            getInstance().obtenerDatos();
+            List<Pregunta> preguntas = getInstance().obtenerDatos();
         } catch(CsvValidationException | IOException e){
             // TODO menajar el posible error
         }
         int cantidadPreguntas = getInstance().getCantidadPreguntas();
         JPanel[] paneles = new JPanel[cantidadPreguntas];
         JLabel[] botones = new JLabel[cantidadPreguntas];
-        objeto.setPaneles(paneles);
-        objeto.setBotones(botones);
-        objeto.cargarPanelesInicio();
-        Dimension nuevaDimensionPrincipal = sumaDimension(objeto.getComponents());
-        objeto.setSize(nuevaDimensionPrincipal);
-        objeto.setPreferredSize(nuevaDimensionPrincipal);
-        objeto.setMaximumSize(nuevaDimensionPrincipal);
+        instanciaPanelPreguntas.setPaneles(paneles);
+        instanciaPanelPreguntas.setBotones(botones);
+        instanciaPanelPreguntas.eliminarTodasPreguntas();
+        instanciaPanelPreguntas.cargarPanelesInicio();
     }
     
 
@@ -352,7 +351,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
-        objeto.CambioSize(contenedorDimension);
+        instanciaPanelPreguntas.CambioSize(contenedorDimension);
     }//GEN-LAST:event_simuladorInfoButtonMouseClicked
 
     /**
