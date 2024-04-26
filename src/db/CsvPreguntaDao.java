@@ -52,56 +52,52 @@ public CsvPreguntaDao() {
      * @throws IOException
      * @throws CsvValidationException
      */
-    @Override
-    public List<Pregunta> obtenerTodasPreguntas() throws IOException, CsvValidationException {
-        List<Pregunta> preguntas = new ArrayList<>();
-        CSVParser parser = new CSVParserBuilder()
-                .withSeparator(';')  // Establecer el delimitador como punto y coma
-                .build();
+@Override
+public List<Pregunta> obtenerTodasPreguntas() throws IOException, CsvValidationException {
+    List<Pregunta> preguntas = new ArrayList<>();
+    CSVParser parser = new CSVParserBuilder()
+            .withSeparator(';')  // Establecer el delimitador como punto y coma
+            .build();
 
-        try (CSVReader reader = new CSVReaderBuilder(new FileReader(csvArchivo))
-                .withCSVParser(parser)  // Usar el parser personalizado
-                .build()) {
-            String[] siguienteLinea;
-            boolean isFirstLine = true;
+    try (CSVReader reader = new CSVReaderBuilder(new FileReader(csvArchivo))
+            .withCSVParser(parser)  // Usar el parser personalizado
+            .build()) {
+        String[] siguienteLinea;
 
-            while ((siguienteLinea = reader.readNext()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false; // Omitir la primera línea si es el encabezado.
-                    continue;
-                }
-                if (siguienteLinea.length < 5) {
-                    // Si no hay suficientes columnas, imprimir error y continuar con la siguiente línea
-                    System.err.println("Línea incompleta ignorada: " + Arrays.toString(siguienteLinea));
-                    continue;
-                }
-                String pregunta = siguienteLinea[0];
-                List<String> respuestas = Arrays.asList(siguienteLinea[1], siguienteLinea[2], siguienteLinea[3]);
-                String respuestaCorrecta = siguienteLinea[4];
-                preguntas.add(new Pregunta()
-                    .setPregunta(pregunta)
-                    .setRespuestas(respuestas)
-                    .setRespuestaCorrecta(respuestaCorrecta));
+        while ((siguienteLinea = reader.readNext()) != null) {
+            if (siguienteLinea.length < 5) {
+                // Si no hay suficientes columnas, imprimir error y continuar con la siguiente línea
+                System.err.println("Línea incompleta ignorada: " + Arrays.toString(siguienteLinea));
+                continue;
             }
-        } catch (CsvValidationException e) {
-            System.err.println("Error en la estructura del archivo de preguntas: " + e.getMessage());
-            String err = "Error en la estructura del archivo de preguntas";
-            Sesion.getInstance().setRojo(err);
-            throw e;
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo CSV: " + e.getMessage());
-            throw e;
+            String pregunta = siguienteLinea[0];
+            List<String> respuestas = Arrays.asList(siguienteLinea[1], siguienteLinea[2], siguienteLinea[3]);
+            String respuestaCorrecta = siguienteLinea[4];
+            preguntas.add(new Pregunta()
+                .setPregunta(pregunta)
+                .setRespuestas(respuestas)
+                .setRespuestaCorrecta(respuestaCorrecta));
         }
-
-        // Verificación para comprobar si la lista de preguntas está vacía
-        if (preguntas.isEmpty()) {
-            System.err.println("No se encontraron preguntas en el archivo.");
-            String err = "Este simulador no tiene preguntas";
-            Sesion.getInstance().setAmarillo(err);
-        }
-
-        return preguntas;
+    } catch (CsvValidationException e) {
+        System.err.println("Error en la estructura del archivo de preguntas: " + e.getMessage());
+        String err = "Error en la estructura del archivo de preguntas";
+        Sesion.getInstance().setRojo(err);
+        throw e;
+    } catch (IOException e) {
+        System.err.println("Error al leer el archivo CSV: " + e.getMessage());
+        throw e;
     }
+
+    // Verificación para comprobar si la lista de preguntas está vacía
+    if (preguntas.isEmpty()) {
+        System.err.println("No se encontraron preguntas en el archivo.");
+        String err = "Este simulador no tiene preguntas";
+        Sesion.getInstance().setAmarillo(err);
+    }
+
+    return preguntas;
+}
+
 
 
 /**
