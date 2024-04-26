@@ -94,7 +94,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             Dimension compPrefSize = comp.getPreferredSize();
             if (x + compPrefSize.width > totalWidth) {
                 x = 0;
-                y += maxHeight;
+                y += maxHeight + 10;
                 maxHeight = 0;
             }
             x += compPrefSize.width;
