@@ -4,7 +4,9 @@
  */
 package views;
 
+import com.opencsv.exceptions.CsvValidationException;
 import java.awt.Dimension;
+import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static utility.Sesion.getInstance;
@@ -152,7 +154,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         simuladorLabel1.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel1.setForeground(new java.awt.Color(247, 247, 247));
-        simuladorLabel1.setText("El Cazador");
+        simuladorLabel1.setText("Simulador2");
         simuladorLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel1.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel1.setMinimumSize(new java.awt.Dimension(400, 15));
@@ -313,12 +315,21 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
      */
     private void mostrarPreguntas(String nombreSimulador) {
         getInstance().setSimuladorName(nombreSimulador);
+        try{
+            getInstance().obtenerDatos();
+        } catch(CsvValidationException | IOException e){
+            // TODO menajar el posible error
+        }
         int cantidadPreguntas = getInstance().getCantidadPreguntas();
         JPanel[] paneles = new JPanel[cantidadPreguntas];
         JLabel[] botones = new JLabel[cantidadPreguntas];
         objeto.setPaneles(paneles);
         objeto.setBotones(botones);
         objeto.cargarPanelesInicio();
+        Dimension nuevaDimensionPrincipal = sumaDimension(objeto.getComponents());
+        objeto.setSize(nuevaDimensionPrincipal);
+        objeto.setPreferredSize(nuevaDimensionPrincipal);
+        objeto.setMaximumSize(nuevaDimensionPrincipal);
     }
     
 

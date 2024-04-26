@@ -25,7 +25,7 @@ public class theUltimateUtility {
      * @return Dimension La suma de las dimensiones de los componentes.
      */
     public static Dimension sumaDimension(Component args[]){
-        int width = 430;
+        int width = 0;
         int height = 5;
         for (Component component: args){
             if (component.isVisible()){
@@ -35,6 +35,7 @@ public class theUltimateUtility {
                     height += component.getSize().height +5;
                 }
             }
+            width = Math.max(width, component.getWidth());
         }
         return new Dimension(width, height);
     }
