@@ -5,6 +5,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -33,7 +34,7 @@ public final class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-       
+        
 
         //Ubicar y adaptar botón de "Crear".
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
@@ -58,14 +59,18 @@ public final class Principal extends javax.swing.JFrame {
     
     
     
-public void ShowPanel(JPanel p){
+    public void ShowPanel(JPanel p){
         JScrollPane scrollPane = new JScrollPane(p);
+
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        //scrollPane.setOpaque(false);
 
-        scrollPane.setPreferredSize(new Dimension(440, 700));
+        scrollPane.setPreferredSize(new Dimension(438, 790));
 
         contentPanel.removeAll();
         contentPanel.add(scrollPane, BorderLayout.CENTER);
