@@ -5,6 +5,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,7 +17,9 @@ import utility.Utility;
  *
  * @author USER
  */
-public class Principal extends javax.swing.JFrame {
+public final class Principal extends javax.swing.JFrame {
+
+    private Component panelPrincipal;
 
     /*
     String colorRojo = "#EB4151";
@@ -38,7 +41,7 @@ public class Principal extends javax.swing.JFrame {
         
         //Llamar al JPanel correspondiente de preguntas.
         PanelPreguntas p = new PanelPreguntas();
-        ShowPanel(p);
+        ShowPanel(p.panelPrincipal);
         
         //Mantener el JFrame siempre en primera posición.
         setAlwaysOnTop(true);

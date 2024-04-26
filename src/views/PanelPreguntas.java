@@ -552,7 +552,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel panelPrincipal;
+    public javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 
     private Component buscarComponentePorNombre(JPanel panelPrincipal, String string) {
