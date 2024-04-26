@@ -134,9 +134,8 @@ public class Sesion {
     public static void guardar(List<Pregunta> preguntasGuardado) throws IOException {
         // Crear una instancia de CsvPreguntaDao
         CsvPreguntaDao guardar = new CsvPreguntaDao();
-         String simuladorName = getInstance().getSimuladorName();
         // Llamar al método reescribirArchivo con la lista de preguntas
-        guardar.reescribirArchivo(preguntasGuardado,simuladorName);
+        guardar.reescribirArchivo(preguntasGuardado);
         String err = "Las preguntas han sido guardadas (%d en total)" + getInstance().getnFinalPreguntas();
     }
     /**

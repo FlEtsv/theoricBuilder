@@ -105,7 +105,7 @@ public List<Pregunta> obtenerTodasPreguntas() throws IOException, CsvValidationE
  * @param preguntas
  * @throws IOException 
  */
-    public void reescribirArchivo(List<Pregunta> preguntas, String csvArchivo) throws IOException {
+    public void reescribirArchivo(List<Pregunta> preguntas) throws IOException {
         try (CSVWriter writer = new CSVWriter(new FileWriter(csvArchivo, false),
                 ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                 CSVWriter.DEFAULT_LINE_END)) {
