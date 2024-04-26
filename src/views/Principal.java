@@ -10,10 +10,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import utility.ControlDepuracion;
+import utility.Sesion;
 import utility.Utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,7 +69,11 @@ public final class Principal extends javax.swing.JFrame {
         JScrollPane scrollPane = new JScrollPane(p);
 
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-
+        
+        //PONER VELOCIDAD DISTINTA AL SCROLL
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        
+        
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
@@ -76,7 +84,6 @@ public final class Principal extends javax.swing.JFrame {
 
         contentPanel.removeAll();
         contentPanel.add(scrollPane, BorderLayout.CENTER);
-
         contentPanel.revalidate();
         contentPanel.repaint();
     }
@@ -119,13 +126,13 @@ public final class Principal extends javax.swing.JFrame {
         jPanel4.setMaximumSize(new java.awt.Dimension(430, 930));
         jPanel4.setMinimumSize(new java.awt.Dimension(430, 930));
         jPanel4.setPreferredSize(new java.awt.Dimension(430, 930));
-        jPanel4.setLayout(new java.awt.BorderLayout(3, 1));
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
-        topPanel.setMaximumSize(new java.awt.Dimension(430, 52));
+        topPanel.setMaximumSize(new java.awt.Dimension(430, 56));
         topPanel.setMinimumSize(new java.awt.Dimension(430, 52));
         topPanel.setOpaque(false);
         topPanel.setPreferredSize(new java.awt.Dimension(430, 52));
-        topPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
+        topPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtTitulo.setFont(new java.awt.Font("Raleway", 1, 24)); // NOI18N
         txtTitulo.setForeground(new java.awt.Color(247, 247, 247));
@@ -135,7 +142,7 @@ public final class Principal extends javax.swing.JFrame {
         txtTitulo.setMaximumSize(new java.awt.Dimension(430, 29));
         txtTitulo.setMinimumSize(new java.awt.Dimension(430, 29));
         txtTitulo.setPreferredSize(new java.awt.Dimension(430, 29));
-        topPanel.add(txtTitulo);
+        topPanel.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         jPanel4.add(topPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -186,11 +193,12 @@ public final class Principal extends javax.swing.JFrame {
 
         jPanel4.add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 
-        contentPanel.setMaximumSize(new java.awt.Dimension(430, 790));
-        contentPanel.setMinimumSize(new java.awt.Dimension(430, 790));
+        contentPanel.setMaximumSize(new java.awt.Dimension(430, 788));
+        contentPanel.setMinimumSize(new java.awt.Dimension(430, 788));
         contentPanel.setOpaque(false);
-        contentPanel.setPreferredSize(new java.awt.Dimension(430, 790));
-        jPanel4.add(contentPanel, java.awt.BorderLayout.CENTER);
+        contentPanel.setPreferredSize(new java.awt.Dimension(430, 788));
+        contentPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+        jPanel4.add(contentPanel, java.awt.BorderLayout.WEST);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.LINE_END);
 
@@ -208,22 +216,20 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportarMouseExited
 
     private void btnExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseClicked
-        /*
-            btnExportar -> Función guardar en CSV y exportar en ZIP
-            txtPregunta -> Muestra la pregunta n (variable según instancias)
-            txtRespuestaCorrecta -> Muestra la respuesta correcta de n
-            txtRespuestaInc1 -> Muestra la primera resp. inco. de n
-            txtRespuestaInc2 -> Muestra la segunda resp. inco. de n
-            txtRespuestaInc3 -> Muestra la tercera resp. inco. de n
-            iconoEliminar -> Función de eliminar una pregunta.
-            
-            SEGÚN NOS DIGA JACK:
-            btnGuardar -> Guarda todo el front en CSV antes de exportar.
-        */
+        try {
+            Sesion.guardar(Sesion.getInstance().getPreguntas());
+            Sesion.Exportar();
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnExportarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        
+        try {
+            Sesion.guardar(Sesion.getInstance().getPreguntas());
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     /**

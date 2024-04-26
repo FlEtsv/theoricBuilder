@@ -39,7 +39,7 @@ public class Sesion {
     private String simuladorName = null;
     private int cantidadPreguntas;
     private int nFinalPreguntas;
-
+    private List<Pregunta> preguntasFront;
 
     
     private Sesion() {
@@ -51,6 +51,14 @@ public class Sesion {
             instancia = new Sesion();
         }
         return instancia;
+    }
+    
+    public List<Pregunta> getPreguntas() {
+        return preguntasFront;
+    }
+
+    public void setPreguntas(List<Pregunta> preguntasFront) {
+        this.preguntasFront = preguntasFront;
     }
     
     public int getCantidadPreguntas() {
