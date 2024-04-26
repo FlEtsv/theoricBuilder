@@ -29,8 +29,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private final Dimension selectorDimension = new Dimension(380, 46);
     private final Dimension iconButtonDimension = new Dimension(25, 25);
     private final Dimension infoPanelDimension = new Dimension(380, 95);
-    private Dimension contenedorDimension = new Dimension(430, 130);
+    private Dimension contenedorDimension = new Dimension(380, 130);
     private PanelPreguntas instanciaPanelPreguntas;
+    
+    
     /**
      * Constructor para la clase VistaSelectorSimulador.
      * Inicializa los componentes y configura el estado inicial del panel.
@@ -38,7 +40,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     public VistaSelectorSimulador(PanelPreguntas instanciaPanelPreguntas) {
         this.instanciaPanelPreguntas = instanciaPanelPreguntas;
         initComponents();
-
+        
         // Inicia el panel de lista como no visible
         listaSimuladoresPanel.setVisible(false);
 
@@ -227,6 +229,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         textAnadirPregunta.setForeground(new java.awt.Color(247, 247, 247));
         textAnadirPregunta.setText("Añadir una pregunta");
         textAnadirPregunta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        textAnadirPregunta.setPreferredSize(new java.awt.Dimension(173, 20));
         jPanel1.add(textAnadirPregunta, java.awt.BorderLayout.CENTER);
 
         buttonsPanel.setOpaque(false);
@@ -262,19 +265,19 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         infoText.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
         infoText.setForeground(new java.awt.Color(247, 247, 247));
         infoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        infoText.setText("<html><center> Añade las preguntas que quieras que aparezcan durante<br/>la simulación. Luego, pulsa el botón crear para exportar<br/>el archivo zip que deberas subir a SharePoint.</center> </html>");
+        infoText.setText("<html><center>Añade las preguntas que quieras que aparezcan durante la simulación. Luego, pulsa el botón crear para exportar el archivo zip que deberas subir a SharePoint.</center> </html>");
         infoText.setAlignmentY(0.0F);
         infoText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        infoText.setMaximumSize(new java.awt.Dimension(400, 0));
-        infoText.setMinimumSize(new java.awt.Dimension(400, 0));
-        infoText.setPreferredSize(new java.awt.Dimension(400, 0));
-        infoPanel.add(infoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
+        infoText.setMaximumSize(new java.awt.Dimension(360, 0));
+        infoText.setMinimumSize(new java.awt.Dimension(360, 0));
+        infoText.setPreferredSize(new java.awt.Dimension(360, 0));
+        infoPanel.add(infoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 360, 100));
 
         infoBackImg.setAlignmentY(0.0F);
-        infoBackImg.setMaximumSize(new java.awt.Dimension(400, 32767));
-        infoBackImg.setMinimumSize(new java.awt.Dimension(400, 0));
-        infoBackImg.setPreferredSize(new java.awt.Dimension(400, 0));
-        infoPanel.add(infoBackImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 100));
+        infoBackImg.setMaximumSize(new java.awt.Dimension(380, 32767));
+        infoBackImg.setMinimumSize(new java.awt.Dimension(380, 0));
+        infoBackImg.setPreferredSize(new java.awt.Dimension(380, 0));
+        infoPanel.add(infoBackImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 100));
 
         add(infoPanel);
     }// </editor-fold>//GEN-END:initComponents
