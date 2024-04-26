@@ -18,6 +18,7 @@ import utility.Sesion;
 import utility.Utility;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -80,10 +81,11 @@ public final class Principal extends javax.swing.JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        scrollPane.setPreferredSize(new Dimension(438, 790));
-
+        scrollPane.setPreferredSize(new Dimension(430, 788));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(-3, 0, 0, 0));
+        
         contentPanel.removeAll();
-        contentPanel.add(scrollPane, BorderLayout.CENTER);
+        contentPanel.add(scrollPane);
         contentPanel.revalidate();
         contentPanel.repaint();
     }
@@ -144,7 +146,7 @@ public final class Principal extends javax.swing.JFrame {
         txtTitulo.setPreferredSize(new java.awt.Dimension(430, 29));
         topPanel.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
-        jPanel4.add(topPanel, java.awt.BorderLayout.PAGE_START);
+        jPanel4.add(topPanel, java.awt.BorderLayout.NORTH);
 
         bottomPanel.setMaximumSize(new java.awt.Dimension(430, 92));
         bottomPanel.setMinimumSize(new java.awt.Dimension(430, 92));
@@ -191,14 +193,14 @@ public final class Principal extends javax.swing.JFrame {
         });
         bottomPanel.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 50, 50));
 
-        jPanel4.add(bottomPanel, java.awt.BorderLayout.PAGE_END);
+        jPanel4.add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
         contentPanel.setMaximumSize(new java.awt.Dimension(430, 788));
         contentPanel.setMinimumSize(new java.awt.Dimension(430, 788));
         contentPanel.setOpaque(false);
         contentPanel.setPreferredSize(new java.awt.Dimension(430, 788));
         contentPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
-        jPanel4.add(contentPanel, java.awt.BorderLayout.WEST);
+        jPanel4.add(contentPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.LINE_END);
 

@@ -141,9 +141,9 @@ public class PanelPreguntas extends javax.swing.JPanel {
             paneles[indice] = new JPanel(); // Inicializa el JPanel antes de usarlo
             paneles[indice].setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             paneles[indice].setName("contenedorPregunta"+indice);
-            paneles[indice].setMaximumSize(new java.awt.Dimension(410, 250));
-            paneles[indice].setMinimumSize(new java.awt.Dimension(410, 250));
-            paneles[indice].setPreferredSize(new java.awt.Dimension(410, 250));
+            paneles[indice].setMaximumSize(new java.awt.Dimension(380, 250));
+            paneles[indice].setMinimumSize(new java.awt.Dimension(380, 250));
+            paneles[indice].setPreferredSize(new java.awt.Dimension(380, 250));
             paneles[indice].setOpaque(false);
 
 
@@ -157,7 +157,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             botones[indice].setMinimumSize(new java.awt.Dimension(12, 12));
             botones[indice].setPreferredSize(new java.awt.Dimension(12, 12));
             Utility.SetImageLabel(botones[indice], "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
-            paneles[indice].add(botones[indice], new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 12, 12));
+            paneles[indice].add(botones[indice], new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 12, 12));
             // Agregar MouseListener al segundo JLabel
             botones[indice].addMouseListener(new MouseAdapter() {
                 @Override
@@ -175,7 +175,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             JLabel preguntatxt = new JLabel("Pregunta");
             preguntatxt.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
             preguntatxt.setForeground(new java.awt.Color(255, 255, 255));
-            paneles[indice].add(preguntatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 165, -1));
+            paneles[indice].add(preguntatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 160, -1));
 
                     //Generamos y creamos el JTextField de la pregunta
                     JTextField preguntaescribe = new JTextField();
@@ -187,15 +187,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     preguntaescribe.setBorder(null);
                     preguntaescribe.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     preguntaescribe.setOpaque(false);
-                    paneles[indice].add(preguntaescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 34, 350, -1));
+                    paneles[indice].add(preguntaescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 34, 320, -1));
 
             //Generamos el fondo del JLabel
             JLabel fondoPregunta = new JLabel();
-            fondoPregunta.setMaximumSize(new java.awt.Dimension(360, 30));
-            fondoPregunta.setMinimumSize(new java.awt.Dimension(360, 30));
-            fondoPregunta.setPreferredSize(new java.awt.Dimension(360, 30));
-            Utility.SetImageLabel(fondoPregunta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(360, 30));
-            paneles[indice].add(fondoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 29, 360, -1));
+            fondoPregunta.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoPregunta.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoPregunta.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoPregunta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            paneles[indice].add(fondoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 29, 340, -1));
             
             //Generamos y creamos el JLabel del título de "Respuesta correcta"
             JLabel respuestaCorrectaTXT = new JLabel("Respuesta correcta");
@@ -213,15 +213,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestacorrecta.setBorder(null);
                     respuestacorrecta.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestacorrecta.setOpaque(false);
-                    paneles[indice].add(respuestacorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 350, -1));
+                    paneles[indice].add(respuestacorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 320, -1));
 
             //Generamos el fondo del JLabel
             JLabel fondoRespuestaCorrecta = new JLabel();
-            fondoRespuestaCorrecta.setMaximumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaCorrecta.setMinimumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaCorrecta.setPreferredSize(new java.awt.Dimension(360, 30));
-            Utility.SetImageLabel(fondoRespuestaCorrecta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(360, 30));
-            paneles[indice].add(fondoRespuestaCorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 360, -1));
+            fondoRespuestaCorrecta.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaCorrecta.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaCorrecta.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaCorrecta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            paneles[indice].add(fondoRespuestaCorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 340, -1));
             
             //Generamos y creamos el JLabel del título de "Respuestas incorrectas"
             JLabel respuestasIncorrectasTXT = new JLabel("Respuestas incorrectas");
@@ -239,15 +239,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta1.setBorder(null);
                     respuestaIncorrecta1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta1.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 350, -1));
+                    paneles[indice].add(respuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 320, -1));
 
             //Generamos el fondo del incorrecta 1
             JLabel fondoRespuestaIncorrecta1 = new JLabel();
-            fondoRespuestaIncorrecta1.setMaximumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta1.setMinimumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta1.setPreferredSize(new java.awt.Dimension(360, 30));
-            Utility.SetImageLabel(fondoRespuestaIncorrecta1, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(360, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 360, -1));
+            fondoRespuestaIncorrecta1.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta1.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta1.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta1, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            paneles[indice].add(fondoRespuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 340, -1));
 
                     //Generamos y creamos el JTextField de la respuesta incorrecta 2
                     JTextField respuestaIncorrecta2 = new JTextField();
@@ -259,15 +259,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta2.setBorder(null);
                     respuestaIncorrecta2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta2.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 350, -1));
+                    paneles[indice].add(respuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 320, -1));
 
             //Generamos el fondo del incorrecta 2
             JLabel fondoRespuestaIncorrecta2 = new JLabel();
-            fondoRespuestaIncorrecta2.setMaximumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta2.setMinimumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta2.setPreferredSize(new java.awt.Dimension(360, 30));
-            Utility.SetImageLabel(fondoRespuestaIncorrecta2, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(360, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 171, 360, -1));
+            fondoRespuestaIncorrecta2.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta2.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta2.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta2, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            paneles[indice].add(fondoRespuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 171, 340, -1));
 
                     //Generamos y creamos el JTextField de la respuesta incorrecta 3
                     JTextField respuestaIncorrecta3 = new JTextField();
@@ -279,15 +279,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta3.setBorder(null);
                     respuestaIncorrecta3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta3.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 350, -1));
+                    paneles[indice].add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 320, -1));
 
             //Generamos el fondo del incorrecta 3
             JLabel fondoRespuestaIncorrecta3 = new JLabel();
-            fondoRespuestaIncorrecta3.setMaximumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta3.setMinimumSize(new java.awt.Dimension(360, 30));
-            fondoRespuestaIncorrecta3.setPreferredSize(new java.awt.Dimension(360, 30));
-            Utility.SetImageLabel(fondoRespuestaIncorrecta3, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(360, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 208, 360, -1));
+            fondoRespuestaIncorrecta3.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta3.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta3.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta3, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            paneles[indice].add(fondoRespuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 208, 340, -1));
             
             
             
@@ -298,16 +298,16 @@ public class PanelPreguntas extends javax.swing.JPanel {
             //Generamos el fondo de la tarjeta
             JLabel fondoTarjeta12 = new JLabel();
             fondoTarjeta12.setName("fondoTarjeta"+indice);
-            fondoTarjeta12.setMaximumSize(new java.awt.Dimension(410, 250));
-            fondoTarjeta12.setMinimumSize(new java.awt.Dimension(410, 250));
+            fondoTarjeta12.setMaximumSize(new java.awt.Dimension(380, 250));
+            fondoTarjeta12.setMinimumSize(new java.awt.Dimension(380, 250));
             fondoTarjeta12.setName(""); // NOI18N
             fondoTarjeta12.setOpaque(false);
-            fondoTarjeta12.setPreferredSize(new java.awt.Dimension(410, 250));
-            Utility.SetImageLabel(fondoTarjeta12, "src/imagenes/InterfazMobile/Cuadrado_Off.png", new Dimension(410, 250));
+            fondoTarjeta12.setPreferredSize(new java.awt.Dimension(380, 250));
+            Utility.SetImageLabel(fondoTarjeta12, "src/imagenes/InterfazMobile/Cuadrado_Off.png", new Dimension(380, 250));
             
 
             // Agregar componentes al panel
-            paneles[indice].add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 250));
+            paneles[indice].add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 250));
             cantidadPanelesFront++;
 
         }

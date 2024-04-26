@@ -26,9 +26,9 @@ import views.PanelPreguntas;
 public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     // Dimensiones para varios componentes en el panel
-    private final Dimension selectorDimension = new Dimension(400, 46);
+    private final Dimension selectorDimension = new Dimension(380, 46);
     private final Dimension iconButtonDimension = new Dimension(25, 25);
-    private final Dimension infoPanelDimension = new Dimension(400, 95);
+    private final Dimension infoPanelDimension = new Dimension(380, 95);
     private Dimension contenedorDimension = new Dimension(430, 130);
     private PanelPreguntas instanciaPanelPreguntas;
     /**
@@ -91,19 +91,23 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(430, 129));
 
+        tipoSimuladorPanel.setMinimumSize(new java.awt.Dimension(380, 25));
         tipoSimuladorPanel.setOpaque(false);
+        tipoSimuladorPanel.setPreferredSize(new java.awt.Dimension(380, 30));
 
         tipoSimuladorLabel.setFont(new java.awt.Font("Raleway Medium", 0, 18)); // NOI18N
         tipoSimuladorLabel.setForeground(new java.awt.Color(247, 247, 247));
         tipoSimuladorLabel.setText("Tipo de Simulador");
-        tipoSimuladorLabel.setMaximumSize(new java.awt.Dimension(400, 20));
-        tipoSimuladorLabel.setMinimumSize(new java.awt.Dimension(400, 15));
-        tipoSimuladorLabel.setPreferredSize(new java.awt.Dimension(400, 20));
+        tipoSimuladorLabel.setMaximumSize(new java.awt.Dimension(380, 20));
+        tipoSimuladorLabel.setMinimumSize(new java.awt.Dimension(380, 15));
+        tipoSimuladorLabel.setPreferredSize(new java.awt.Dimension(380, 20));
         tipoSimuladorPanel.add(tipoSimuladorLabel);
 
         add(tipoSimuladorPanel);
 
+        selectorPanel.setMinimumSize(new java.awt.Dimension(380, 46));
         selectorPanel.setOpaque(false);
+        selectorPanel.setPreferredSize(new java.awt.Dimension(380, 46));
         selectorPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         selectorSimuladoresTxt.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
@@ -133,10 +137,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         add(selectorPanel);
 
         listaSimuladoresPanel.setBackground(new java.awt.Color(111, 114, 113));
-        listaSimuladoresPanel.setMaximumSize(new java.awt.Dimension(400, 32767));
-        listaSimuladoresPanel.setMinimumSize(new java.awt.Dimension(400, 0));
+        listaSimuladoresPanel.setMaximumSize(new java.awt.Dimension(380, 32767));
+        listaSimuladoresPanel.setMinimumSize(new java.awt.Dimension(380, 0));
         listaSimuladoresPanel.setOpaque(false);
-        listaSimuladoresPanel.setPreferredSize(new java.awt.Dimension(400, 150));
+        listaSimuladoresPanel.setPreferredSize(new java.awt.Dimension(380, 150));
         listaSimuladoresPanel.setVerifyInputWhenFocusTarget(false);
         listaSimuladoresPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 13));
 
@@ -212,10 +216,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         add(listaSimuladoresPanel);
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(400, 32767));
-        jPanel1.setMinimumSize(new java.awt.Dimension(400, 35));
+        jPanel1.setMaximumSize(new java.awt.Dimension(380, 32767));
+        jPanel1.setMinimumSize(new java.awt.Dimension(380, 35));
         jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 35));
+        jPanel1.setPreferredSize(new java.awt.Dimension(380, 35));
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -249,10 +253,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         add(jPanel1);
 
-        infoPanel.setMaximumSize(new java.awt.Dimension(400, 32767));
-        infoPanel.setMinimumSize(new java.awt.Dimension(400, 0));
+        infoPanel.setMaximumSize(new java.awt.Dimension(380, 32767));
+        infoPanel.setMinimumSize(new java.awt.Dimension(380, 0));
         infoPanel.setOpaque(false);
-        infoPanel.setPreferredSize(new java.awt.Dimension(400, 100));
+        infoPanel.setPreferredSize(new java.awt.Dimension(380, 100));
         infoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         infoText.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
