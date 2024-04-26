@@ -120,6 +120,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
     
     public void CambioSize(Dimension nuevaDimension){
         panelPrincipal.getComponent(0).setPreferredSize(nuevaDimension);
+        ajustarTamaño();
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
     }
