@@ -51,7 +51,7 @@ public final class Principal extends javax.swing.JFrame {
 
         //Ubicar y adaptar botón de "Crear".
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
-        Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(50, 50));
+        Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(45, 45));
         
         //Llamar al JPanel correspondiente de preguntas.
         PanelPreguntas p = new PanelPreguntas();
@@ -148,7 +148,12 @@ public final class Principal extends javax.swing.JFrame {
         txtBtnCrear = new javax.swing.JLabel();
         btnExportar = new javax.swing.JLabel();
         txtWarning = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -222,13 +227,29 @@ public final class Principal extends javax.swing.JFrame {
         txtWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bottomPanel.add(txtWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 56, 420, 30));
 
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
+            }
         });
-        bottomPanel.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 50, 50));
+        jPanel1.add(btnGuardar, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jLabel1, java.awt.BorderLayout.NORTH);
+        jPanel1.add(jLabel2, java.awt.BorderLayout.SOUTH);
+        jPanel1.add(jLabel3, java.awt.BorderLayout.WEST);
+        jPanel1.add(jLabel4, java.awt.BorderLayout.EAST);
+
+        bottomPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 70, 70));
 
         jPanel4.add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
@@ -288,6 +309,16 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarMouseClicked
 
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+        // TODO add your handling code here:
+        Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(50, 50));
+    }//GEN-LAST:event_btnGuardarMouseEntered
+
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+        // TODO add your handling code here:
+        Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(45, 45));
+    }//GEN-LAST:event_btnGuardarMouseExited
+
     /**
      * Método principal de la aplicación.
      * @param args Argumentos de la línea de comandos.
@@ -330,6 +361,11 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel btnExportar;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel txtBtnCrear;
