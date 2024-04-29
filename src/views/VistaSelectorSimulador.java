@@ -149,7 +149,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         simuladorLabel0.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel0.setForeground(new java.awt.Color(247, 247, 247));
-        simuladorLabel0.setText("Simulador1");
+        simuladorLabel0.setText("Ahora Aprendo");
         simuladorLabel0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel0.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel0.setMinimumSize(new java.awt.Dimension(400, 15));
@@ -163,7 +163,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
         simuladorLabel1.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
         simuladorLabel1.setForeground(new java.awt.Color(247, 247, 247));
-        simuladorLabel1.setText("Simulador2");
+        simuladorLabel1.setText("El Cazador");
         simuladorLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         simuladorLabel1.setMaximumSize(new java.awt.Dimension(400, 15));
         simuladorLabel1.setMinimumSize(new java.awt.Dimension(400, 15));
