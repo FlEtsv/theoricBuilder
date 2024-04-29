@@ -390,8 +390,12 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
         // TODO add your handling code here:
-        Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + instanciaPanelPreguntas.cantidadPanelesFront);
-        instanciaPanelPreguntas.crearPanelNuevo();
+        if(Sesion.getInstance().getSimuladorName() == null || Sesion.getInstance().getSimuladorName().isEmpty()){
+            Sesion.getInstance().setRojo("No se puede añadir pregunta sin seleccionar simulador.");
+        } else {
+            Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + instanciaPanelPreguntas.cantidadPanelesFront);
+            instanciaPanelPreguntas.crearPanelNuevo();
+        }
     }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
 
 
