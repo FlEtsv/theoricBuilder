@@ -331,10 +331,10 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
             // TODO menajar el posible error
         }
         int cantidadPreguntas = getInstance().getCantidadPreguntas();
-        JPanel[] paneles = new JPanel[cantidadPreguntas];
+        /*JPanel[] paneles = new JPanel[cantidadPreguntas];
         JLabel[] botones = new JLabel[cantidadPreguntas];
         instanciaPanelPreguntas.setPaneles(paneles);
-        instanciaPanelPreguntas.setBotones(botones);
+        instanciaPanelPreguntas.setBotones(botones);*/
         instanciaPanelPreguntas.eliminarTodasPreguntas();
         instanciaPanelPreguntas.cargarPanelesInicio();
     }
@@ -391,6 +391,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
         // TODO add your handling code here:
         Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + instanciaPanelPreguntas.cantidadPanelesFront);
+        instanciaPanelPreguntas.crearPanelNuevo();
     }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
 
 

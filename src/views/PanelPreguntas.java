@@ -14,6 +14,7 @@ import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
@@ -32,9 +33,9 @@ import utility.Sesion;
  */
 public class PanelPreguntas extends javax.swing.JPanel {
     
+    private List<JPanel> paneles = new ArrayList<>();
+    private List<JLabel> botones = new ArrayList<>();
     
-    private JPanel[] paneles;
-    private JLabel[] botones;
     //List<JPanel> preguntas = obtenerPreguntas();
     
     //private final java.util.List<JPanel> paneles = new java.util.ArrayList<>();
@@ -92,6 +93,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
         int maxHeight = 0;
         int contadorComponentes = 0;
 
+
         for (Component comp : panelPrincipal.getComponents()) {
             Dimension compPrefSize = comp.getPreferredSize();
             if (x + compPrefSize.width > totalWidth) {
@@ -109,7 +111,8 @@ public class PanelPreguntas extends javax.swing.JPanel {
             maxHeight = Math.max(maxHeight, compPrefSize.height);
             contadorComponentes+=1;
         }
-
+        Component[] components = panelPrincipal.getComponents();
+        Sesion.getInstance().setCantidadcomponentes(components.length);
         int newHeight = y + maxHeight;
         Dimension newSize = new Dimension(totalWidth, newHeight);
         panelPrincipal.setPreferredSize(newSize);
@@ -134,48 +137,48 @@ public class PanelPreguntas extends javax.swing.JPanel {
         panelPrincipal.repaint();
     }
     
-    public void setPaneles(JPanel[] paneles){
+    public void setPaneles(List<JPanel> paneles){
         this.paneles = paneles;
     }
     
-    public void setBotones(JLabel[] botones){
+    public void setBotones(List<JLabel> botones){
         this.botones = botones;
     }
     
-    public void cargarPanelesInicio() {
-        for (int i = 0; i < paneles.length; i++) {
-            final int indice = i;
-            
+    public void crearPanelNuevo() {
+        
+            final int indice = cantidadPanelesFront;
             
             //Creación del panel con ÍNDICE.
-            paneles[indice] = new JPanel(); // Inicializa el JPanel antes de usarlo
-            paneles[indice].setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-            paneles[indice].setName("contenedorPregunta"+indice);
-            paneles[indice].setMaximumSize(new java.awt.Dimension(380, 250));
-            paneles[indice].setMinimumSize(new java.awt.Dimension(380, 250));
-            paneles[indice].setPreferredSize(new java.awt.Dimension(380, 250));
-            paneles[indice].setOpaque(false);
+            JPanel panelNuevo = new JPanel(); // Inicializa el JPanel antes de usarlo
+            panelNuevo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            panelNuevo.setName("contenedorPregunta"+indice);
+            panelNuevo.setMaximumSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setMinimumSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setPreferredSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setOpaque(false);
+            
 
 
             //Generar icono eliminar pregunta
-            botones[indice] = new JLabel();
-            botones[indice].setName("iconoEliminar"+indice);
-            botones[indice].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            botones[indice].setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-            botones[indice].setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            botones[indice].setMaximumSize(new java.awt.Dimension(12, 12));
-            botones[indice].setMinimumSize(new java.awt.Dimension(12, 12));
-            botones[indice].setPreferredSize(new java.awt.Dimension(12, 12));
-            Utility.SetImageLabel(botones[indice], "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
-            paneles[indice].add(botones[indice], new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 12, 12));
+            JLabel botonNuevo = new JLabel();
+            botonNuevo.setName("iconoEliminar"+indice);
+            botonNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            botonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            botonNuevo.setMaximumSize(new java.awt.Dimension(12, 12));
+            botonNuevo.setMinimumSize(new java.awt.Dimension(12, 12));
+            botonNuevo.setPreferredSize(new java.awt.Dimension(12, 12));
+            Utility.SetImageLabel(botonNuevo, "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
+            panelNuevo.add(botonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 12, 12));
             // Agregar MouseListener al segundo JLabel
-            botones[indice].addMouseListener(new MouseAdapter() {
+            botonNuevo.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // Acción al clicar el label2
                     //JOptionPane.showMessageDialog(null, "Has hecho click en el botón del panel " + paneles[indice].getName());
-                    eliminarPregunta(paneles[indice].getName());
-                    Sesion.getInstance().setBlanco("Pregunta elimidada (quedan " + cantidadPanelesFront + ")");
+                    eliminarPregunta(panelNuevo.getName());
+                    Sesion.getInstance().setBlanco("Pregunta elimidada (quedan " + (Sesion.getInstance().getCantidadcomponentes()-1) + ")");
                 }
             });
             
@@ -186,7 +189,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             JLabel preguntatxt = new JLabel("Pregunta");
             preguntatxt.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
             preguntatxt.setForeground(new java.awt.Color(255, 255, 255));
-            paneles[indice].add(preguntatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 160, -1));
+            panelNuevo.add(preguntatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 160, -1));
 
                     //Generamos y creamos el JTextField de la pregunta
                     JTextField preguntaescribe = new JTextField();
@@ -198,7 +201,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     preguntaescribe.setBorder(null);
                     preguntaescribe.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     preguntaescribe.setOpaque(false);
-                    paneles[indice].add(preguntaescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 34, 320, -1));
+                    panelNuevo.add(preguntaescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 34, 320, -1));
 
             //Generamos el fondo del JLabel
             JLabel fondoPregunta = new JLabel();
@@ -206,13 +209,13 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoPregunta.setMinimumSize(new java.awt.Dimension(340, 30));
             fondoPregunta.setPreferredSize(new java.awt.Dimension(340, 30));
             Utility.SetImageLabel(fondoPregunta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
-            paneles[indice].add(fondoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 29, 340, -1));
+            panelNuevo.add(fondoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 29, 340, -1));
             
             //Generamos y creamos el JLabel del título de "Respuesta correcta"
             JLabel respuestaCorrectaTXT = new JLabel("Respuesta correcta");
             respuestaCorrectaTXT.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
             respuestaCorrectaTXT.setForeground(new java.awt.Color(255, 255, 255));
-            paneles[indice].add(respuestaCorrectaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 165, -1));
+            panelNuevo.add(respuestaCorrectaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 165, -1));
 
                     //Generamos y creamos el JTextField de la respuesta correcta
                     JTextField respuestacorrecta = new JTextField();
@@ -224,7 +227,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestacorrecta.setBorder(null);
                     respuestacorrecta.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestacorrecta.setOpaque(false);
-                    paneles[indice].add(respuestacorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 320, -1));
+                   panelNuevo.add(respuestacorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 320, -1));
 
             //Generamos el fondo del JLabel
             JLabel fondoRespuestaCorrecta = new JLabel();
@@ -232,13 +235,13 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoRespuestaCorrecta.setMinimumSize(new java.awt.Dimension(340, 30));
             fondoRespuestaCorrecta.setPreferredSize(new java.awt.Dimension(340, 30));
             Utility.SetImageLabel(fondoRespuestaCorrecta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
-            paneles[indice].add(fondoRespuestaCorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 340, -1));
+            panelNuevo.add(fondoRespuestaCorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 340, -1));
             
             //Generamos y creamos el JLabel del título de "Respuestas incorrectas"
             JLabel respuestasIncorrectasTXT = new JLabel("Respuestas incorrectas");
             respuestasIncorrectasTXT.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
             respuestasIncorrectasTXT.setForeground(new java.awt.Color(255, 255, 255));
-            paneles[indice].add(respuestasIncorrectasTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 115, 165, -1));
+            panelNuevo.add(respuestasIncorrectasTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 115, 165, -1));
 
                     //Generamos y creamos el JTextField de la respuesta incorrecta 1
                     JTextField respuestaIncorrecta1 = new JTextField();
@@ -250,7 +253,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta1.setBorder(null);
                     respuestaIncorrecta1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta1.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 320, -1));
+                    panelNuevo.add(respuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 320, -1));
 
             //Generamos el fondo del incorrecta 1
             JLabel fondoRespuestaIncorrecta1 = new JLabel();
@@ -258,7 +261,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoRespuestaIncorrecta1.setMinimumSize(new java.awt.Dimension(340, 30));
             fondoRespuestaIncorrecta1.setPreferredSize(new java.awt.Dimension(340, 30));
             Utility.SetImageLabel(fondoRespuestaIncorrecta1, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 340, -1));
+            panelNuevo.add(fondoRespuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 340, -1));
 
                     //Generamos y creamos el JTextField de la respuesta incorrecta 2
                     JTextField respuestaIncorrecta2 = new JTextField();
@@ -270,7 +273,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta2.setBorder(null);
                     respuestaIncorrecta2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta2.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 320, -1));
+                    panelNuevo.add(respuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 320, -1));
 
             //Generamos el fondo del incorrecta 2
             JLabel fondoRespuestaIncorrecta2 = new JLabel();
@@ -278,7 +281,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoRespuestaIncorrecta2.setMinimumSize(new java.awt.Dimension(340, 30));
             fondoRespuestaIncorrecta2.setPreferredSize(new java.awt.Dimension(340, 30));
             Utility.SetImageLabel(fondoRespuestaIncorrecta2, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 171, 340, -1));
+            panelNuevo.add(fondoRespuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 171, 340, -1));
 
                     //Generamos y creamos el JTextField de la respuesta incorrecta 3
                     JTextField respuestaIncorrecta3 = new JTextField();
@@ -290,7 +293,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta3.setBorder(null);
                     respuestaIncorrecta3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta3.setOpaque(false);
-                    paneles[indice].add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 320, -1));
+                    panelNuevo.add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 320, -1));
 
             //Generamos el fondo del incorrecta 3
             JLabel fondoRespuestaIncorrecta3 = new JLabel();
@@ -298,7 +301,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoRespuestaIncorrecta3.setMinimumSize(new java.awt.Dimension(340, 30));
             fondoRespuestaIncorrecta3.setPreferredSize(new java.awt.Dimension(340, 30));
             Utility.SetImageLabel(fondoRespuestaIncorrecta3, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
-            paneles[indice].add(fondoRespuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 208, 340, -1));
+            panelNuevo.add(fondoRespuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 208, 340, -1));
             
             
             
@@ -315,12 +318,194 @@ public class PanelPreguntas extends javax.swing.JPanel {
             fondoTarjeta12.setOpaque(false);
             fondoTarjeta12.setPreferredSize(new java.awt.Dimension(380, 250));
             Utility.SetImageLabel(fondoTarjeta12, "src/imagenes/InterfazMobile/Cuadrado_Off.png", new Dimension(380, 250));
-            
+            panelNuevo.add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 250));
+
 
             // Agregar componentes al panel
-            paneles[indice].add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 250));
+            paneles.add(panelNuevo);
+            panelPrincipal.add(panelNuevo);
             cantidadPanelesFront++;
+            Sesion.getInstance().setBlanco("Pregunta añadida (actualmente " + (Sesion.getInstance().getCantidadcomponentes()-1) + ")");
+    }
+    
+    public void cargarPanelesInicio() {
+        for (int i = 0; i < Sesion.getInstance().getCantidadPreguntas(); i++) {
+            final int indice = i;
+            
+            //Creación del panel con ÍNDICE.
+            JPanel panelNuevo = new JPanel(); // Inicializa el JPanel antes de usarlo
+            panelNuevo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            panelNuevo.setName("contenedorPregunta"+indice);
+            panelNuevo.setMaximumSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setMinimumSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setPreferredSize(new java.awt.Dimension(380, 250));
+            panelNuevo.setOpaque(false);
+            
 
+
+            //Generar icono eliminar pregunta
+            JLabel botonNuevo = new JLabel();
+            botonNuevo.setName("iconoEliminar"+indice);
+            botonNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            botonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            botonNuevo.setMaximumSize(new java.awt.Dimension(12, 12));
+            botonNuevo.setMinimumSize(new java.awt.Dimension(12, 12));
+            botonNuevo.setPreferredSize(new java.awt.Dimension(12, 12));
+            Utility.SetImageLabel(botonNuevo, "src/imagenes/InterfazMobile/Menos_Off.png", new Dimension (14,14));
+            panelNuevo.add(botonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 12, 12));
+            // Agregar MouseListener al segundo JLabel
+            botonNuevo.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // Acción al clicar el label2
+                    //JOptionPane.showMessageDialog(null, "Has hecho click en el botón del panel " + paneles[indice].getName());
+                    eliminarPregunta(panelNuevo.getName());
+                    Sesion.getInstance().setBlanco("Pregunta elimidada (quedan " + (Sesion.getInstance().getCantidadcomponentes()-1) + ")");
+                }
+            });
+            
+            
+            
+            
+            //Generamos y creamos el JLabel del título de "Pregunta"
+            JLabel preguntatxt = new JLabel("Pregunta");
+            preguntatxt.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
+            preguntatxt.setForeground(new java.awt.Color(255, 255, 255));
+            panelNuevo.add(preguntatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 160, -1));
+
+                    //Generamos y creamos el JTextField de la pregunta
+                    JTextField preguntaescribe = new JTextField();
+                    preguntaescribe.setName("jLabelPregunta"+indice);
+                    preguntaescribe.setBackground(new java.awt.Color(0,0,0,1));
+                    preguntaescribe.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+                    preguntaescribe.setForeground(new java.awt.Color(255, 255, 255));
+                    preguntaescribe.setText("¿Cuál de estos animales no es un reptil?");
+                    preguntaescribe.setBorder(null);
+                    preguntaescribe.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+                    preguntaescribe.setOpaque(false);
+                    panelNuevo.add(preguntaescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 34, 320, -1));
+
+            //Generamos el fondo del JLabel
+            JLabel fondoPregunta = new JLabel();
+            fondoPregunta.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoPregunta.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoPregunta.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoPregunta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            panelNuevo.add(fondoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 29, 340, -1));
+            
+            //Generamos y creamos el JLabel del título de "Respuesta correcta"
+            JLabel respuestaCorrectaTXT = new JLabel("Respuesta correcta");
+            respuestaCorrectaTXT.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
+            respuestaCorrectaTXT.setForeground(new java.awt.Color(255, 255, 255));
+            panelNuevo.add(respuestaCorrectaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 165, -1));
+
+                    //Generamos y creamos el JTextField de la respuesta correcta
+                    JTextField respuestacorrecta = new JTextField();
+                    respuestacorrecta.setName("jLabelCorrecta"+indice);
+                    respuestacorrecta.setBackground(new java.awt.Color(0,0,0,1));
+                    respuestacorrecta.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+                    respuestacorrecta.setForeground(new java.awt.Color(255, 255, 255));
+                    respuestacorrecta.setText("Respuesta correcta prueba "+indice);
+                    respuestacorrecta.setBorder(null);
+                    respuestacorrecta.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+                    respuestacorrecta.setOpaque(false);
+                   panelNuevo.add(respuestacorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 320, -1));
+
+            //Generamos el fondo del JLabel
+            JLabel fondoRespuestaCorrecta = new JLabel();
+            fondoRespuestaCorrecta.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaCorrecta.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaCorrecta.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaCorrecta, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            panelNuevo.add(fondoRespuestaCorrecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 79, 340, -1));
+            
+            //Generamos y creamos el JLabel del título de "Respuestas incorrectas"
+            JLabel respuestasIncorrectasTXT = new JLabel("Respuestas incorrectas");
+            respuestasIncorrectasTXT.setFont(new java.awt.Font("Raleway Medium", 0, 12)); // NOI18N
+            respuestasIncorrectasTXT.setForeground(new java.awt.Color(255, 255, 255));
+            panelNuevo.add(respuestasIncorrectasTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 115, 165, -1));
+
+                    //Generamos y creamos el JTextField de la respuesta incorrecta 1
+                    JTextField respuestaIncorrecta1 = new JTextField();
+                    respuestaIncorrecta1.setName("jLabelIncorrecta1");
+                    respuestaIncorrecta1.setBackground(new java.awt.Color(0,0,0,1));
+                    respuestaIncorrecta1.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+                    respuestaIncorrecta1.setForeground(new java.awt.Color(255, 255, 255));
+                    respuestaIncorrecta1.setText("Respuesta incorrecta 1 del "+indice);
+                    respuestaIncorrecta1.setBorder(null);
+                    respuestaIncorrecta1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+                    respuestaIncorrecta1.setOpaque(false);
+                    panelNuevo.add(respuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 320, -1));
+
+            //Generamos el fondo del incorrecta 1
+            JLabel fondoRespuestaIncorrecta1 = new JLabel();
+            fondoRespuestaIncorrecta1.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta1.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta1.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta1, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            panelNuevo.add(fondoRespuestaIncorrecta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 134, 340, -1));
+
+                    //Generamos y creamos el JTextField de la respuesta incorrecta 2
+                    JTextField respuestaIncorrecta2 = new JTextField();
+                    respuestaIncorrecta2.setName("jLabelIncorrecta2");
+                    respuestaIncorrecta2.setBackground(new java.awt.Color(0,0,0,1));
+                    respuestaIncorrecta2.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+                    respuestaIncorrecta2.setForeground(new java.awt.Color(255, 255, 255));
+                    respuestaIncorrecta2.setText("Respuesta incorrecta 2 del "+indice);
+                    respuestaIncorrecta2.setBorder(null);
+                    respuestaIncorrecta2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+                    respuestaIncorrecta2.setOpaque(false);
+                    panelNuevo.add(respuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 320, -1));
+
+            //Generamos el fondo del incorrecta 2
+            JLabel fondoRespuestaIncorrecta2 = new JLabel();
+            fondoRespuestaIncorrecta2.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta2.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta2.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta2, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            panelNuevo.add(fondoRespuestaIncorrecta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 171, 340, -1));
+
+                    //Generamos y creamos el JTextField de la respuesta incorrecta 3
+                    JTextField respuestaIncorrecta3 = new JTextField();
+                    respuestaIncorrecta3.setName("jLabelIncorrecta3");
+                    respuestaIncorrecta3.setBackground(new java.awt.Color(0,0,0,1));
+                    respuestaIncorrecta3.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
+                    respuestaIncorrecta3.setForeground(new java.awt.Color(255, 255, 255));
+                    respuestaIncorrecta3.setText("Respuesta incorrecta 3 del "+indice);
+                    respuestaIncorrecta3.setBorder(null);
+                    respuestaIncorrecta3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+                    respuestaIncorrecta3.setOpaque(false);
+                    panelNuevo.add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 320, -1));
+
+            //Generamos el fondo del incorrecta 3
+            JLabel fondoRespuestaIncorrecta3 = new JLabel();
+            fondoRespuestaIncorrecta3.setMaximumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta3.setMinimumSize(new java.awt.Dimension(340, 30));
+            fondoRespuestaIncorrecta3.setPreferredSize(new java.awt.Dimension(340, 30));
+            Utility.SetImageLabel(fondoRespuestaIncorrecta3, "src/imagenes/InterfazMobile/Panel_Info.png", new Dimension(340, 30));
+            panelNuevo.add(fondoRespuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 208, 340, -1));
+            
+            
+            
+            
+            
+            
+            
+            //Generamos el fondo de la tarjeta
+            JLabel fondoTarjeta12 = new JLabel();
+            fondoTarjeta12.setName("fondoTarjeta"+indice);
+            fondoTarjeta12.setMaximumSize(new java.awt.Dimension(380, 250));
+            fondoTarjeta12.setMinimumSize(new java.awt.Dimension(380, 250));
+            fondoTarjeta12.setName(""); // NOI18N
+            fondoTarjeta12.setOpaque(false);
+            fondoTarjeta12.setPreferredSize(new java.awt.Dimension(380, 250));
+            Utility.SetImageLabel(fondoTarjeta12, "src/imagenes/InterfazMobile/Cuadrado_Off.png", new Dimension(380, 250));
+            panelNuevo.add(fondoTarjeta12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 250));
+
+            paneles.add(panelNuevo);
+            cantidadPanelesFront++;
+            System.out.println("creado panel con indice: " + indice);
         }
 
         List<Pregunta> preguntasLista = List.of();
@@ -329,7 +514,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
         } catch(CsvValidationException | IOException e){
             // TODO menajar el posible error
         }
-        getInstance().actualizarPreguntasEnPaneles(Arrays.asList(paneles), preguntasLista, paneles.length);
+        getInstance().actualizarPreguntasEnPaneles(paneles, preguntasLista, paneles.size());
         
         for (JPanel panel : paneles) {
             panelPrincipal.add(panel);
