@@ -50,7 +50,8 @@ public final class Principal extends javax.swing.JFrame {
         txtWarningControl.iniciarDepuracion();
 
         //Ubicar y adaptar botón de "Crear".
-        Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
+        Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_Off.png", new Dimension(240, 45));
+        txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
         Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(45, 45));
         
         //Llamar al JPanel correspondiente de preguntas.
@@ -197,7 +198,7 @@ public final class Principal extends javax.swing.JFrame {
         bottomPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 24)); // NOI18N
-        txtBtnCrear.setForeground(new java.awt.Color(10, 38, 72));
+        txtBtnCrear.setForeground(new java.awt.Color(7, 29, 57));
         txtBtnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtBtnCrear.setText("Exportar");
         txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -267,10 +268,12 @@ public final class Principal extends javax.swing.JFrame {
 
     private void btnExportarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseEntered
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(250, 50));
+        txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 24));
     }//GEN-LAST:event_btnExportarMouseEntered
 
     private void btnExportarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseExited
         Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
+        txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
     }//GEN-LAST:event_btnExportarMouseExited
 
     /**
