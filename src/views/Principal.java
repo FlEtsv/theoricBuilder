@@ -222,6 +222,7 @@ public final class Principal extends javax.swing.JFrame {
         txtWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bottomPanel.add(txtWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 56, 420, 30));
 
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseClicked(evt);
@@ -270,9 +271,18 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExportarMouseClicked
 
+    /**
+    * Método que se ejecuta cuando se hace clic en el botón "Guardar".
+    * Este método crea una lista de paneles de preguntas, convierte estos paneles en objetos de tipo Pregunta,
+    * guarda estas preguntas en un archivo CSV.
+    *
+    * @param evt Evento del mouse que representa el clic en el botón.
+    */
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        // Convierte los paneles de preguntas en objetos de tipo Pregunta
+        List<Pregunta> preguntas = Sesion.getInstance().crearPreguntasConPaneles(obtenerJPanlesPreguntas());
         try {
-            Sesion.guardar(Sesion.getInstance().getPreguntas());
+            Sesion.guardar(preguntas);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
