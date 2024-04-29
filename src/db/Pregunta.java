@@ -50,9 +50,13 @@ public class Pregunta {
             if(!pregunta.isEmpty() && pregunta!=null && !respuestaCorrecta.isEmpty() && respuestaCorrecta != null){
                 for(String respuesta : respuestas){
                     resultado = (!respuesta.isEmpty() && respuesta != null);
+                    if(!resultado){
+                        break;
+                    }
                 }
             }
         }
-    return resultado;}
+        return resultado;
+    }
     
 }

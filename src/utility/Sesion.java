@@ -149,19 +149,28 @@ public class Sesion {
     public static void guardar(List<Pregunta> preguntasGuardado) throws IOException {
         // Crear una instancia de CsvPreguntaDao
         CsvPreguntaDao guardar = new CsvPreguntaDao();
-        // Llamar al método reescribirArchivo con la lista de preguntas
-        boolean valido = true;
+        
+        boolean estado = true;
+        
         for(Pregunta pregunta : preguntasGuardado){
-        if(!pregunta.isValide()){ valido = false;
-                break;}
+            if(pregunta.isValide()){
+                estado = true;
+            } else {
+                estado = false;
+                break;
+            }
         }
-        if(valido){
+        
+        if(estado == true){
+            // Llamar al método reescribirArchivo con la lista de preguntas
             guardar.reescribirArchivo(preguntasGuardado);
             String err = "Las preguntas han sido guardadas ("+ getInstance().getnFinalPreguntas() + " en total)";
             getInstance().setVerde(err);
-        }else{
-               getInstance().setRojo("Algunas preguntas estan vacias");
-            }
+        } else {
+            // Llamar al método reescribirArchivo con la lista de preguntas
+            String err = "Algunas preguntas están vacías.";
+            getInstance().setRojo(err);
+        }
 
     }
     /**
@@ -279,7 +288,7 @@ public class Sesion {
             }
             pregunta.setRespuestas(incorrectasList);
             // Añade cada una de las preguntas a la lista de preguntas
-
+            preguntas.add(pregunta);
         }
         getInstance().setnFinalPreguntas(preguntas.size());
         return preguntas;
