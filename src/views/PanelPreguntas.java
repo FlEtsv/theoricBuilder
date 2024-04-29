@@ -89,16 +89,24 @@ public class PanelPreguntas extends javax.swing.JPanel {
         int x = 0;
         int y = 0;
         int maxHeight = 0;
+        int contadorComponentes = 0;
 
         for (Component comp : panelPrincipal.getComponents()) {
             Dimension compPrefSize = comp.getPreferredSize();
             if (x + compPrefSize.width > totalWidth) {
                 x = 0;
-                y += maxHeight + 10;
+                if(contadorComponentes < 4){
+                    y += maxHeight + 20;
+                } else if(contadorComponentes <= 7){
+                    y += maxHeight + 17;
+                } else {
+                    y += maxHeight + 4;
+                }
                 maxHeight = 0;
             }
             x += compPrefSize.width;
             maxHeight = Math.max(maxHeight, compPrefSize.height);
+            contadorComponentes+=1;
         }
 
         int newHeight = y + maxHeight;
