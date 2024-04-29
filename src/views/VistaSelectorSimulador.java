@@ -393,7 +393,6 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         if(Sesion.getInstance().getSimuladorName() == null || Sesion.getInstance().getSimuladorName().isEmpty()){
             Sesion.getInstance().setRojo("No se puede añadir pregunta sin seleccionar simulador.");
         } else {
-            Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + instanciaPanelPreguntas.cantidadPanelesFront);
             instanciaPanelPreguntas.crearPanelNuevo();
         }
     }//GEN-LAST:event_anadirPreguntaButtonMouseClicked

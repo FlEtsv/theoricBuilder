@@ -197,7 +197,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     preguntaescribe.setBackground(new java.awt.Color(0,0,0,1));
                     preguntaescribe.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     preguntaescribe.setForeground(new java.awt.Color(255, 255, 255));
-                    preguntaescribe.setText("¿Cuál de estos animales no es un reptil?");
+                    preguntaescribe.setText("");
                     preguntaescribe.setBorder(null);
                     preguntaescribe.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     preguntaescribe.setOpaque(false);
@@ -223,7 +223,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestacorrecta.setBackground(new java.awt.Color(0,0,0,1));
                     respuestacorrecta.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestacorrecta.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestacorrecta.setText("Respuesta correcta prueba "+indice);
+                    respuestacorrecta.setText("");
                     respuestacorrecta.setBorder(null);
                     respuestacorrecta.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestacorrecta.setOpaque(false);
@@ -249,7 +249,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta1.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta1.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestaIncorrecta1.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta1.setText("Respuesta incorrecta 1 del "+indice);
+                    respuestaIncorrecta1.setText("");
                     respuestaIncorrecta1.setBorder(null);
                     respuestaIncorrecta1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta1.setOpaque(false);
@@ -269,7 +269,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta2.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta2.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestaIncorrecta2.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta2.setText("Respuesta incorrecta 2 del "+indice);
+                    respuestaIncorrecta2.setText("");
                     respuestaIncorrecta2.setBorder(null);
                     respuestaIncorrecta2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta2.setOpaque(false);
@@ -289,7 +289,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta3.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta3.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestaIncorrecta3.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta3.setText("Respuesta incorrecta 3 del "+indice);
+                    respuestaIncorrecta3.setText("");
                     respuestaIncorrecta3.setBorder(null);
                     respuestaIncorrecta3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta3.setOpaque(false);
@@ -380,7 +380,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     preguntaescribe.setBackground(new java.awt.Color(0,0,0,1));
                     preguntaescribe.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     preguntaescribe.setForeground(new java.awt.Color(255, 255, 255));
-                    preguntaescribe.setText("¿Cuál de estos animales no es un reptil?");
                     preguntaescribe.setBorder(null);
                     preguntaescribe.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     preguntaescribe.setOpaque(false);
@@ -406,7 +405,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestacorrecta.setBackground(new java.awt.Color(0,0,0,1));
                     respuestacorrecta.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestacorrecta.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestacorrecta.setText("Respuesta correcta prueba "+indice);
                     respuestacorrecta.setBorder(null);
                     respuestacorrecta.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestacorrecta.setOpaque(false);
@@ -432,7 +430,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta1.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta1.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestaIncorrecta1.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta1.setText("Respuesta incorrecta 1 del "+indice);
                     respuestaIncorrecta1.setBorder(null);
                     respuestaIncorrecta1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta1.setOpaque(false);
@@ -452,7 +449,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta2.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta2.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
                     respuestaIncorrecta2.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta2.setText("Respuesta incorrecta 2 del "+indice);
                     respuestaIncorrecta2.setBorder(null);
                     respuestaIncorrecta2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta2.setOpaque(false);
@@ -471,9 +467,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     respuestaIncorrecta3.setName("jLabelIncorrecta3");
                     respuestaIncorrecta3.setBackground(new java.awt.Color(0,0,0,1));
                     respuestaIncorrecta3.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
-                    respuestaIncorrecta3.setForeground(new java.awt.Color(255, 255, 255));
-                    respuestaIncorrecta3.setText("Respuesta incorrecta 3 del "+indice);
-                    respuestaIncorrecta3.setBorder(null);
+                    respuestaIncorrecta3.setForeground(new java.awt.Color(255, 255, 255));                    respuestaIncorrecta3.setBorder(null);
                     respuestaIncorrecta3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
                     respuestaIncorrecta3.setOpaque(false);
                     panelNuevo.add(respuestaIncorrecta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 213, 320, -1));
@@ -536,6 +530,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
     }
     
     public void eliminarTodasPreguntas(){
+        paneles.clear();
         Component[] componentes = panelPrincipal.getComponents();
         if (componentes.length > 1 && componentes[0] instanceof VistaSelectorSimulador){
             for (int i = 1; i < componentes.length; i++) {
