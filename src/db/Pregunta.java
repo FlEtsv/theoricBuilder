@@ -47,9 +47,9 @@ public class Pregunta {
     public boolean isValide(){
         boolean resultado = false;
         if(this != null){
-            if(!pregunta.isEmpty() && pregunta!=null && !respuestaCorrecta.isEmpty() && respuestaCorrecta != null){
+            if(!pregunta.isEmpty() && !respuestaCorrecta.isEmpty()){
                 for(String respuesta : respuestas){
-                    resultado = (!respuesta.isEmpty() && respuesta != null);
+                    resultado = (!respuesta.isEmpty());
                     if(!resultado){
                         break;
                     }
