@@ -151,7 +151,7 @@ public class Sesion {
         CsvPreguntaDao guardar = new CsvPreguntaDao();
         // Llamar al método reescribirArchivo con la lista de preguntas
         guardar.reescribirArchivo(preguntasGuardado);
-        String err = "Las preguntas han sido guardadas (%d en total)" + getInstance().getnFinalPreguntas();
+        String err = "Las preguntas han sido guardadas ("+ getInstance().getnFinalPreguntas() + " en total)";
         getInstance().setVerde(err);
     }
     /**
