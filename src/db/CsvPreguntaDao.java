@@ -24,7 +24,7 @@ import utility.Sesion;
  * @author steve
  */
 public class CsvPreguntaDao implements PreguntaDao{
-    private final String csvArchivo = Sesion.getInstance().getSimuladorName() + File.separator + "StreamingAssets\\Preguntas.csv";
+    private final String csvArchivo = Sesion.getInstance().getSimuladorName() + File.separator + "StreamingAssets/Preguntas.csv";
 public CsvPreguntaDao() {
     // al instanciar vemos si existe
         crearArchivoSiNoExiste();
