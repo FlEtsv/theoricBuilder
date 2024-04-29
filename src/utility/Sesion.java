@@ -37,9 +37,10 @@ public class Sesion {
     private static Sesion instancia = null;
     private String rojo, amarillo, verde, blanco = null;
     private String simuladorName = null;
-    private int cantidadPreguntas;
+    private int cantidadPreguntas, cantidadcomponentes;
     private int nFinalPreguntas;
     private List<Pregunta> preguntasFront;
+    
 
     
     private Sesion() {
@@ -67,6 +68,13 @@ public class Sesion {
     
     public void setCantidadPreguntas(int cantidadPreguntas) {
         this.cantidadPreguntas = cantidadPreguntas;
+    }
+        public int getCantidadcomponentes() {
+        return cantidadcomponentes;
+    }
+    
+    public void setCantidadcomponentes(int cantidadcomponentes) {
+        this.cantidadcomponentes = cantidadcomponentes;
     }
         public  String getSimuladorName() {
         return simuladorName;

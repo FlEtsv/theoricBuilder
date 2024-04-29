@@ -8,6 +8,7 @@ package utility;
  *
  * @author steve
  */
+import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,9 +31,10 @@ public ControlDepuracion(JLabel mensajeLabel) {
      * @param message El mensaje a mostrar.
      * @param displayDuration Duración en milisegundos durante la cual se mostrará el mensaje.
      */
-public void mostrarMensaje(String message, int displayDuration) {
+public void mostrarMensaje(String message ,int r, int g, int b, int displayDuration) {
     if (message != null && !message.isEmpty()) {
         mensajeLabel.setText(message); // Establece el mensaje en la etiqueta
+        mensajeLabel.setForeground(new Color(r,g,b));
         mensajeTimer.setInitialDelay(displayDuration); // Establece la duración de visualización
         mensajeTimer.start(); // Inicia o reinicia el timer
     }
@@ -59,19 +61,19 @@ public void mostrarMensaje(String message, int displayDuration) {
     String blanco = Sesion.getInstance().getBlanco();
 
     if (rojo != null && !rojo.isEmpty()) {
-        this.mostrarMensaje(rojo, 3000); // 3 segundos para 'rojo'
+        this.mostrarMensaje(rojo,235,65,81, 3000); // 3 segundos para 'rojo'
         Sesion.getInstance().setRojo(""); // Limpia el valor después de mostrar
     }
     if (verde != null && !verde.isEmpty()) {
-        this.mostrarMensaje(verde, 2000); // 2 segundos para 'verde'
+        this.mostrarMensaje(verde,134,210,149,2000); // 2 segundos para 'verde'
         Sesion.getInstance().setVerde(""); // Limpia el valor después de mostrar
     }
     if (amarillo != null && !amarillo.isEmpty()) {
-        this.mostrarMensaje(amarillo, 2000); // 2 segundos para 'amarillo'
+        this.mostrarMensaje(amarillo,245,154,26,2000); // 2 segundos para 'amarillo'
         Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
     }
         if (blanco != null && !blanco.isEmpty()) {
-        this.mostrarMensaje(blanco, 1000); // 2 segundos para 'amarillo'
+        this.mostrarMensaje(blanco,247,247,247,1000); // 2 segundos para 'amarillo'
         Sesion.getInstance().setBlanco(""); // Limpia el valor después de mostrar
     }
 }
