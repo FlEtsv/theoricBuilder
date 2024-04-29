@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import utility.Sesion;
 import static utility.Sesion.getInstance;
 import static utility.theUltimateUtility.sumaDimension;
 import static utility.theUltimateUtility.setImageLabel;
@@ -389,7 +390,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
         // TODO add your handling code here:
-        
+        Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + cantidadPanelesFront);
     }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
 
 

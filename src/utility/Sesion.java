@@ -35,7 +35,7 @@ import javax.swing.JTextField;
  */
 public class Sesion {
     private static Sesion instancia = null;
-    private String rojo, amarillo, verde = null;
+    private String rojo, amarillo, verde, blanco = null;
     private String simuladorName = null;
     private int cantidadPreguntas;
     private int nFinalPreguntas;
@@ -99,6 +99,13 @@ public class Sesion {
     public void setVerde(String verde) {
         this.verde = verde;
     }
+    public String getBlanco() {
+        return blanco;
+    }
+
+    public void setBlanco(String verde) {
+        this.blanco = blanco;
+    }
         public int getnFinalPreguntas() {
         return nFinalPreguntas;
     }
@@ -137,6 +144,7 @@ public class Sesion {
         // Llamar al método reescribirArchivo con la lista de preguntas
         guardar.reescribirArchivo(preguntasGuardado);
         String err = "Las preguntas han sido guardadas (%d en total)" + getInstance().getnFinalPreguntas();
+        getInstance().setVerde(err);
     }
     /**
      * nos genera el archivo final solo necesita el nombre del simulador elegido

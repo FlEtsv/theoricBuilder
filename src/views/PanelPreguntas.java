@@ -342,6 +342,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 panelPrincipal.revalidate();
                 panelPrincipal.repaint();
                 System.out.println("Eliminando el panel: " + nombre);
+                Sesion.getInstance().setBlanco("Pregunta elimidada (quedan %d)" + cantidadPanelesFront);
                 return;
             }
         }
