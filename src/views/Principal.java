@@ -285,8 +285,10 @@ public final class Principal extends javax.swing.JFrame {
         List<Pregunta> preguntas = Sesion.getInstance().crearPreguntasConPaneles(obtenerJPanlesPreguntas());       
         // Guarda las preguntas en un archivo CSV y exporta este archivo a un archivo ZIP
         try {
-            Sesion.guardar(preguntas);
-            Sesion.Exportar();
+            boolean isGuardado = Sesion.guardar(preguntas);
+            if(isGuardado){
+                Sesion.Exportar();
+            }
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }

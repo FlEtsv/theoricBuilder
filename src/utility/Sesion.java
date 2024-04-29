@@ -146,7 +146,7 @@ public class Sesion {
      * @param preguntasGuardado Lista de preguntas a guardar.
      * @throws java.io.IOException
      */
-    public static void guardar(List<Pregunta> preguntasGuardado) throws IOException {
+    public static boolean guardar(List<Pregunta> preguntasGuardado) throws IOException {
         // Crear una instancia de CsvPreguntaDao
         CsvPreguntaDao guardar = new CsvPreguntaDao();
         
@@ -171,7 +171,7 @@ public class Sesion {
             String err = "Algunas preguntas están vacías.";
             getInstance().setRojo(err);
         }
-
+        return estado;
     }
     /**
      * nos genera el archivo final solo necesita el nombre del simulador elegido
