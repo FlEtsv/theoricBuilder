@@ -150,9 +150,19 @@ public class Sesion {
         // Crear una instancia de CsvPreguntaDao
         CsvPreguntaDao guardar = new CsvPreguntaDao();
         // Llamar al método reescribirArchivo con la lista de preguntas
-        guardar.reescribirArchivo(preguntasGuardado);
-        String err = "Las preguntas han sido guardadas ("+ getInstance().getnFinalPreguntas() + " en total)";
-        getInstance().setVerde(err);
+        boolean valido = true;
+        for(Pregunta pregunta : preguntasGuardado){
+        if(!pregunta.isValide()){ valido = false;
+                break;}
+        }
+        if(valido){
+            guardar.reescribirArchivo(preguntasGuardado);
+            String err = "Las preguntas han sido guardadas ("+ getInstance().getnFinalPreguntas() + " en total)";
+            getInstance().setVerde(err);
+        }else{
+               getInstance().setRojo("Algunas preguntas estan vacias");
+            }
+
     }
     /**
      * nos genera el archivo final solo necesita el nombre del simulador elegido
@@ -269,7 +279,7 @@ public class Sesion {
             }
             pregunta.setRespuestas(incorrectasList);
             // Añade cada una de las preguntas a la lista de preguntas
-            preguntas.add(pregunta);
+
         }
         getInstance().setnFinalPreguntas(preguntas.size());
         return preguntas;

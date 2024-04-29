@@ -44,5 +44,15 @@ public class Pregunta {
         this.respuestaCorrecta = respuestaCorrecta;
         return this;
     }
+    public boolean isValide(){
+        boolean resultado = false;
+        if(this != null){
+            if(!pregunta.isEmpty() && pregunta!=null && !respuestaCorrecta.isEmpty() && respuestaCorrecta != null){
+                for(String respuesta : respuestas){
+                    resultado = (!respuesta.isEmpty() && respuesta != null);
+                }
+            }
+        }
+    return resultado;}
     
 }
