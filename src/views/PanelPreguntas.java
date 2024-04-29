@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static utility.Sesion.getInstance;
 import utility.Utility;
+import utility.Sesion;
 
 
 /**
@@ -174,6 +175,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     // Acción al clicar el label2
                     //JOptionPane.showMessageDialog(null, "Has hecho click en el botón del panel " + paneles[indice].getName());
                     eliminarPregunta(paneles[indice].getName());
+                    Sesion.getInstance().setBlanco("Pregunta elimidada (quedan " + cantidadPanelesFront + ")");
                 }
             });
             
@@ -342,7 +344,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 panelPrincipal.revalidate();
                 panelPrincipal.repaint();
                 System.out.println("Eliminando el panel: " + nombre);
-                Sesion.getInstance().setBlanco("Pregunta elimidada (quedan %d)" + cantidadPanelesFront);
                 return;
             }
         }

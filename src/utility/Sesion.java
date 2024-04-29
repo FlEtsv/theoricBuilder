@@ -99,11 +99,11 @@ public class Sesion {
     public void setVerde(String verde) {
         this.verde = verde;
     }
-    public String getBlanco() {
+        public String getBlanco() {
         return blanco;
     }
 
-    public void setBlanco(String verde) {
+    public void setBlanco(String blanco) {
         this.blanco = blanco;
     }
         public int getnFinalPreguntas() {

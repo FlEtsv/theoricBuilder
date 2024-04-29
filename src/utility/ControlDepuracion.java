@@ -56,6 +56,7 @@ public void mostrarMensaje(String message, int displayDuration) {
     String rojo = Sesion.getInstance().getRojo();
     String verde = Sesion.getInstance().getVerde();
     String amarillo = Sesion.getInstance().getAmarillo();
+    String blanco = Sesion.getInstance().getBlanco();
 
     if (rojo != null && !rojo.isEmpty()) {
         this.mostrarMensaje(rojo, 3000); // 3 segundos para 'rojo'
@@ -68,6 +69,10 @@ public void mostrarMensaje(String message, int displayDuration) {
     if (amarillo != null && !amarillo.isEmpty()) {
         this.mostrarMensaje(amarillo, 2000); // 2 segundos para 'amarillo'
         Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
+    }
+        if (blanco != null && !blanco.isEmpty()) {
+        this.mostrarMensaje(blanco, 1000); // 2 segundos para 'amarillo'
+        Sesion.getInstance().setBlanco(""); // Limpia el valor después de mostrar
     }
 }
 

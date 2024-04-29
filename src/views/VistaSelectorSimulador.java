@@ -390,7 +390,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
         // TODO add your handling code here:
-        Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + cantidadPanelesFront);
+        Sesion.getInstance().setBlanco("Pregunta añadida  (actualmente %d)" + instanciaPanelPreguntas.cantidadPanelesFront);
     }//GEN-LAST:event_anadirPreguntaButtonMouseClicked
 
 
