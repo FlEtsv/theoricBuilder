@@ -31,14 +31,20 @@ public ControlDepuracion(JLabel mensajeLabel) {
      * @param message El mensaje a mostrar.
      * @param displayDuration Duración en milisegundos durante la cual se mostrará el mensaje.
      */
-public void mostrarMensaje(String message ,int r, int g, int b, int displayDuration) {
+public void mostrarMensaje(String message, int r, int g, int b, int displayDuration) {
     if (message != null && !message.isEmpty()) {
         mensajeLabel.setText(message); // Establece el mensaje en la etiqueta
-        mensajeLabel.setForeground(new Color(r,g,b));
+        mensajeLabel.setForeground(new Color(r, g, b));
+
+        if (mensajeTimer.isRunning()) { // Verifica si el timer ya está corriendo
+            mensajeTimer.stop(); // Detiene el timer si está corriendo
+        }
+        
         mensajeTimer.setInitialDelay(displayDuration); // Establece la duración de visualización
-        mensajeTimer.start(); // Inicia o reinicia el timer
+        mensajeTimer.restart(); // Reinicia el timer
     }
 }
+
 
     public void iniciarDepuracion() {
         threadDepuracion = new Thread(() -> {
