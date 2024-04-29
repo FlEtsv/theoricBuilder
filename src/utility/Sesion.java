@@ -271,6 +271,7 @@ public class Sesion {
             // Añade cada una de las preguntas a la lista de preguntas
             preguntas.add(pregunta);
         }
+        getInstance().setnFinalPreguntas(preguntas.size());
         return preguntas;
     }
     //prueba
