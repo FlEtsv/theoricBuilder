@@ -44,6 +44,10 @@ public class Pregunta {
         this.respuestaCorrecta = respuestaCorrecta;
         return this;
     }
+    /**
+     * nos devuelve un valor boolean segun las instancias validas o no
+     * @return 
+     */
     public boolean isValide(){
         boolean resultado = false;
         if(this != null){

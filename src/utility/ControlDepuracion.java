@@ -10,15 +10,12 @@ package utility;
  */
 import java.awt.Color;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ControlDepuracion {
     private Thread threadDepuracion;
     private volatile boolean seguirEjecutando = true;
-    private JLabel mensajeLabel;
-    private ControlDepuracion depuracion;
-    private Timer mensajeTimer;
+    private final JLabel mensajeLabel;
+    private final Timer mensajeTimer;
 
 public ControlDepuracion(JLabel mensajeLabel) {
     this.mensajeLabel = mensajeLabel;
@@ -29,6 +26,10 @@ public ControlDepuracion(JLabel mensajeLabel) {
     /**
      * Muestra un mensaje en la etiqueta por un período de tiempo específico si el mensaje no está vacío.
      * @param message El mensaje a mostrar.
+     * codigo de color RGB
+     * @param r
+     * @param g
+     * @param b
      * @param displayDuration Duración en milisegundos durante la cual se mostrará el mensaje.
      */
 public void mostrarMensaje(String message, int r, int g, int b, int displayDuration) {
@@ -59,7 +60,9 @@ public void mostrarMensaje(String message, int r, int g, int b, int displayDurat
         });
         threadDepuracion.start();
     }
-
+/**
+ * verifica el cambio dentro de las variables para saber si hay un mensaje que mostrar
+ */
     private void verificarYMostrarMensajes() {
     String rojo = Sesion.getInstance().getRojo();
     String verde = Sesion.getInstance().getVerde();

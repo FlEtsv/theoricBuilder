@@ -5,8 +5,6 @@
 package views;
 
 import db.Pregunta;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -15,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +22,6 @@ import utility.Utility;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import views.PanelPreguntas;
 
 /**
  * Clase Principal que extiende de JFrame.
@@ -37,12 +33,7 @@ public final class Principal extends javax.swing.JFrame {
     private PanelPreguntas instanciaPanelPreguntas;
     private volatile boolean seguirEjecutando = true;
     private Thread threadDepuracion;
-    /*
-    String colorRojo = "#EB4151";
-    String colorAmarillo = "#FF9C00";
-    String colorVerde = "#86D295";
-    String colorBlanco = "#F7F7F7";
-    */
+
     
     /**
      * Constructor de la clase Principal.
@@ -74,11 +65,12 @@ public final class Principal extends javax.swing.JFrame {
         setLocation(horizontal, vertical);
     }
     
-    
+    /**
+     * revisa el cambio en el numero de componentes para funcionalidad "Exportar"
+     */
     public void revisarEstado(){
         txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         int numero = Sesion.getInstance().getCantidadcomponentes();
-        System.out.println(numero);
         if(numero <= 1){
             
             Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_Off.png", new Dimension(240, 45));
@@ -104,7 +96,9 @@ public final class Principal extends javax.swing.JFrame {
             });
         }
     }
-    
+    /**
+     * controlador loop de revisarEstado()
+     */
     public void iniciarCuentaPanelesShow() {
         threadDepuracion = new Thread(() -> {
             while (seguirEjecutando) {

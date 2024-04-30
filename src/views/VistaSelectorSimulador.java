@@ -10,12 +10,10 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import utility.Sesion;
 import static utility.Sesion.getInstance;
 import static utility.theUltimateUtility.sumaDimension;
 import static utility.theUltimateUtility.setImageLabel;
-import views.PanelPreguntas;
 
 /**
  * Esta clase extiende JPanel para crear un panel personalizado para seleccionar un simulador.
@@ -31,12 +29,13 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private final Dimension iconButtonDimension = new Dimension(25, 25);
     private final Dimension infoPanelDimension = new Dimension(380, 95);
     private Dimension contenedorDimension = new Dimension(380, 130);
-    private PanelPreguntas instanciaPanelPreguntas;
+    private final PanelPreguntas instanciaPanelPreguntas;
     
     
     /**
      * Constructor para la clase VistaSelectorSimulador.
      * Inicializa los componentes y configura el estado inicial del panel.
+     * @param instanciaPanelPreguntas
      */
     public VistaSelectorSimulador(PanelPreguntas instanciaPanelPreguntas) {
         this.instanciaPanelPreguntas = instanciaPanelPreguntas;

@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class RoundedPanel extends JPanel {
 
-    private int radius;
+    private final int radius;
 
     /**
      * Constructor para la clase RoundedPanel.

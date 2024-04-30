@@ -5,7 +5,7 @@
 package utility;
 
 /**
- *
+ *api de creacion propia para poder gestionar recursos a lo largo del codigo
  * @author steve
  */
 /*
@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
