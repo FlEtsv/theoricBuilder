@@ -8,14 +8,16 @@ import java.util.List;
 
 /**
  * clase Pregunta representa como objetos los datos de nuestro csv
+ *
  * @author steve
  */
 public class Pregunta {
+
     private String pregunta;
     private List<String> respuestas;
     private String respuestaCorrecta;
-    
-    public Pregunta(){
+
+    public Pregunta() {
     }
 
     public String getPregunta() {
@@ -44,17 +46,19 @@ public class Pregunta {
         this.respuestaCorrecta = respuestaCorrecta;
         return this;
     }
+
     /**
      * nos devuelve un valor boolean segun las instancias validas o no
-     * @return 
+     *
+     * @return
      */
-    public boolean isValide(){
+    public boolean isValide() {
         boolean resultado = false;
-        if(this != null){
-            if(!pregunta.isEmpty() && !respuestaCorrecta.isEmpty()){
-                for(String respuesta : respuestas){
+        if (this != null) {
+            if (this.pregunta != null && !pregunta.isEmpty() && !respuestaCorrecta.isEmpty()) {
+                for (String respuesta : respuestas) {
                     resultado = (!respuesta.isEmpty());
-                    if(!resultado){
+                    if (!resultado) {
                         break;
                     }
                 }
@@ -62,5 +66,5 @@ public class Pregunta {
         }
         return resultado;
     }
-    
+
 }

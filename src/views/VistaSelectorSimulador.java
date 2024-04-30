@@ -12,13 +12,14 @@ import java.util.List;
 import javax.swing.JLabel;
 import utility.Sesion;
 import static utility.Sesion.getInstance;
-import static utility.theUltimateUtility.sumaDimension;
-import static utility.theUltimateUtility.setImageLabel;
+import static utility.Utility.sumaDimension;
+import static utility.Utility.SetImageLabel;
 
 /**
- * Esta clase extiende JPanel para crear un panel personalizado para seleccionar un simulador.
- * Incluye un desplegable para la selección del simulador, un botón para añadir preguntas y un botón de información.
- * El panel también incluye un panel de información que puede ser visible o invisible.
+ * Esta clase extiende JPanel para crear un panel personalizado para seleccionar
+ * un simulador. Incluye un desplegable para la selección del simulador, un
+ * botón para añadir preguntas y un botón de información. El panel también
+ * incluye un panel de información que puede ser visible o invisible.
  *
  * @author Fishb0ness
  */
@@ -30,30 +31,30 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     private final Dimension infoPanelDimension = new Dimension(380, 95);
     private Dimension contenedorDimension = new Dimension(380, 130);
     private final PanelPreguntas instanciaPanelPreguntas;
-    
-    
+
     /**
-     * Constructor para la clase VistaSelectorSimulador.
-     * Inicializa los componentes y configura el estado inicial del panel.
+     * Constructor para la clase VistaSelectorSimulador. Inicializa los
+     * componentes y configura el estado inicial del panel.
+     *
      * @param instanciaPanelPreguntas
      */
     public VistaSelectorSimulador(PanelPreguntas instanciaPanelPreguntas) {
         this.instanciaPanelPreguntas = instanciaPanelPreguntas;
         initComponents();
-        
+
         // Inicia el panel de lista como no visible
         listaSimuladoresPanel.setVisible(false);
 
         // Establece la imagen del desplegable del selector de simuladores
-        setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
+        SetImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
 
         // Establece los iconos de añadir pregunta y de información sobre el simulador
-        setImageLabel(anadirPreguntaButton, "src/imagenes/InterfazMobile/Mas_Off.png", iconButtonDimension);
-        setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
+        SetImageLabel(anadirPreguntaButton, "src/imagenes/InterfazMobile/Mas_Off.png", iconButtonDimension);
+        SetImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
 
         // Establece el panel de información como invisible y establece la imagen de fondo
         infoPanel.setVisible(false);
-        setImageLabel(infoBackImg, "src/imagenes/InterfazMobile/Panel_Info.png", infoPanelDimension);
+        SetImageLabel(infoBackImg, "src/imagenes/InterfazMobile/Panel_Info.png", infoPanelDimension);
 
         // Establece el tamaño del contenedor
         this.setSize(contenedorDimension);
@@ -283,50 +284,55 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Este método se activa cuando se hace clic en el texto del selector de simuladores.
-     * Si el panel de la lista de simuladores está visible, lo oculta y cambia la imagen del botón del selector.
-     * Si el panel de la lista de simuladores no está visible, lo hace visible y cambia la imagen del botón del selector.
-     * Después de cambiar la visibilidad del panel de la lista de simuladores, recalcula y ajusta el tamaño del contenedor.
+     * Este método se activa cuando se hace clic en el texto del selector de
+     * simuladores. Si el panel de la lista de simuladores está visible, lo
+     * oculta y cambia la imagen del botón del selector. Si el panel de la lista
+     * de simuladores no está visible, lo hace visible y cambia la imagen del
+     * botón del selector. Después de cambiar la visibilidad del panel de la
+     * lista de simuladores, recalcula y ajusta el tamaño del contenedor.
      *
      * @param evt El evento de clic del mouse que activó este método.
      */
     private void selectorSimuladoresTxtMouseClicked(java.awt.event.MouseEvent evt) {
         if (listaSimuladoresPanel.isShowing()) {
             listaSimuladoresPanel.setVisible(false);
-            setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
+            SetImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_Off.png", selectorDimension);
         } else {
             listaSimuladoresPanel.setVisible(true);
-            setImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);           
+            SetImageLabel(selectorSimuladoresImg, "src/imagenes/InterfazMobile/Desplegable_On.png", selectorDimension);
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
         instanciaPanelPreguntas.CambioSize(contenedorDimension);
-    }       
-    
+    }
+
     /**
-     * Este método se activa cuando se hace clic en el texto del selector de simuladores.
-     * Después de cambiar la visibilidad del panel de la lista de simuladores (metodo selectorSimuladoresTxtMouseClicked), recalcula y ajusta el tamaño del contenedor. 
-     * Llama al metodo mostrarPreguntas del simulador
+     * Este método se activa cuando se hace clic en el texto del selector de
+     * simuladores. Después de cambiar la visibilidad del panel de la lista de
+     * simuladores (metodo selectorSimuladoresTxtMouseClicked), recalcula y
+     * ajusta el tamaño del contenedor. Llama al metodo mostrarPreguntas del
+     * simulador
      *
      * @param evt El evento de clic del mouse que activó este método.
      */
-    private void simuladorSeleccionado(java.awt.event.MouseEvent evt){
+    private void simuladorSeleccionado(java.awt.event.MouseEvent evt) {
         JLabel clickedLabel = (JLabel) evt.getSource();
         selectorSimuladoresTxt.setText(clickedLabel.getText());
         selectorSimuladoresTxtMouseClicked(evt);
         mostrarPreguntas(clickedLabel.getText());
     }
-    
+
     /**
      * Muestra las preguntas existentes del simulador dado.
      *
-     * @param nombreSimulador El nombre del simulador elegido para mostrar sus preguntas.
+     * @param nombreSimulador El nombre del simulador elegido para mostrar sus
+     * preguntas.
      */
     private void mostrarPreguntas(String nombreSimulador) {
         getInstance().setSimuladorName(nombreSimulador);
-        try{
+        try {
             List<Pregunta> preguntas = getInstance().obtenerDatos();
-        } catch(CsvValidationException | IOException e){
+        } catch (CsvValidationException | IOException e) {
             // TODO menajar el posible error
         }
         int cantidadPreguntas = getInstance().getCantidadPreguntas();
@@ -337,24 +343,25 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
         instanciaPanelPreguntas.eliminarTodasPreguntas();
         instanciaPanelPreguntas.cargarPanelesInicio();
     }
-    
 
     /**
-     * Este método se activa cuando se hace clic en el botón de información del simulador.
-     * Si el panel de información está visible, lo oculta y cambia la imagen del botón de información.
-     * Si el panel de información no está visible, lo hace visible y cambia la imagen del botón de información.
-     * También cambia la imagen del botón del selector de simuladores.
-     * Después de cambiar la visibilidad del panel de información, recalcula y ajusta el tamaño del contenedor.
+     * Este método se activa cuando se hace clic en el botón de información del
+     * simulador. Si el panel de información está visible, lo oculta y cambia la
+     * imagen del botón de información. Si el panel de información no está
+     * visible, lo hace visible y cambia la imagen del botón de información.
+     * También cambia la imagen del botón del selector de simuladores. Después
+     * de cambiar la visibilidad del panel de información, recalcula y ajusta el
+     * tamaño del contenedor.
      *
      * @param evt El evento de clic del mouse que activó este método.
      */
     private void simuladorInfoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simuladorInfoButtonMouseClicked
         if (infoPanel.isShowing()) {
             infoPanel.setVisible(false);
-            setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
+            SetImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_Off.png", iconButtonDimension);
         } else {
             infoPanel.setVisible(true);
-            setImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_On.png", iconButtonDimension);
+            SetImageLabel(simuladorInfoButton, "src/imagenes/InterfazMobile/info_On.png", iconButtonDimension);
         }
         contenedorDimension = sumaDimension(this.getComponents());
         this.setSize(contenedorDimension);
@@ -363,7 +370,9 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     /**
      * Este método se activa cuando se hace clic en la etiqueta del simulador 0.
-     * Obtiene la etiqueta en la que se hizo clic, establece el texto del selector de simuladores al texto de la etiqueta y activa el método de clic del selector de simuladores.
+     * Obtiene la etiqueta en la que se hizo clic, establece el texto del
+     * selector de simuladores al texto de la etiqueta y activa el método de
+     * clic del selector de simuladores.
      *
      * @param evt El evento de clic del mouse que activó este método.
      */
@@ -389,7 +398,7 @@ public class VistaSelectorSimulador extends javax.swing.JPanel {
 
     private void anadirPreguntaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirPreguntaButtonMouseClicked
         // TODO add your handling code here:
-        if(Sesion.getInstance().getSimuladorName() == null || Sesion.getInstance().getSimuladorName().isEmpty()){
+        if (Sesion.getInstance().getSimuladorName() == null || Sesion.getInstance().getSimuladorName().isEmpty()) {
             Sesion.getInstance().setRojo("No se puede añadir pregunta sin seleccionar simulador.");
         } else {
             instanciaPanelPreguntas.crearPanelNuevo();

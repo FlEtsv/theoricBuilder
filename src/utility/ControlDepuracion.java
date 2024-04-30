@@ -12,40 +12,42 @@ import java.awt.Color;
 import javax.swing.*;
 
 public class ControlDepuracion {
+
     private Thread threadDepuracion;
     private volatile boolean seguirEjecutando = true;
     private final JLabel mensajeLabel;
     private final Timer mensajeTimer;
 
-public ControlDepuracion(JLabel mensajeLabel) {
-    this.mensajeLabel = mensajeLabel;
-    this.mensajeTimer = new Timer(0, e -> mensajeLabel.setText(""));
-    this.mensajeTimer.setRepeats(false);
-}
+    public ControlDepuracion(JLabel mensajeLabel) {
+        this.mensajeLabel = mensajeLabel;
+        this.mensajeTimer = new Timer(0, e -> mensajeLabel.setText(""));
+        this.mensajeTimer.setRepeats(false);
+    }
 
     /**
-     * Muestra un mensaje en la etiqueta por un período de tiempo específico si el mensaje no está vacío.
-     * @param message El mensaje a mostrar.
-     * codigo de color RGB
+     * Muestra un mensaje en la etiqueta por un período de tiempo específico si
+     * el mensaje no está vacío.
+     *
+     * @param message El mensaje a mostrar. codigo de color RGB
      * @param r
      * @param g
      * @param b
-     * @param displayDuration Duración en milisegundos durante la cual se mostrará el mensaje.
+     * @param displayDuration Duración en milisegundos durante la cual se
+     * mostrará el mensaje.
      */
-public void mostrarMensaje(String message, int r, int g, int b, int displayDuration) {
-    if (message != null && !message.isEmpty()) {
-        mensajeLabel.setText(message); // Establece el mensaje en la etiqueta
-        mensajeLabel.setForeground(new Color(r, g, b));
+    public void mostrarMensaje(String message, int r, int g, int b, int displayDuration) {
+        if (message != null && !message.isEmpty()) {
+            mensajeLabel.setText(message); // Establece el mensaje en la etiqueta
+            mensajeLabel.setForeground(new Color(r, g, b));
 
-        if (mensajeTimer.isRunning()) { // Verifica si el timer ya está corriendo
-            mensajeTimer.stop(); // Detiene el timer si está corriendo
+            if (mensajeTimer.isRunning()) { // Verifica si el timer ya está corriendo
+                mensajeTimer.stop(); // Detiene el timer si está corriendo
+            }
+
+            mensajeTimer.setInitialDelay(displayDuration); // Establece la duración de visualización
+            mensajeTimer.restart(); // Reinicia el timer
         }
-        
-        mensajeTimer.setInitialDelay(displayDuration); // Establece la duración de visualización
-        mensajeTimer.restart(); // Reinicia el timer
     }
-}
-
 
     public void iniciarDepuracion() {
         threadDepuracion = new Thread(() -> {
@@ -60,32 +62,34 @@ public void mostrarMensaje(String message, int r, int g, int b, int displayDurat
         });
         threadDepuracion.start();
     }
-/**
- * verifica el cambio dentro de las variables para saber si hay un mensaje que mostrar
- */
-    private void verificarYMostrarMensajes() {
-    String rojo = Sesion.getInstance().getRojo();
-    String verde = Sesion.getInstance().getVerde();
-    String amarillo = Sesion.getInstance().getAmarillo();
-    String blanco = Sesion.getInstance().getBlanco();
 
-    if (rojo != null && !rojo.isEmpty()) {
-        this.mostrarMensaje(rojo,235,65,81, 3000); // 3 segundos para 'rojo'
-        Sesion.getInstance().setRojo(""); // Limpia el valor después de mostrar
-    }
-    if (verde != null && !verde.isEmpty()) {
-        this.mostrarMensaje(verde,134,210,149,2000); // 2 segundos para 'verde'
-        Sesion.getInstance().setVerde(""); // Limpia el valor después de mostrar
-    }
-    if (amarillo != null && !amarillo.isEmpty()) {
-        this.mostrarMensaje(amarillo,245,154,26,2000); // 2 segundos para 'amarillo'
-        Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
-    }
+    /**
+     * verifica el cambio dentro de las variables para saber si hay un mensaje
+     * que mostrar
+     */
+    private void verificarYMostrarMensajes() {
+        String rojo = Sesion.getInstance().getRojo();
+        String verde = Sesion.getInstance().getVerde();
+        String amarillo = Sesion.getInstance().getAmarillo();
+        String blanco = Sesion.getInstance().getBlanco();
+
+        if (rojo != null && !rojo.isEmpty()) {
+            this.mostrarMensaje(rojo, 235, 65, 81, 3000); // 3 segundos para 'rojo'
+            Sesion.getInstance().setRojo(""); // Limpia el valor después de mostrar
+        }
+        if (verde != null && !verde.isEmpty()) {
+            this.mostrarMensaje(verde, 134, 210, 149, 2000); // 2 segundos para 'verde'
+            Sesion.getInstance().setVerde(""); // Limpia el valor después de mostrar
+        }
+        if (amarillo != null && !amarillo.isEmpty()) {
+            this.mostrarMensaje(amarillo, 245, 154, 26, 2000); // 2 segundos para 'amarillo'
+            Sesion.getInstance().setAmarillo(""); // Limpia el valor después de mostrar
+        }
         if (blanco != null && !blanco.isEmpty()) {
-        this.mostrarMensaje(blanco,247,247,247,1000); // 2 segundos para 'amarillo'
-        Sesion.getInstance().setBlanco(""); // Limpia el valor después de mostrar
+            this.mostrarMensaje(blanco, 247, 247, 247, 1000); // 2 segundos para 'amarillo'
+            Sesion.getInstance().setBlanco(""); // Limpia el valor después de mostrar
+        }
     }
-}
 
     public void detenerDepuracion() {
         seguirEjecutando = false;
@@ -95,7 +99,7 @@ public void mostrarMensaje(String message, int r, int g, int b, int displayDurat
     }
 }
 
-    /*
+/*
     ControlDepuracion depuracion = new ControlDepuracion(messageLabel);
 
             String rojo = Sesion.getInstace().getRojo();
@@ -113,5 +117,4 @@ public void mostrarMensaje(String message, int r, int g, int b, int displayDurat
                 depuracion.mostrarMensaje(amarillo, 2000); // 2 segundos para 'amarillo'
                 amarillo = ""; 
             }
-    */
-
+ */

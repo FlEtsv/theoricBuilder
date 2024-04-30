@@ -30,7 +30,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
     private List<JPanel> paneles = new ArrayList<>();
     private List<JLabel> botones = new ArrayList<>();
-    int cantidadPanelesFront = 0;
+    int cantidadPanelesPreguntaFront = 0;
 
     public PanelPreguntas() {
         initComponents();
@@ -120,12 +120,12 @@ public class PanelPreguntas extends javax.swing.JPanel {
      */
     public void crearPanelNuevo() {
 
-        final int indice = cantidadPanelesFront;
+        final int indice = cantidadPanelesPreguntaFront;
         JPanel nuevoPanel = panelPreguntaCom(indice);
         // Agregar componentes al panel
         paneles.add(nuevoPanel);
         panelPrincipal.add(nuevoPanel);
-        cantidadPanelesFront++;
+        cantidadPanelesPreguntaFront++;
         Sesion.getInstance().setBlanco("Pregunta añadida (actualmente " + (Sesion.getInstance().getCantidadcomponentes() - 1) + ")");
     }
 
@@ -136,7 +136,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
         for (int i = 0; i < Sesion.getInstance().getCantidadPreguntas(); i++) {
             final int indice = i;
             paneles.add(panelPreguntaCom(indice));
-            cantidadPanelesFront++;
+            cantidadPanelesPreguntaFront++;
         }
 
         List<Pregunta> preguntasLista = List.of();
@@ -165,10 +165,12 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 panelPrincipal.remove(componente);
                 panelPrincipal.revalidate();
                 panelPrincipal.repaint();
-                return;
+                if (cantidadPanelesPreguntaFront > 0) {
+                    cantidadPanelesPreguntaFront--;
+                }
+                break;
             }
         }
-        System.out.println("No se encontró ningún panel con el nombre: " + nombre);
     }
 
     /**

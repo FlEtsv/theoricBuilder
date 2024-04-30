@@ -4,6 +4,7 @@
  */
 package utility;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -11,17 +12,46 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
+ * Clase de utilidad que proporciona métodos estáticos para manipular
+ * componentes de la interfaz de usuario.
  *
  * @author USER
  */
 public class Utility {
-    public static void SetImageLabel(JLabel labelName, String root, Dimension dimension){
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_DEFAULT)
-        );
-        labelName.setIcon(icon);
-        labelName.repaint();
+
+    /**
+     * Establece la imagen de un JLabel.
+     *
+     * @param jLabel El JLabel al que se le establecerá la imagen.
+     * @param path La ruta de la imagen.
+     * @param dimension Las dimensiones de la imagen.
+     */
+    public static void SetImageLabel(JLabel jLabel, String path, Dimension dimension) {
+        ImageIcon imageIcon = new ImageIcon(path);
+        Icon icon = new ImageIcon(imageIcon.getImage().getScaledInstance((int) (dimension.getWidth()), (int) (dimension.getHeight()), Image.SCALE_SMOOTH));
+        jLabel.setIcon(icon);
+        jLabel.repaint();
+    }
+
+    /**
+     * Suma las dimensiones de los componentes proporcionados.
+     *
+     * @param args Los componentes cuyas dimensiones se sumarán.
+     * @return Dimension La suma de las dimensiones de los componentes.
+     */
+    public static Dimension sumaDimension(Component args[]) {
+        int width = 0;
+        int height = 5;
+        for (Component component : args) {
+            if (component.isVisible()) {
+                if (component.getSize().height < 1) {
+                    height += component.getPreferredSize().height + 5;
+                } else {
+                    height += component.getSize().height + 5;
+                }
+            }
+            width = Math.max(width, component.getWidth());
+        }
+        return new Dimension(width, height);
     }
 }
-

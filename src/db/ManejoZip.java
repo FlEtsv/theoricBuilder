@@ -4,7 +4,6 @@
  */
 package db;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,9 +19,11 @@ import utility.Sesion;
  * @author steve
  */
 public class ManejoZip {
+
     /**
-    * metodo principal
-     * Comprime el contenido de un directorio o archivo en un archivo ZIP.
+     * metodo principal Comprime el contenido de un directorio o archivo en un
+     * archivo ZIP.
+     *
      * @param fuente es la ruta del archivo o directorio que se va a comprimir.
      * @param direccionArchivoZip es la ruta donde se guardará el archivo ZIP.
      * @throws java.io.IOException
@@ -41,6 +42,7 @@ public class ManejoZip {
 
     /**
      * Comprime un archivo o directorio (recursivamente si es necesario).
+     *
      * @param archivo a comprimir
      * @param nombreBase nombre dentro del archivo ZIP
      * @param zipOut flujo de salida del archivo ZIP
@@ -76,11 +78,13 @@ public class ManejoZip {
             zipOut.closeEntry();
         }
     }
+
     /**
-     * encuentra el path del escritorio usando la  variable path
-     * @return 
+     * encuentra el path del escritorio usando la variable path
+     *
+     * @return
      */
-public String obtenerEscritorio() {
+    public String obtenerEscritorio() {
         // Obtiene el directorio home del usuario
         String userHome = System.getProperty("user.home");
 
@@ -103,9 +107,10 @@ public String obtenerEscritorio() {
             return null;  // Devuelve null si no se encuentra el escritorio
         }
     }
+
     /**
-     * 
-     * @param path 
+     *
+     * @param path
      */
     public void crearCarpetaSiNoExiste(String path) {
         File carpeta = new File(path);
@@ -118,5 +123,5 @@ public String obtenerEscritorio() {
         }
     }
     //prueba
-    
+
 }

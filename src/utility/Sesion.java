@@ -5,16 +5,14 @@
 package utility;
 
 /**
- *api de creacion propia para poder gestionar recursos a lo largo del codigo
+ * api de creacion propia para poder gestionar recursos a lo largo del codigo
+ *
  * @author steve
  */
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-
-
 import com.opencsv.exceptions.CsvValidationException;
 import db.CsvPreguntaDao;
 import db.ManejoZip;
@@ -33,26 +31,25 @@ import javax.swing.JTextField;
  * @author steve
  */
 public class Sesion {
+
     private static Sesion instancia = null;
     private String rojo, amarillo, verde, blanco = null;
     private String simuladorName = null;
     private int cantidadPreguntas, cantidadcomponentes;
     private int nFinalPreguntas;
     private List<Pregunta> preguntasFront;
-    
 
-    
     private Sesion() {
         // Constructor privado para el patrón Singleton
     }
-    
+
     public static Sesion getInstance() {
         if (instancia == null) {
             instancia = new Sesion();
         }
         return instancia;
     }
-    
+
     public List<Pregunta> getPreguntas() {
         return preguntasFront;
     }
@@ -60,29 +57,31 @@ public class Sesion {
     public void setPreguntas(List<Pregunta> preguntasFront) {
         this.preguntasFront = preguntasFront;
     }
-    
+
     public int getCantidadPreguntas() {
         return cantidadPreguntas;
     }
-    
+
     public void setCantidadPreguntas(int cantidadPreguntas) {
         this.cantidadPreguntas = cantidadPreguntas;
     }
-        public int getCantidadcomponentes() {
+
+    public int getCantidadcomponentes() {
         return cantidadcomponentes;
     }
-    
+
     public void setCantidadcomponentes(int cantidadcomponentes) {
         this.cantidadcomponentes = cantidadcomponentes;
     }
-        public  String getSimuladorName() {
+
+    public String getSimuladorName() {
         return simuladorName;
     }
 
     public void setSimuladorName(String simuladorName) {
         this.simuladorName = simuladorName;
     }
-    
+
     public String getRojo() {
         return rojo;
     }
@@ -106,22 +105,25 @@ public class Sesion {
     public void setVerde(String verde) {
         this.verde = verde;
     }
-        public String getBlanco() {
+
+    public String getBlanco() {
         return blanco;
     }
 
     public void setBlanco(String blanco) {
         this.blanco = blanco;
     }
-        public int getnFinalPreguntas() {
+
+    public int getnFinalPreguntas() {
         return nFinalPreguntas;
     }
 
     public void setnFinalPreguntas(int nFinalPreguntas) {
         this.nFinalPreguntas = nFinalPreguntas;
     }
+
     /**
-     * 
+     *
      * @return datos para cargarlos directamente en las labels
      * @throws com.opencsv.exceptions.CsvValidationException
      * @throws java.io.IOException
@@ -133,37 +135,38 @@ public class Sesion {
             getInstance().setCantidadPreguntas(datos.size());
             String err = "Las preguntas han sido cargadas con éxito";
             getInstance().setVerde(err);
-            return datos; 
-        } catch (IOException e) { 
+            return datos;
+        } catch (IOException e) {
             System.err.println("Error al obtener preguntas: " + e.getMessage());
             return null;
         }
     }
-    
-     /**
+
+    /**
      * Método final para guardar el archivo.
+     *
      * @param preguntasGuardado Lista de preguntas a guardar.
      * @throws java.io.IOException
      */
     public static boolean guardar(List<Pregunta> preguntasGuardado) throws IOException {
         // Crear una instancia de CsvPreguntaDao
         CsvPreguntaDao guardar = new CsvPreguntaDao();
-        
+
         boolean estado = true;
-        
-        for(Pregunta pregunta : preguntasGuardado){
-            if(pregunta.isValide()){
+
+        for (Pregunta pregunta : preguntasGuardado) {
+            if (pregunta.isValide()) {
                 estado = true;
             } else {
                 estado = false;
                 break;
             }
         }
-        
-        if(estado == true){
+
+        if (estado == true) {
             // Llamar al método reescribirArchivo con la lista de preguntas
             guardar.reescribirArchivo(preguntasGuardado);
-            String err = "Las preguntas han sido guardadas ("+ getInstance().getnFinalPreguntas() + " en total)";
+            String err = "Las preguntas han sido guardadas (" + getInstance().getnFinalPreguntas() + " en total)";
             getInstance().setVerde(err);
         } else {
             // Llamar al método reescribirArchivo con la lista de preguntas
@@ -172,31 +175,34 @@ public class Sesion {
         }
         return estado;
     }
+
     /**
      * nos genera el archivo final solo necesita el nombre del simulador elegido
-     * @throws IOException 
+     *
+     * @throws IOException
      */
-    public static void Exportar() throws IOException{
+    public static void Exportar() throws IOException {
         String simuladorName = getInstance().getSimuladorName();
         db.ManejoZip exportar = new ManejoZip();
         ManejoZip zip = new ManejoZip();
-    String miCarpeta = exportar.obtenerEscritorio() + File.separator + "Test";
-    zip.crearCarpetaSiNoExiste(miCarpeta); 
+        String miCarpeta = exportar.obtenerEscritorio() + File.separator + "Test";
+        zip.crearCarpetaSiNoExiste(miCarpeta);
 
-    String nombreArchivoZIP =  simuladorName + ".zip";
-    String direccionArchivoZIP = miCarpeta + File.separator + nombreArchivoZIP;
-    exportar.comprimir(simuladorName, direccionArchivoZIP);
-    String err = "Las preguntas se guardaron y se exportó el simulador en: "+ direccionArchivoZIP +".zip";
-    getInstance().setVerde(err);
+        String nombreArchivoZIP = simuladorName + ".zip";
+        String direccionArchivoZIP = miCarpeta + File.separator + nombreArchivoZIP;
+        exportar.comprimir(simuladorName, direccionArchivoZIP);
+        String err = "Las preguntas se guardaron y se exportó el simulador en: " + direccionArchivoZIP + ".zip";
+        getInstance().setVerde(err);
     }
-    
 
     /**
-     * Actualiza los JTextFields dentro de una lista de JPanels con preguntas de una lista de Pregunta.
-     * 
+     * Actualiza los JTextFields dentro de una lista de JPanels con preguntas de
+     * una lista de Pregunta.
+     *
      * @param paneles La lista de JPanels que se actualizarán con preguntas.
      * @param preguntas La lista de preguntas que contienen los datos a mostrar.
-     * @param cantidadPaneles El número de paneles que corresponden al número de preguntas.
+     * @param cantidadPaneles El número de paneles que corresponden al número de
+     * preguntas.
      */
     public void actualizarPreguntasEnPaneles(List<JPanel> paneles, List<Pregunta> preguntas, int cantidadPaneles) {
         for (int i = 0; i < Math.min(paneles.size(), preguntas.size()); i++) {
@@ -216,8 +222,8 @@ public class Sesion {
             } else {
                 System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
             }
-            for(int j = 1; j <= pregunta.getRespuestas().size(); j++) {
-                int index = j-1;
+            for (int j = 1; j <= pregunta.getRespuestas().size(); j++) {
+                int index = j - 1;
                 JTextField textFieldRespuestaIncorrecta = (JTextField) EncontrarComponente(panel, "jLabelIncorrecta" + (j));
                 if (textFieldRespuestaIncorrecta != null) {
                     textFieldRespuestaIncorrecta.setText(pregunta.getRespuestas().get(index));
@@ -230,7 +236,7 @@ public class Sesion {
 
     /**
      * Busca un componente por nombre dentro de un contenedor.
-     * 
+     *
      * @param container El contenedor donde buscar el componente.
      * @param name El nombre del componente a buscar.
      * @return El componente si se encuentra, de lo contrario null.
@@ -248,10 +254,11 @@ public class Sesion {
         }
         return null;
     }
-    
+
     /**
-     * Crea una lista de preguntas instanciando Pregunta con los JTextFields de una lista de JPanels.
-     * 
+     * Crea una lista de preguntas instanciando Pregunta con los JTextFields de
+     * una lista de JPanels.
+     *
      * @param paneles La lista de JPanels de la que tomamos la información..
      * @return Una lista de Pregunta con la información tomada de los paneles.
      */
@@ -265,24 +272,24 @@ public class Sesion {
             if (preguntaTextField != null) {
                 pregunta.setPregunta(preguntaTextField.getText());
             } else {
-                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+                System.err.println("No se encontró el JTextField Pregunta con el nombre esperado en el panel " + (i));
             }
             // Busca el JTextField de la respuesta correcta por su nombre en el JPanel
             JTextField correctaTextField = (JTextField) EncontrarComponente(panel, "jLabelCorrecta" + (i));
             if (correctaTextField != null) {
                 pregunta.setRespuestaCorrecta(correctaTextField.getText());
             } else {
-                System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+                System.err.println("No se encontró el JTextField RespCorrecta con el nombre esperado en el panel " + (i));
             }
             // Respuestas incorrectas.
             List<String> incorrectasList = new ArrayList<>();
             // Busca el JTextField cada una de las respuestas incorrectas por su nombre en el JPanel
-            for (int j = 1; j <= 3; j++){
-                JTextField incorrectaTextField = (JTextField) EncontrarComponente(panel, "jLabelIncorrecta"+j);
+            for (int j = 1; j <= 3; j++) {
+                JTextField incorrectaTextField = (JTextField) EncontrarComponente(panel, "jLabelIncorrecta" + j);
                 if (correctaTextField != null) {
                     incorrectasList.add(incorrectaTextField.getText());
                 } else {
-                    System.err.println("No se encontró el JTextField con el nombre esperado en el panel " + (i));
+                    System.err.println("No se encontró el JTextField RespIncorrecta con el nombre esperado en el panel " + (i));
                 }
             }
             pregunta.setRespuestas(incorrectasList);
@@ -294,5 +301,3 @@ public class Sesion {
     }
     //prueba
 }
-
-

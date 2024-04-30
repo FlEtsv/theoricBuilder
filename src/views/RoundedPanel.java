@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Esta clase extiende JPanel para crear un panel con esquinas redondeadas.
- * El radio de las esquinas se puede establecer durante la instanciación.
+ * Esta clase extiende JPanel para crear un panel con esquinas redondeadas. El
+ * radio de las esquinas se puede establecer durante la instanciación.
  *
  * @author Fishb0ness
  */
@@ -28,8 +28,8 @@ public class RoundedPanel extends JPanel {
     }
 
     /**
-     * Sobrescribe el método paintComponent de JPanel.
-     * Aquí es donde se dibujan las esquinas redondeadas.
+     * Sobrescribe el método paintComponent de JPanel. Aquí es donde se dibujan
+     * las esquinas redondeadas.
      *
      * @param g El objeto Graphics a proteger.
      */
