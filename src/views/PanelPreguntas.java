@@ -29,7 +29,6 @@ import utility.Sesion;
 public class PanelPreguntas extends javax.swing.JPanel {
 
     private List<JPanel> paneles = new ArrayList<>();
-    private List<JLabel> botones = new ArrayList<>();
     int cantidadPanelesPreguntaFront = 0;
 
     public PanelPreguntas() {
@@ -109,10 +108,6 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
     public void setPaneles(List<JPanel> paneles) {
         this.paneles = paneles;
-    }
-
-    public void setBotones(List<JLabel> botones) {
-        this.botones = botones;
     }
 
     /**
@@ -238,7 +233,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         //Generamos y creamos el JTextField de la pregunta
         JTextField preguntaescribe = new JTextField();
-        preguntaescribe.setName("jLabelPregunta" + indice);
+        preguntaescribe.setName("jLabelPregunta");
         preguntaescribe.setBackground(new java.awt.Color(0, 0, 0, 1));
         preguntaescribe.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
         preguntaescribe.setForeground(new java.awt.Color(255, 255, 255));
@@ -263,7 +258,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         //Generamos y creamos el JTextField de la respuesta correcta
         JTextField respuestacorrecta = new JTextField();
-        respuestacorrecta.setName("jLabelCorrecta" + indice);
+        respuestacorrecta.setName("jLabelCorrecta");
         respuestacorrecta.setBackground(new java.awt.Color(0, 0, 0, 1));
         respuestacorrecta.setFont(new java.awt.Font("Raleway Medium", 0, 14)); // NOI18N
         respuestacorrecta.setForeground(new java.awt.Color(255, 255, 255));
@@ -345,7 +340,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         //Generamos el fondo de la tarjeta
         JLabel fondoTarjeta12 = new JLabel();
-        fondoTarjeta12.setName("fondoTarjeta" + indice);
+        fondoTarjeta12.setName("fondoTarjeta");
         fondoTarjeta12.setMaximumSize(new java.awt.Dimension(380, 250));
         fondoTarjeta12.setMinimumSize(new java.awt.Dimension(380, 250));
         fondoTarjeta12.setName(""); // NOI18N
