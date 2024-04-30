@@ -243,7 +243,7 @@ public class Sesion {
      */
     private Component EncontrarComponente(Container container, String name) {
         for (Component comp : container.getComponents()) {
-            if (name.equals(comp.getName())) {
+            if (comp.getName() != null && comp.getName().startsWith(name)) {
                 return comp;
             } else if (comp instanceof Container) {
                 Component foundComp = EncontrarComponente((Container) comp, name);
@@ -268,14 +268,14 @@ public class Sesion {
             JPanel panel = paneles.get(i);
             Pregunta pregunta = new Pregunta();
             // Buscar el JTextField de la pregunta por su nombre en el JPanel
-            JTextField preguntaTextField = (JTextField) EncontrarComponente(panel, "jLabelPregunta" + (i));
+            JTextField preguntaTextField = (JTextField) EncontrarComponente(panel, "jLabelPregunta");
             if (preguntaTextField != null) {
                 pregunta.setPregunta(preguntaTextField.getText());
             } else {
                 System.err.println("No se encontró el JTextField Pregunta con el nombre esperado en el panel " + (i));
             }
             // Busca el JTextField de la respuesta correcta por su nombre en el JPanel
-            JTextField correctaTextField = (JTextField) EncontrarComponente(panel, "jLabelCorrecta" + (i));
+            JTextField correctaTextField = (JTextField) EncontrarComponente(panel, "jLabelCorrecta");
             if (correctaTextField != null) {
                 pregunta.setRespuestaCorrecta(correctaTextField.getText());
             } else {
