@@ -46,7 +46,6 @@ public final class Principal extends javax.swing.JFrame {
         txtWarningControl.iniciarDepuracion();
 
         //Ubicar y adaptar botón de "Crear".
-        
         Utility.SetImageLabel(btnGuardar, "src/imagenes/InterfazMobile/Extra/Icon_Shield.png", new Dimension(45, 45));
         
         //Llamar al JPanel correspondiente de preguntas.
@@ -69,15 +68,32 @@ public final class Principal extends javax.swing.JFrame {
      * revisa el cambio en el numero de componentes para funcionalidad "Exportar"
      */
     public void revisarEstado(){
-        txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        
         int numero = Sesion.getInstance().getCantidadcomponentes();
         if(numero <= 1){
-            
             Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_Off.png", new Dimension(240, 45));
             txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
+            btnExportar.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_Off.png", new Dimension(240, 45));
+                    txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
+                    txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                    btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e){
+                    Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_Off.png", new Dimension(240, 45));
+                    txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
+                    txtBtnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                    btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                }
+            });
+            
         } else {
             //BOTÓN ESTÁ ACTIVO
             Utility.SetImageLabel(btnExportar, "src/imagenes/InterfazMobile/Cilindrico_On.png", new Dimension(240, 45));
+            txtBtnCrear.setFont(new java.awt.Font("Raleway", 0, 22));
             btnExportar.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
